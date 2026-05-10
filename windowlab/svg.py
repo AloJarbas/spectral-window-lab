@@ -8,6 +8,7 @@ PALETTE = {
     "hann": "#ff7f0e",
     "hamming": "#2ca02c",
     "blackman": "#d62728",
+    "kaiser-8.6": "#9467bd",
 }
 
 

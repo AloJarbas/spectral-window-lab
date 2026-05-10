@@ -12,7 +12,7 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 
 ## Included
 
-- `windowlab/windows.py` builds rectangular, Hann, Hamming, and Blackman windows
+- `windowlab/windows.py` builds rectangular, Hann, Hamming, Blackman, and Kaiser (`beta=8.6`) windows
 - `windowlab/metrics.py` computes coherent gain, ENBW, main-lobe width, and peak sidelobe level
 - `windowlab/svg.py` renders clean SVG comparison plots without external plotting libraries
 - `scripts/make_gallery.py` regenerates the figures and metrics CSV
@@ -28,7 +28,15 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 
 ![Window spectra](art/window-spectra.svg)
 
-The generated CSV in `art/window-metrics.csv` gives a compact numeric summary.
+### Amplitude loss versus bin offset
+
+![Amplitude loss versus bin offset](art/window-offset-loss.svg)
+
+### Half-bin leakage near the peak
+
+![Half-bin tone leakage](art/window-half-bin-leakage.svg)
+
+The generated CSV in `art/window-metrics.csv` now gives a compact numeric summary for coherent gain, ENBW, peak sidelobes, main-lobe width, and scalloping loss.
 
 ## Quick run
 
@@ -47,8 +55,9 @@ This repo is small, but it has a real spine: code, generated artifacts, tests, a
 
 ## Next directions
 
-- add Kaiser and flat-top windows
-- add a leakage demo with off-bin sinusoids
+- add a short note that walks through how to read the new offset-loss and half-bin leakage figures
+- make the Kaiser ENBW and sidelobe tradeoff more explicit in the notes and generated artifacts
+- add flat-top only when the repo can explain why its low scalloping error costs ENBW and resolution
 - add overlap-add and STFT framing notes
 - port the metrics core to Julia and Fortran for cross-language comparison once those toolchains are live
 
