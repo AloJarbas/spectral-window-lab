@@ -8,6 +8,13 @@ WindowBuilder = Callable[[int], list[float]]
 
 
 KAISER_BETA_86 = 8.6
+FLATTOP_COEFFICIENTS = (
+    0.21557895,
+    0.41663158,
+    0.277263158,
+    0.083578947,
+    0.006947368,
+)
 
 
 def _check_length(length: int) -> None:
@@ -28,30 +35,38 @@ def _i0(value: float) -> float:
         k += 1
 
 
+def _generalized_cosine(length: int, coefficients: tuple[float, ...]) -> list[float]:
+    _check_length(length)
+    scale = 2.0 * math.pi / (length - 1)
+    values: list[float] = []
+    for n in range(length):
+        total = 0.0
+        for index, coefficient in enumerate(coefficients):
+            sign = -1.0 if index % 2 else 1.0
+            total += sign * coefficient * math.cos(index * scale * n)
+        values.append(total)
+    return values
+
+
 def rectangular(length: int) -> list[float]:
     _check_length(length)
     return [1.0] * length
 
 
 def hann(length: int) -> list[float]:
-    _check_length(length)
-    scale = 2.0 * math.pi / (length - 1)
-    return [0.5 - 0.5 * math.cos(scale * n) for n in range(length)]
+    return _generalized_cosine(length, (0.5, 0.5))
 
 
 def hamming(length: int) -> list[float]:
-    _check_length(length)
-    scale = 2.0 * math.pi / (length - 1)
-    return [0.54 - 0.46 * math.cos(scale * n) for n in range(length)]
+    return _generalized_cosine(length, (0.54, 0.46))
 
 
 def blackman(length: int) -> list[float]:
-    _check_length(length)
-    scale = 2.0 * math.pi / (length - 1)
-    return [
-        0.42 - 0.5 * math.cos(scale * n) + 0.08 * math.cos(2.0 * scale * n)
-        for n in range(length)
-    ]
+    return _generalized_cosine(length, (0.42, 0.5, 0.08))
+
+
+def flattop(length: int) -> list[float]:
+    return _generalized_cosine(length, FLATTOP_COEFFICIENTS)
 
 
 def kaiser(length: int, beta: float) -> list[float]:
@@ -76,6 +91,7 @@ WINDOW_BUILDERS: dict[str, WindowBuilder] = {
     "hamming": hamming,
     "blackman": blackman,
     "kaiser-8.6": kaiser_86,
+    "flattop": flattop,
 }
 
 

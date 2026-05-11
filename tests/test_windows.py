@@ -6,6 +6,7 @@ from windowlab.metrics import (
     coherent_gain,
     coherent_gain_normalized_response,
     equivalent_noise_bandwidth_bins,
+    null_to_null_main_lobe_width,
     peak_sidelobe_level_db,
     scalloping_loss_db,
 )
@@ -85,6 +86,22 @@ class WindowTests(unittest.TestCase):
         self.assertLess(losses["hamming"], losses["hann"])
         self.assertLess(losses["hann"], losses["blackman"])
         self.assertLess(abs(losses["kaiser-8.6"] - losses["blackman"]), 0.05)
+
+    def test_flattop_is_amplitude_specialist_not_default(self) -> None:
+        size = 129
+        flattop = build_window("flattop", size)
+        blackman = build_window("blackman", size)
+
+        self.assertLess(abs(scalloping_loss_db(flattop)), 0.05)
+        self.assertGreater(
+            equivalent_noise_bandwidth_bins(flattop),
+            2.0 * equivalent_noise_bandwidth_bins(blackman),
+        )
+        self.assertGreater(
+            null_to_null_main_lobe_width(flattop, fft_size=2048),
+            1.5 * null_to_null_main_lobe_width(blackman, fft_size=2048),
+        )
+        self.assertLess(coherent_gain(flattop), coherent_gain(blackman))
 
 
 if __name__ == "__main__":

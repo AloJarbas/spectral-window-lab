@@ -9,6 +9,7 @@ PALETTE = {
     "hamming": "#2ca02c",
     "blackman": "#d62728",
     "kaiser-8.6": "#9467bd",
+    "flattop": "#8b5cf6",
 }
 
 
@@ -75,5 +76,76 @@ def chart_svg(title: str, x_label: str, y_label: str, series: dict[str, list[tup
 
     parts.append(_text((left + right) / 2, height - 28, x_label, size=16, anchor="middle", fill="#374151"))
     parts.append(_text(28, (top + bottom) / 2, y_label, size=16, anchor="middle", fill="#374151"))
+    parts.append('</svg>')
+    return "\n".join(parts)
+
+
+def triptych_bar_svg(
+    title: str,
+    subtitle: str,
+    panels: list[dict[str, object]],
+    *,
+    width: int = 1200,
+    height: int = 580,
+    background: str = "#fcfcfd",
+) -> str:
+    left = 60
+    right = width - 40
+    top = 120
+    bottom = height - 80
+    gap = 26
+    panel_width = (right - left - gap * (len(panels) - 1)) / len(panels)
+
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
+        f'<rect width="{width}" height="{height}" fill="{background}"/>',
+        _text(width / 2, 42, title, size=28, anchor="middle", weight="700"),
+        _text(width / 2, 72, subtitle, size=16, anchor="middle", fill="#4b5563"),
+    ]
+
+    legend_x = left
+    legend_y = 98
+    legend_names: list[str] = list(panels[0]["values"].keys()) if panels else []
+    for idx, name in enumerate(legend_names):
+        x = legend_x + idx * 140
+        parts.append(_line(x, legend_y, x + 24, legend_y, stroke=PALETTE.get(name, "#111827"), width=4))
+        parts.append(_text(x + 32, legend_y + 5, name, size=14, fill="#111827"))
+
+    for panel_index, panel in enumerate(panels):
+        panel_left = left + panel_index * (panel_width + gap)
+        panel_right = panel_left + panel_width
+        y_lo, y_hi = panel["y_range"]
+
+        def map_y(value: float) -> float:
+            return bottom - (value - y_lo) / (y_hi - y_lo) * (bottom - top)
+
+        parts.append(f'<rect x="{panel_left:.1f}" y="{top:.1f}" width="{panel_width:.1f}" height="{bottom - top:.1f}" fill="#ffffff" stroke="#e5e7eb" rx="14"/>')
+        parts.append(_text((panel_left + panel_right) / 2, top - 18, str(panel["title"]), size=17, anchor="middle", weight="700"))
+        values: dict[str, float] = panel["values"]
+        bar_gap = 16.0
+        usable_width = panel_width - 54.0
+        bar_width = (usable_width - bar_gap * (len(values) - 1)) / len(values)
+        base_y = map_y(0.0 if y_lo <= 0.0 <= y_hi else y_lo)
+
+        for step in range(5):
+            frac = step / 4
+            y_value = y_lo + frac * (y_hi - y_lo)
+            y = map_y(y_value)
+            parts.append(_line(panel_left + 20, y, panel_right - 16, y, stroke="#e5e7eb", dash="4 6"))
+            parts.append(_text(panel_left + 16, y + 5, panel["tick_format"].format(y_value), size=12, anchor="end", fill="#6b7280"))
+
+        for idx, (name, value) in enumerate(values.items()):
+            x = panel_left + 30 + idx * (bar_width + bar_gap)
+            y = map_y(value)
+            height_px = abs(base_y - y)
+            rect_y = min(base_y, y)
+            parts.append(
+                f'<rect x="{x:.1f}" y="{rect_y:.1f}" width="{bar_width:.1f}" height="{max(height_px, 1.5):.1f}" fill="{PALETTE.get(name, "#111827")}" rx="8"/>'
+            )
+            parts.append(_text(x + bar_width / 2, bottom + 22, name, size=12, anchor="middle", fill="#374151"))
+            parts.append(_text(x + bar_width / 2, rect_y - 8, panel["value_format"].format(value), size=12, anchor="middle", fill="#111827", weight="700"))
+
+        parts.append(_text((panel_left + panel_right) / 2, bottom + 48, str(panel["y_label"]), size=13, anchor="middle", fill="#6b7280"))
+
     parts.append('</svg>')
     return "\n".join(parts)
