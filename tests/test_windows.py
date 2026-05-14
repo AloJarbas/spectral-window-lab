@@ -64,6 +64,12 @@ class WindowTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             kaiser(33, -0.1)
 
+    def test_kaiser_beta_zero_matches_rectangular(self) -> None:
+        rectangular = build_window("rectangular", 33)
+        beta_zero = kaiser(33, 0.0)
+        for expected, actual in zip(rectangular, beta_zero):
+            self.assertAlmostEqual(expected, actual, places=12)
+
     def test_kaiser_beta_86_has_blackman_like_enbw(self) -> None:
         size = 129
         kaiser_enbw = equivalent_noise_bandwidth_bins(build_window("kaiser-8.6", size))
@@ -102,6 +108,18 @@ class WindowTests(unittest.TestCase):
             1.5 * null_to_null_main_lobe_width(blackman, fft_size=2048),
         )
         self.assertLess(coherent_gain(flattop), coherent_gain(blackman))
+
+    def test_kaiser_tradeoffs_move_monotonically_with_beta(self) -> None:
+        size = 129
+        betas = [0.0, 5.0, 8.6, 14.0]
+        windows = [kaiser(size, beta) for beta in betas]
+        enbw = [equivalent_noise_bandwidth_bins(window) for window in windows]
+        main_lobe = [null_to_null_main_lobe_width(window, fft_size=2048) for window in windows]
+        sidelobes = [peak_sidelobe_level_db(window, fft_size=2048) for window in windows]
+
+        self.assertEqual(enbw, sorted(enbw))
+        self.assertEqual(main_lobe, sorted(main_lobe))
+        self.assertEqual(sidelobes, sorted(sidelobes, reverse=True))
 
 
 if __name__ == "__main__":

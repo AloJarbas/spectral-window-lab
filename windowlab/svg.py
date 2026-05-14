@@ -23,6 +23,10 @@ def _polyline(points: list[tuple[float, float]], *, stroke: str, width: int = 2)
     return f'<polyline fill="none" stroke="{stroke}" stroke-width="{width}" points="{payload}"/>'
 
 
+def _circle(x: float, y: float, radius: float, *, fill: str, stroke: str = "none", width: int = 1) -> str:
+    return f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{radius:.1f}" fill="{fill}" stroke="{stroke}" stroke-width="{width}"/>'
+
+
 def _text(x: float, y: float, text: str, *, size: int = 16, anchor: str = "start", fill: str = "#222", weight: str = "normal") -> str:
     return f'<text x="{x:.1f}" y="{y:.1f}" fill="{fill}" font-size="{size}" font-family="Inter, Arial, sans-serif" text-anchor="{anchor}" font-weight="{weight}">{escape(text)}</text>'
 
@@ -147,5 +151,100 @@ def triptych_bar_svg(
 
         parts.append(_text((panel_left + panel_right) / 2, bottom + 48, str(panel["y_label"]), size=13, anchor="middle", fill="#6b7280"))
 
+    parts.append('</svg>')
+    return "\n".join(parts)
+
+
+def stacked_line_panels_svg(
+    title: str,
+    subtitle: str,
+    x_label: str,
+    panels: list[dict[str, object]],
+    *,
+    width: int = 1200,
+    height: int = 860,
+    background: str = "#fcfcfd",
+) -> str:
+    left = 90
+    right = width - 40
+    top = 110
+    bottom = height - 90
+    panel_gap = 34
+    panel_height = (bottom - top - panel_gap * (len(panels) - 1)) / len(panels)
+    x_lo, x_hi = panels[0]["x_range"]
+
+    def map_x(value: float) -> float:
+        return left + (value - x_lo) / (x_hi - x_lo) * (right - left)
+
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
+        f'<rect width="{width}" height="{height}" fill="{background}"/>',
+        _text(width / 2, 40, title, size=28, anchor="middle", weight="700"),
+        _text(width / 2, 70, subtitle, size=16, anchor="middle", fill="#4b5563"),
+    ]
+
+    legend_x = left
+    legend_y = 92
+    legend_items: list[tuple[str, str, str | None]] = []
+    seen: set[tuple[str, str, str | None]] = set()
+    for panel in panels:
+        for series in panel.get("series", []):
+            item = (str(series["name"]), str(series["stroke"]), None)
+            if item not in seen:
+                legend_items.append(item)
+                seen.add(item)
+        for ref in panel.get("references", []):
+            item = (str(ref["label"]), str(ref["stroke"]), str(ref.get("dash")))
+            if item not in seen:
+                legend_items.append(item)
+                seen.add(item)
+
+    for idx, (label, stroke, dash) in enumerate(legend_items):
+        x = legend_x + idx * 170
+        parts.append(_line(x, legend_y, x + 24, legend_y, stroke=stroke, width=4, dash=dash))
+        parts.append(_text(x + 32, legend_y + 5, label, size=14, fill="#111827"))
+
+    for panel_index, panel in enumerate(panels):
+        panel_top = top + panel_index * (panel_height + panel_gap)
+        panel_bottom = panel_top + panel_height
+        y_lo, y_hi = panel["y_range"]
+
+        def map_y(value: float) -> float:
+            return panel_bottom - (value - y_lo) / (y_hi - y_lo) * (panel_height - 24)
+
+        parts.append(f'<rect x="{left:.1f}" y="{panel_top:.1f}" width="{right - left:.1f}" height="{panel_height:.1f}" fill="#ffffff" stroke="#e5e7eb" rx="14"/>')
+        parts.append(_text(left + 18, panel_top + 28, str(panel["title"]), size=17, weight="700"))
+        parts.append(_text(right - 8, panel_top + 28, str(panel["y_label"]), size=13, anchor="end", fill="#6b7280"))
+
+        for step in range(5):
+            frac = step / 4
+            y_value = y_lo + frac * (y_hi - y_lo)
+            y = map_y(y_value)
+            parts.append(_line(left + 20, y, right - 16, y, stroke="#e5e7eb", dash="4 6"))
+            parts.append(_text(left + 16, y + 5, str(panel["tick_format"]).format(y_value), size=12, anchor="end", fill="#6b7280"))
+
+        for step in range(8):
+            frac = step / 7
+            x_value = x_lo + frac * (x_hi - x_lo)
+            x = map_x(x_value)
+            parts.append(_line(x, panel_top + 40, x, panel_bottom - 16, stroke="#eef1f5", dash="4 6"))
+            parts.append(_text(x, panel_bottom + 20, str(panel["x_tick_format"]).format(x_value), size=12, anchor="middle", fill="#6b7280"))
+
+        for ref in panel.get("references", []):
+            y = map_y(float(ref["value"]))
+            parts.append(_line(left + 20, y, right - 16, y, stroke=str(ref["stroke"]), width=2, dash=str(ref.get("dash", "6 6"))))
+            parts.append(_text(right - 22, y - 6, str(ref["label"]), size=12, anchor="end", fill=str(ref["stroke"]), weight="700"))
+
+        for series in panel.get("series", []):
+            mapped = [(map_x(x), map_y(y)) for x, y in series["points"]]
+            parts.append(_polyline(mapped, stroke=str(series["stroke"]), width=int(series.get("width", 3))))
+
+        for marker in panel.get("markers", []):
+            x = map_x(float(marker["x"]))
+            y = map_y(float(marker["y"]))
+            parts.append(_circle(x, y, 5.0, fill=str(marker.get("fill", "#ffffff")), stroke=str(marker.get("stroke", "#111827")), width=2))
+            parts.append(_text(x, y - 10, str(marker["label"]), size=12, anchor="middle", fill="#111827", weight="700"))
+
+    parts.append(_text((left + right) / 2, height - 24, x_label, size=16, anchor="middle", fill="#374151"))
     parts.append('</svg>')
     return "\n".join(parts)

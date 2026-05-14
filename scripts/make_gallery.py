@@ -11,16 +11,18 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from windowlab.metrics import (
+    coherent_gain,
     equivalent_noise_bandwidth_bins,
     half_bin_leakage_spectrum,
     metrics_row,
     null_to_null_main_lobe_width,
     offset_response_curve,
+    peak_sidelobe_level_db,
     positive_frequency_spectrum,
     scalloping_loss_db,
 )
-from windowlab.svg import chart_svg, triptych_bar_svg
-from windowlab.windows import WINDOW_BUILDERS
+from windowlab.svg import chart_svg, stacked_line_panels_svg, triptych_bar_svg
+from windowlab.windows import WINDOW_BUILDERS, kaiser
 
 ART = ROOT / "art"
 LENGTH = 129
@@ -28,6 +30,8 @@ FFT_SIZE = 4096
 WINDOW_ORDER = tuple(WINDOW_BUILDERS)
 SPECTRUM_ORDER = ("rectangular", "hann", "hamming", "blackman", "kaiser-8.6")
 AMPLITUDE_SPECIALISTS = ("blackman", "kaiser-8.6", "flattop")
+KAISER_SWEEP_BETAS = tuple(sorted({step / 2 for step in range(29)} | {8.6}))
+KAISER_HIGHLIGHTS = (0.0, 5.0, 8.6, 14.0)
 
 
 def builders_for(names: tuple[str, ...]) -> list[tuple[str, object]]:
@@ -115,6 +119,132 @@ def build_amplitude_summary() -> str:
     )
 
 
+def build_kaiser_sweep_rows() -> list[dict[str, float]]:
+    rows: list[dict[str, float]] = []
+    for beta in KAISER_SWEEP_BETAS:
+        window = kaiser(LENGTH, beta)
+        rows.append(
+            {
+                "beta": beta,
+                "coherent_gain": coherent_gain(window),
+                "enbw_bins": equivalent_noise_bandwidth_bins(window),
+                "peak_sidelobe_db": peak_sidelobe_level_db(window, fft_size=FFT_SIZE),
+                "main_lobe_width_bins": LENGTH * null_to_null_main_lobe_width(window, fft_size=FFT_SIZE),
+                "scalloping_loss_db": abs(scalloping_loss_db(window)),
+            }
+        )
+    return rows
+
+
+def _padded_range(values: list[float], *, pad_low: float = 0.08, pad_high: float = 0.12, clamp_min: float | None = None) -> tuple[float, float]:
+    lo = min(values)
+    hi = max(values)
+    span = hi - lo if hi > lo else max(abs(hi), 1.0)
+    lo -= span * pad_low
+    hi += span * pad_high
+    if clamp_min is not None:
+        lo = max(clamp_min, lo)
+    return lo, hi
+
+
+def build_kaiser_sweep_svg(rows: list[dict[str, float]]) -> str:
+    blackman = WINDOW_BUILDERS["blackman"](LENGTH)
+    flattop = WINDOW_BUILDERS["flattop"](LENGTH)
+    series = {
+        "ENBW": [(row["beta"], row["enbw_bins"]) for row in rows],
+        "Main-lobe width": [(row["beta"], row["main_lobe_width_bins"]) for row in rows],
+        "Peak sidelobe": [(row["beta"], row["peak_sidelobe_db"]) for row in rows],
+    }
+    highlight_rows = {row["beta"]: row for row in rows if row["beta"] in KAISER_HIGHLIGHTS}
+
+    panels = [
+        {
+            "title": "Equivalent noise bandwidth rises with beta",
+            "y_label": "ENBW (bins)",
+            "y_range": _padded_range(
+                [row["enbw_bins"] for row in rows]
+                + [
+                    equivalent_noise_bandwidth_bins(blackman),
+                    equivalent_noise_bandwidth_bins(flattop),
+                ],
+                clamp_min=0.0,
+            ),
+            "tick_format": "{:.2f}",
+            "x_range": (KAISER_SWEEP_BETAS[0], KAISER_SWEEP_BETAS[-1]),
+            "x_tick_format": "{:.0f}",
+            "series": [
+                {"name": "Kaiser family", "stroke": "#7c3aed", "points": series["ENBW"], "width": 3},
+            ],
+            "references": [
+                {"label": "blackman", "value": equivalent_noise_bandwidth_bins(blackman), "stroke": "#d62728", "dash": "6 6"},
+                {"label": "flat-top", "value": equivalent_noise_bandwidth_bins(flattop), "stroke": "#8b5cf6", "dash": "2 7"},
+            ],
+            "markers": [
+                {"label": f"β={beta:g}", "x": beta, "y": highlight_rows[beta]["enbw_bins"], "fill": "#ede9fe", "stroke": "#7c3aed"}
+                for beta in KAISER_HIGHLIGHTS
+            ],
+        },
+        {
+            "title": "Main-lobe width keeps widening",
+            "y_label": "null-to-null width (DFT bins)",
+            "y_range": _padded_range(
+                [row["main_lobe_width_bins"] for row in rows]
+                + [
+                    LENGTH * null_to_null_main_lobe_width(blackman, fft_size=FFT_SIZE),
+                    LENGTH * null_to_null_main_lobe_width(flattop, fft_size=FFT_SIZE),
+                ],
+                clamp_min=0.0,
+            ),
+            "tick_format": "{:.1f}",
+            "x_range": (KAISER_SWEEP_BETAS[0], KAISER_SWEEP_BETAS[-1]),
+            "x_tick_format": "{:.0f}",
+            "series": [
+                {"name": "Kaiser family", "stroke": "#7c3aed", "points": series["Main-lobe width"], "width": 3},
+            ],
+            "references": [
+                {"label": "blackman", "value": LENGTH * null_to_null_main_lobe_width(blackman, fft_size=FFT_SIZE), "stroke": "#d62728", "dash": "6 6"},
+                {"label": "flat-top", "value": LENGTH * null_to_null_main_lobe_width(flattop, fft_size=FFT_SIZE), "stroke": "#8b5cf6", "dash": "2 7"},
+            ],
+            "markers": [
+                {"label": f"β={beta:g}", "x": beta, "y": highlight_rows[beta]["main_lobe_width_bins"], "fill": "#ede9fe", "stroke": "#7c3aed"}
+                for beta in KAISER_HIGHLIGHTS
+            ],
+        },
+        {
+            "title": "Peak sidelobes drop as beta climbs",
+            "y_label": "peak sidelobe (dB)",
+            "y_range": _padded_range(
+                [row["peak_sidelobe_db"] for row in rows]
+                + [
+                    peak_sidelobe_level_db(blackman, fft_size=FFT_SIZE),
+                    peak_sidelobe_level_db(flattop, fft_size=FFT_SIZE),
+                ]
+            ),
+            "tick_format": "{:.0f}",
+            "x_range": (KAISER_SWEEP_BETAS[0], KAISER_SWEEP_BETAS[-1]),
+            "x_tick_format": "{:.0f}",
+            "series": [
+                {"name": "Kaiser family", "stroke": "#7c3aed", "points": series["Peak sidelobe"], "width": 3},
+            ],
+            "references": [
+                {"label": "blackman", "value": peak_sidelobe_level_db(blackman, fft_size=FFT_SIZE), "stroke": "#d62728", "dash": "6 6"},
+                {"label": "flat-top", "value": peak_sidelobe_level_db(flattop, fft_size=FFT_SIZE), "stroke": "#8b5cf6", "dash": "2 7"},
+            ],
+            "markers": [
+                {"label": f"β={beta:g}", "x": beta, "y": highlight_rows[beta]["peak_sidelobe_db"], "fill": "#ede9fe", "stroke": "#7c3aed"}
+                for beta in KAISER_HIGHLIGHTS
+            ],
+        },
+    ]
+
+    return stacked_line_panels_svg(
+        "Kaiser beta sweep: one knob, three visible tradeoffs",
+        "The family moves smoothly. Blackman sits near β≈8.6. Flat-top is still a separate amplitude specialist, not the end of the Kaiser curve.",
+        "Kaiser β",
+        panels,
+    )
+
+
 def main() -> int:
     ART.mkdir(exist_ok=True)
 
@@ -158,6 +288,23 @@ def main() -> int:
     (ART / "window-half-bin-leakage.svg").write_text(half_bin_svg)
 
     (ART / "window-amplitude-specialist-summary.svg").write_text(build_amplitude_summary())
+
+    kaiser_rows = build_kaiser_sweep_rows()
+    (ART / "window-kaiser-beta-sweep.svg").write_text(build_kaiser_sweep_svg(kaiser_rows))
+    with (ART / "kaiser-beta-sweep.csv").open("w", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=[
+                "beta",
+                "coherent_gain",
+                "enbw_bins",
+                "peak_sidelobe_db",
+                "main_lobe_width_bins",
+                "scalloping_loss_db",
+            ],
+        )
+        writer.writeheader()
+        writer.writerows(kaiser_rows)
 
     rows = build_metrics()
     with (ART / "window-metrics.csv").open("w", newline="") as handle:

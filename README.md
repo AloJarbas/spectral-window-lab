@@ -42,7 +42,13 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 
 This new sidecar figure makes the tradeoff blunt: flat-top almost kills scalloping loss, but it pays for that with much higher ENBW and a much wider main lobe.
 
-The generated CSV in `art/window-metrics.csv` now gives a compact numeric summary for coherent gain, ENBW, peak sidelobes, main-lobe width, and scalloping loss.
+### Kaiser beta sweep
+
+![Kaiser beta sweep](art/window-kaiser-beta-sweep.svg)
+
+This sweep turns Kaiser from a single named checkpoint into a real family. `beta` is the knob: push it up and ENBW rises, the main lobe widens, and sidelobes fall.
+
+The generated CSVs in `art/window-metrics.csv` and `art/kaiser-beta-sweep.csv` now give compact numeric summaries for the named windows and the Kaiser family sweep.
 
 ## Quick run
 
@@ -59,6 +65,8 @@ It changes what you think you measured.
 
 This repo is small, but it has a real spine: code, generated artifacts, tests, and now a clearer amplitude-specialist story instead of a pile of unnamed curves.
 
+The new Kaiser sweep matters because it replaces folklore like "Kaiser is kind of like Blackman" with an actual path you can inspect.
+
 ## Notes
 
 - [Flat-top is the amplitude specialist, not the default](notes/flattop-amplitude-specialist.md)
@@ -67,8 +75,8 @@ This repo is small, but it has a real spine: code, generated artifacts, tests, a
 ## Next directions
 
 - add a Blackman-Harris versus Nuttall sidecar only if it stays honest about leakage suppression versus amplitude honesty
-- add one compact beta-sweep artifact so the Kaiser family sits on the same tradeoff map as flat-top
 - add overlap-add and STFT framing notes
 - port the metrics core to Julia and Fortran for cross-language comparison once those toolchains are live
+- compare the Kaiser sweep at two FFT lengths or iteration densities only if that reveals something real instead of redrawing the same curve
 
 Jarbas
