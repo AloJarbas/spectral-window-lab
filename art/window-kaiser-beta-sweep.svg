@@ -1,138 +1,149 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="860" viewBox="0 0 1200 860">
-<rect width="1200" height="860" fill="#fcfcfd"/>
-<text x="600.0" y="40.0" fill="#222" font-size="28" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">Kaiser beta sweep: one knob, three visible tradeoffs</text>
-<text x="600.0" y="70.0" fill="#4b5563" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">The family moves smoothly. Blackman sits near β≈8.6. Flat-top is still a separate amplitude specialist, not the end of the Kaiser curve.</text>
-<line x1="90.0" y1="92.0" x2="114.0" y2="92.0" stroke="#7c3aed" stroke-width="4"/>
-<text x="122.0" y="97.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">Kaiser family</text>
-<line x1="260.0" y1="92.0" x2="284.0" y2="92.0" stroke="#d62728" stroke-width="4" stroke-dasharray="6 6"/>
-<text x="292.0" y="97.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">blackman</text>
-<line x1="430.0" y1="92.0" x2="454.0" y2="92.0" stroke="#8b5cf6" stroke-width="4" stroke-dasharray="2 7"/>
-<text x="462.0" y="97.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">flat-top</text>
-<rect x="90.0" y="110.0" width="1070.0" height="197.3" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
-<text x="108.0" y="138.0" fill="#222" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Equivalent noise bandwidth rises with beta</text>
-<text x="1152.0" y="138.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">ENBW (bins)</text>
-<line x1="110.0" y1="307.3" x2="1144.0" y2="307.3" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="312.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.78</text>
-<line x1="110.0" y1="264.0" x2="1144.0" y2="264.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="269.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">1.62</text>
-<line x1="110.0" y1="220.7" x2="1144.0" y2="220.7" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="225.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">2.46</text>
-<line x1="110.0" y1="177.3" x2="1144.0" y2="177.3" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="182.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">3.30</text>
-<line x1="110.0" y1="134.0" x2="1144.0" y2="134.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="139.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">4.14</text>
-<line x1="90.0" y1="150.0" x2="90.0" y2="291.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="90.0" y="327.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">0</text>
-<line x1="242.9" y1="150.0" x2="242.9" y2="291.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="242.9" y="327.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">2</text>
-<line x1="395.7" y1="150.0" x2="395.7" y2="291.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="395.7" y="327.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">4</text>
-<line x1="548.6" y1="150.0" x2="548.6" y2="291.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="548.6" y="327.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">6</text>
-<line x1="701.4" y1="150.0" x2="701.4" y2="291.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="701.4" y="327.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">8</text>
-<line x1="854.3" y1="150.0" x2="854.3" y2="291.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="854.3" y="327.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">10</text>
-<line x1="1007.1" y1="150.0" x2="1007.1" y2="291.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="1007.1" y="327.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">12</text>
-<line x1="1160.0" y1="150.0" x2="1160.0" y2="291.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="1160.0" y="327.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">14</text>
-<line x1="110.0" y1="257.6" x2="1144.0" y2="257.6" stroke="#d62728" stroke-width="2" stroke-dasharray="6 6"/>
-<text x="1138.0" y="251.6" fill="#d62728" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">blackman</text>
-<line x1="110.0" y1="151.3" x2="1144.0" y2="151.3" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="2 7"/>
-<text x="1138.0" y="145.3" fill="#8b5cf6" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">flat-top</text>
-<polyline fill="none" stroke="#7c3aed" stroke-width="3" points="90.0,295.8 128.2,295.8 166.4,295.5 204.6,294.8 242.9,293.3 281.1,291.1 319.3,288.5 357.5,285.6 395.7,282.7 433.9,279.7 472.1,276.8 510.4,273.9 548.6,271.1 586.8,268.4 625.0,265.8 663.2,263.3 701.4,260.8 739.6,258.3 747.3,257.9 777.9,256.0 816.1,253.7 854.3,251.4 892.5,249.2 930.7,247.1 968.9,245.0 1007.1,242.9 1045.4,240.9 1083.6,238.9 1121.8,236.9 1160.0,235.0"/>
-<circle cx="90.0" cy="295.8" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-<text x="90.0" y="285.8" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=0</text>
-<circle cx="472.1" cy="276.8" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-<text x="472.1" y="266.8" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=5</text>
-<circle cx="747.3" cy="257.9" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-<text x="747.3" y="247.9" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=8.6</text>
-<circle cx="1160.0" cy="235.0" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-<text x="1160.0" y="225.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=14</text>
-<rect x="90.0" y="341.3" width="1070.0" height="197.3" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
-<text x="108.0" y="369.3" fill="#222" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Main-lobe width keeps widening</text>
-<text x="1152.0" y="369.3" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">null-to-null width (DFT bins)</text>
-<line x1="110.0" y1="538.7" x2="1144.0" y2="538.7" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="543.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">1.4</text>
-<line x1="110.0" y1="495.3" x2="1144.0" y2="495.3" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="500.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">3.8</text>
-<line x1="110.0" y1="452.0" x2="1144.0" y2="452.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="457.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">6.3</text>
-<line x1="110.0" y1="408.7" x2="1144.0" y2="408.7" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="413.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">8.7</text>
-<line x1="110.0" y1="365.3" x2="1144.0" y2="365.3" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="370.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">11.2</text>
-<line x1="90.0" y1="381.3" x2="90.0" y2="522.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="90.0" y="558.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">0</text>
-<line x1="242.9" y1="381.3" x2="242.9" y2="522.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="242.9" y="558.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">2</text>
-<line x1="395.7" y1="381.3" x2="395.7" y2="522.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="395.7" y="558.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">4</text>
-<line x1="548.6" y1="381.3" x2="548.6" y2="522.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="548.6" y="558.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">6</text>
-<line x1="701.4" y1="381.3" x2="701.4" y2="522.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="701.4" y="558.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">8</text>
-<line x1="854.3" y1="381.3" x2="854.3" y2="522.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="854.3" y="558.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">10</text>
-<line x1="1007.1" y1="381.3" x2="1007.1" y2="522.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="1007.1" y="558.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">12</text>
-<line x1="1160.0" y1="381.3" x2="1160.0" y2="522.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="1160.0" y="558.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">14</text>
-<line x1="110.0" y1="456.0" x2="1144.0" y2="456.0" stroke="#d62728" stroke-width="2" stroke-dasharray="6 6"/>
-<text x="1138.0" y="450.0" fill="#d62728" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">blackman</text>
-<line x1="110.0" y1="382.7" x2="1144.0" y2="382.7" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="2 7"/>
-<text x="1138.0" y="376.7" fill="#8b5cf6" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">flat-top</text>
-<polyline fill="none" stroke="#7c3aed" stroke-width="3" points="90.0,527.1 128.2,527.1 166.4,526.0 204.6,523.8 242.9,520.4 281.1,517.1 319.3,513.8 357.5,509.3 395.7,504.9 433.9,500.4 472.1,496.0 510.4,490.4 548.6,486.0 586.8,480.4 625.0,476.0 663.2,470.4 701.4,464.9 739.6,460.4 747.3,459.3 777.9,454.9 816.1,449.3 854.3,443.8 892.5,438.2 930.7,432.7 968.9,427.1 1007.1,422.7 1045.4,417.1 1083.6,411.6 1121.8,406.0 1160.0,400.4"/>
-<circle cx="90.0" cy="527.1" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-<text x="90.0" y="517.1" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=0</text>
-<circle cx="472.1" cy="496.0" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-<text x="472.1" y="486.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=5</text>
-<circle cx="747.3" cy="459.3" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-<text x="747.3" y="449.3" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=8.6</text>
-<circle cx="1160.0" cy="400.4" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-<text x="1160.0" y="390.4" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=14</text>
-<rect x="90.0" y="572.7" width="1070.0" height="197.3" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
-<text x="108.0" y="600.7" fill="#222" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Peak sidelobes drop as beta climbs</text>
-<text x="1152.0" y="600.7" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">peak sidelobe (dB)</text>
-<line x1="110.0" y1="770.0" x2="1144.0" y2="770.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="775.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">-113</text>
-<line x1="110.0" y1="726.7" x2="1144.0" y2="726.7" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="731.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">-85</text>
-<line x1="110.0" y1="683.3" x2="1144.0" y2="683.3" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="688.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">-58</text>
-<line x1="110.0" y1="640.0" x2="1144.0" y2="640.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="645.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">-30</text>
-<line x1="110.0" y1="596.7" x2="1144.0" y2="596.7" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="106.0" y="601.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">-2</text>
-<line x1="90.0" y1="612.7" x2="90.0" y2="754.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="90.0" y="790.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">0</text>
-<line x1="242.9" y1="612.7" x2="242.9" y2="754.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="242.9" y="790.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">2</text>
-<line x1="395.7" y1="612.7" x2="395.7" y2="754.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="395.7" y="790.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">4</text>
-<line x1="548.6" y1="612.7" x2="548.6" y2="754.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="548.6" y="790.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">6</text>
-<line x1="701.4" y1="612.7" x2="701.4" y2="754.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="701.4" y="790.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">8</text>
-<line x1="854.3" y1="612.7" x2="854.3" y2="754.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="854.3" y="790.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">10</text>
-<line x1="1007.1" y1="612.7" x2="1007.1" y2="754.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="1007.1" y="790.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">12</text>
-<line x1="1160.0" y1="612.7" x2="1160.0" y2="754.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="1160.0" y="790.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">14</text>
-<line x1="110.0" y1="684.0" x2="1144.0" y2="684.0" stroke="#d62728" stroke-width="2" stroke-dasharray="6 6"/>
-<text x="1138.0" y="678.0" fill="#d62728" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">blackman</text>
-<line x1="110.0" y1="735.9" x2="1144.0" y2="735.9" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="2 7"/>
-<text x="1138.0" y="729.9" fill="#8b5cf6" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">flat-top</text>
-<polyline fill="none" stroke="#7c3aed" stroke-width="3" points="90.0,614.0 128.2,614.6 166.4,616.2 204.6,618.8 242.9,622.2 281.1,626.2 319.3,630.7 357.5,635.5 395.7,640.5 433.9,645.7 472.1,651.0 510.4,656.4 548.6,661.8 586.8,667.3 625.0,672.9 663.2,678.6 701.4,684.5 739.6,690.4 747.3,691.6 777.9,696.5 816.1,702.7 854.3,709.0 892.5,715.3 930.7,721.6 968.9,727.8 1007.1,734.1 1045.4,740.2 1083.6,746.2 1121.8,752.3 1160.0,758.4"/>
-<circle cx="90.0" cy="614.0" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-<text x="90.0" y="604.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=0</text>
-<circle cx="472.1" cy="651.0" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-<text x="472.1" y="641.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=5</text>
-<circle cx="747.3" cy="691.6" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-<text x="747.3" y="681.6" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=8.6</text>
-<circle cx="1160.0" cy="758.4" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-<text x="1160.0" y="748.4" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=14</text>
-<text x="625.0" y="836.0" fill="#374151" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">Kaiser β</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1020" viewBox="0 0 1400 1020">
+<defs>
+<clipPath id="stacked-panel-0"><rect x="116.0" y="213.0" width="1224.0" height="161.7" rx="10"/></clipPath>
+<clipPath id="stacked-panel-1"><rect x="116.0" y="468.7" width="1224.0" height="161.7" rx="10"/></clipPath>
+<clipPath id="stacked-panel-2"><rect x="116.0" y="724.3" width="1224.0" height="161.7" rx="10"/></clipPath>
+</defs>
+<rect width="1400" height="1020" fill="#fcfcfd"/>
+<text x="700.0" y="40.0" fill="#222" font-size="28" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700"><tspan x="700.0" dy="0.0" text-anchor="middle">Kaiser beta sweep: one knob, three visible tradeoffs</tspan></text>
+<text x="700.0" y="75.0" fill="#4b5563" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal"><tspan x="700.0" dy="0.0" text-anchor="middle">The family moves smoothly. Blackman sits near β≈8.6. Flat-top is still a separate amplitude specialist, not the end of the Kaiser</tspan><tspan x="700.0" dy="20.0" text-anchor="middle">curve.</tspan></text>
+<line x1="486.3" y1="123.0" x2="510.3" y2="123.0" stroke="#7c3aed" stroke-width="4"/>
+<text x="518.3" y="128.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">Kaiser family</text>
+<line x1="655.8" y1="123.0" x2="679.8" y2="123.0" stroke="#d62728" stroke-width="4" stroke-dasharray="6 6"/>
+<text x="687.8" y="128.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">blackman</text>
+<line x1="784.8" y1="123.0" x2="808.8" y2="123.0" stroke="#8b5cf6" stroke-width="4" stroke-dasharray="2 7"/>
+<text x="816.8" y="128.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">flat-top</text>
+<rect x="96.0" y="173.0" width="1260.0" height="217.7" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
+<text x="114.0" y="201.0" fill="#111827" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700"><tspan x="114.0" dy="0.0" text-anchor="start">Equivalent noise bandwidth rises with beta</tspan></text>
+<text x="1346.0" y="201.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">ENBW (bins)</text>
+<line x1="116.0" y1="374.7" x2="1340.0" y2="374.7" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="379.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.78</text>
+<line x1="116.0" y1="334.2" x2="1340.0" y2="334.2" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="339.2" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">1.62</text>
+<line x1="116.0" y1="293.8" x2="1340.0" y2="293.8" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="298.8" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">2.46</text>
+<line x1="116.0" y1="253.4" x2="1340.0" y2="253.4" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="258.4" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">3.30</text>
+<line x1="116.0" y1="213.0" x2="1340.0" y2="213.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="218.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">4.14</text>
+<line x1="96.0" y1="213.0" x2="96.0" y2="374.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="96.0" y="412.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">0</text>
+<line x1="276.0" y1="213.0" x2="276.0" y2="374.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="276.0" y="412.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">2</text>
+<line x1="456.0" y1="213.0" x2="456.0" y2="374.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="456.0" y="412.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">4</text>
+<line x1="636.0" y1="213.0" x2="636.0" y2="374.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="636.0" y="412.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">6</text>
+<line x1="816.0" y1="213.0" x2="816.0" y2="374.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="816.0" y="412.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">8</text>
+<line x1="996.0" y1="213.0" x2="996.0" y2="374.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="996.0" y="412.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">10</text>
+<line x1="1176.0" y1="213.0" x2="1176.0" y2="374.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1176.0" y="412.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">12</text>
+<line x1="1356.0" y1="213.0" x2="1356.0" y2="374.7" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1356.0" y="412.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">14</text>
+<g clip-path="url(#stacked-panel-0)">
+<line x1="116.0" y1="328.3" x2="1340.0" y2="328.3" stroke="#d62728" stroke-width="2" stroke-dasharray="6 6"/>
+<line x1="116.0" y1="229.2" x2="1340.0" y2="229.2" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="2 7"/>
+<polyline fill="none" stroke="#7c3aed" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,363.9 141.0,363.9 186.0,363.7 231.0,362.9 276.0,361.5 321.0,359.5 366.0,357.1 411.0,354.4 456.0,351.7 501.0,348.9 546.0,346.2 591.0,343.5 636.0,340.9 681.0,338.4 726.0,335.9 771.0,333.6 816.0,331.2 861.0,329.0 870.0,328.5 906.0,326.8 951.0,324.6 996.0,322.5 1041.0,320.5 1086.0,318.5 1131.0,316.5 1176.0,314.6 1221.0,312.7 1266.0,310.8 1311.0,309.0 1356.0,307.2"/>
+<circle cx="96.0" cy="363.9" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<circle cx="546.0" cy="346.2" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<circle cx="870.0" cy="328.5" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<circle cx="1356.0" cy="307.2" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+</g>
+<text x="1334.0" y="322.3" fill="#d62728" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">blackman</text>
+<text x="1334.0" y="223.2" fill="#8b5cf6" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">flat-top</text>
+<text x="96.0" y="353.9" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=0</text>
+<text x="546.0" y="336.2" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=5</text>
+<text x="870.0" y="318.5" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=8.6</text>
+<text x="1356.0" y="297.2" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=14</text>
+<rect x="96.0" y="428.7" width="1260.0" height="217.7" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
+<text x="114.0" y="456.7" fill="#111827" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700"><tspan x="114.0" dy="0.0" text-anchor="start">Main-lobe width keeps widening</tspan></text>
+<text x="1346.0" y="456.7" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">null-to-null width (DFT bins)</text>
+<line x1="116.0" y1="630.3" x2="1340.0" y2="630.3" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="635.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">1.4</text>
+<line x1="116.0" y1="589.9" x2="1340.0" y2="589.9" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="594.9" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">3.8</text>
+<line x1="116.0" y1="549.5" x2="1340.0" y2="549.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="554.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">6.3</text>
+<line x1="116.0" y1="509.1" x2="1340.0" y2="509.1" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="514.1" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">8.7</text>
+<line x1="116.0" y1="468.7" x2="1340.0" y2="468.7" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="473.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">11.2</text>
+<line x1="96.0" y1="468.7" x2="96.0" y2="630.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="96.0" y="668.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">0</text>
+<line x1="276.0" y1="468.7" x2="276.0" y2="630.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="276.0" y="668.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">2</text>
+<line x1="456.0" y1="468.7" x2="456.0" y2="630.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="456.0" y="668.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">4</text>
+<line x1="636.0" y1="468.7" x2="636.0" y2="630.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="636.0" y="668.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">6</text>
+<line x1="816.0" y1="468.7" x2="816.0" y2="630.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="816.0" y="668.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">8</text>
+<line x1="996.0" y1="468.7" x2="996.0" y2="630.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="996.0" y="668.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">10</text>
+<line x1="1176.0" y1="468.7" x2="1176.0" y2="630.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1176.0" y="668.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">12</text>
+<line x1="1356.0" y1="468.7" x2="1356.0" y2="630.3" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1356.0" y="668.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">14</text>
+<g clip-path="url(#stacked-panel-1)">
+<line x1="116.0" y1="553.2" x2="1340.0" y2="553.2" stroke="#d62728" stroke-width="2" stroke-dasharray="6 6"/>
+<line x1="116.0" y1="484.8" x2="1340.0" y2="484.8" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="2 7"/>
+<polyline fill="none" stroke="#7c3aed" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,619.6 141.0,619.6 186.0,618.5 231.0,616.4 276.0,613.3 321.0,610.2 366.0,607.1 411.0,603.0 456.0,598.8 501.0,594.7 546.0,590.5 591.0,585.4 636.0,581.2 681.0,576.0 726.0,571.9 771.0,566.7 816.0,561.5 861.0,557.4 870.0,556.3 906.0,552.2 951.0,547.0 996.0,541.8 1041.0,536.6 1086.0,531.5 1131.0,526.3 1176.0,522.1 1221.0,517.0 1266.0,511.8 1311.0,506.6 1356.0,501.4"/>
+<circle cx="96.0" cy="619.6" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<circle cx="546.0" cy="590.5" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<circle cx="870.0" cy="556.3" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<circle cx="1356.0" cy="501.4" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+</g>
+<text x="1334.0" y="547.2" fill="#d62728" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">blackman</text>
+<text x="1334.0" y="478.8" fill="#8b5cf6" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">flat-top</text>
+<text x="96.0" y="609.6" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=0</text>
+<text x="546.0" y="580.5" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=5</text>
+<text x="870.0" y="546.3" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=8.6</text>
+<text x="1356.0" y="491.4" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=14</text>
+<rect x="96.0" y="684.3" width="1260.0" height="217.7" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
+<text x="114.0" y="712.3" fill="#111827" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700"><tspan x="114.0" dy="0.0" text-anchor="start">Peak sidelobes drop as beta climbs</tspan></text>
+<text x="1346.0" y="712.3" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">peak sidelobe (dB)</text>
+<line x1="116.0" y1="886.0" x2="1340.0" y2="886.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="891.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">-113</text>
+<line x1="116.0" y1="845.6" x2="1340.0" y2="845.6" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="850.6" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">-85</text>
+<line x1="116.0" y1="805.2" x2="1340.0" y2="805.2" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="810.2" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">-58</text>
+<line x1="116.0" y1="764.7" x2="1340.0" y2="764.7" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="769.7" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">-30</text>
+<line x1="116.0" y1="724.3" x2="1340.0" y2="724.3" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="729.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">-2</text>
+<line x1="96.0" y1="724.3" x2="96.0" y2="886.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="96.0" y="924.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">0</text>
+<line x1="276.0" y1="724.3" x2="276.0" y2="886.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="276.0" y="924.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">2</text>
+<line x1="456.0" y1="724.3" x2="456.0" y2="886.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="456.0" y="924.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">4</text>
+<line x1="636.0" y1="724.3" x2="636.0" y2="886.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="636.0" y="924.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">6</text>
+<line x1="816.0" y1="724.3" x2="816.0" y2="886.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="816.0" y="924.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">8</text>
+<line x1="996.0" y1="724.3" x2="996.0" y2="886.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="996.0" y="924.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">10</text>
+<line x1="1176.0" y1="724.3" x2="1176.0" y2="886.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1176.0" y="924.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">12</text>
+<line x1="1356.0" y1="724.3" x2="1356.0" y2="886.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1356.0" y="924.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">14</text>
+<g clip-path="url(#stacked-panel-2)">
+<line x1="116.0" y1="805.8" x2="1340.0" y2="805.8" stroke="#d62728" stroke-width="2" stroke-dasharray="6 6"/>
+<line x1="116.0" y1="854.2" x2="1340.0" y2="854.2" stroke="#8b5cf6" stroke-width="2" stroke-dasharray="2 7"/>
+<polyline fill="none" stroke="#7c3aed" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,740.5 141.0,741.0 186.0,742.6 231.0,745.0 276.0,748.2 321.0,751.9 366.0,756.1 411.0,760.5 456.0,765.2 501.0,770.1 546.0,775.0 591.0,780.0 636.0,785.1 681.0,790.2 726.0,795.4 771.0,800.8 816.0,806.3 861.0,811.8 870.0,812.9 906.0,817.5 951.0,823.2 996.0,829.1 1041.0,835.0 1086.0,840.8 1131.0,846.7 1176.0,852.5 1221.0,858.2 1266.0,863.8 1311.0,869.5 1356.0,875.2"/>
+<circle cx="96.0" cy="740.5" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<circle cx="546.0" cy="775.0" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<circle cx="870.0" cy="812.9" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+<circle cx="1356.0" cy="875.2" r="5.0" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+</g>
+<text x="1334.0" y="799.8" fill="#d62728" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">blackman</text>
+<text x="1334.0" y="848.2" fill="#8b5cf6" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">flat-top</text>
+<text x="96.0" y="730.5" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=0</text>
+<text x="546.0" y="765.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=5</text>
+<text x="870.0" y="802.9" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=8.6</text>
+<text x="1356.0" y="865.2" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=14</text>
+<text x="726.0" y="988.0" fill="#374151" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">Kaiser β</text>
 </svg>

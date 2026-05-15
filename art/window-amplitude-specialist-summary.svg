@@ -1,77 +1,77 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="580" viewBox="0 0 1200 580">
-<rect width="1200" height="580" fill="#fcfcfd"/>
-<text x="600.0" y="42.0" fill="#222" font-size="28" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">Flat-top buys amplitude honesty by spending bandwidth</text>
-<text x="600.0" y="72.0" fill="#4b5563" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">Blackman and Kaiser stay compact; flat-top flattens the peak so hard that ENBW and main-lobe width jump.</text>
-<line x1="60.0" y1="98.0" x2="84.0" y2="98.0" stroke="#d62728" stroke-width="4"/>
-<text x="92.0" y="103.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">blackman</text>
-<line x1="200.0" y1="98.0" x2="224.0" y2="98.0" stroke="#9467bd" stroke-width="4"/>
-<text x="232.0" y="103.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">kaiser-8.6</text>
-<line x1="340.0" y1="98.0" x2="364.0" y2="98.0" stroke="#8b5cf6" stroke-width="4"/>
-<text x="372.0" y="103.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">flattop</text>
-<rect x="60.0" y="120.0" width="349.3" height="380.0" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
-<text x="234.7" y="102.0" fill="#222" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">Half-bin amplitude loss</text>
-<line x1="80.0" y1="500.0" x2="393.3" y2="500.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="76.0" y="505.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.00</text>
-<line x1="80.0" y1="405.0" x2="393.3" y2="405.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="76.0" y="410.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.30</text>
-<line x1="80.0" y1="310.0" x2="393.3" y2="310.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="76.0" y="315.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.60</text>
-<line x1="80.0" y1="215.0" x2="393.3" y2="215.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="76.0" y="220.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.90</text>
-<line x1="80.0" y1="120.0" x2="393.3" y2="120.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="76.0" y="125.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">1.20</text>
-<rect x="90.0" y="157.4" width="87.8" height="342.6" fill="#d62728" rx="8"/>
-<text x="133.9" y="522.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">blackman</text>
-<text x="133.9" y="149.4" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">1.082</text>
-<rect x="193.8" y="154.1" width="87.8" height="345.9" fill="#9467bd" rx="8"/>
-<text x="237.7" y="522.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">kaiser-8.6</text>
-<text x="237.7" y="146.1" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">1.092</text>
-<rect x="297.6" y="497.1" width="87.8" height="2.9" fill="#8b5cf6" rx="8"/>
-<text x="341.4" y="522.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">flattop</text>
-<text x="341.4" y="489.1" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">0.009</text>
-<text x="234.7" y="548.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">absolute scalloping loss (dB)</text>
-<rect x="435.3" y="120.0" width="349.3" height="380.0" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
-<text x="610.0" y="102.0" fill="#222" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">Equivalent noise bandwidth</text>
-<line x1="455.3" y1="500.0" x2="768.7" y2="500.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="451.3" y="505.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.0</text>
-<line x1="455.3" y1="405.0" x2="768.7" y2="405.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="451.3" y="410.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">1.0</text>
-<line x1="455.3" y1="310.0" x2="768.7" y2="310.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="451.3" y="315.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">2.0</text>
-<line x1="455.3" y1="215.0" x2="768.7" y2="215.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="451.3" y="220.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">3.1</text>
-<line x1="455.3" y1="120.0" x2="768.7" y2="120.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="451.3" y="125.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">4.1</text>
-<rect x="465.3" y="338.7" width="87.8" height="161.3" fill="#d62728" rx="8"/>
-<text x="509.2" y="522.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">blackman</text>
-<text x="509.2" y="330.7" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">1.74</text>
-<rect x="569.1" y="339.2" width="87.8" height="160.8" fill="#9467bd" rx="8"/>
-<text x="613.0" y="522.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">kaiser-8.6</text>
-<text x="613.0" y="331.2" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">1.73</text>
-<rect x="672.9" y="147.8" width="87.8" height="352.2" fill="#8b5cf6" rx="8"/>
-<text x="716.8" y="522.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">flattop</text>
-<text x="716.8" y="139.8" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">3.80</text>
-<text x="610.0" y="548.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">ENBW (bins)</text>
-<rect x="810.7" y="120.0" width="349.3" height="380.0" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
-<text x="985.3" y="102.0" fill="#222" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">Null-to-null main-lobe width</text>
-<line x1="830.7" y1="500.0" x2="1144.0" y2="500.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="826.7" y="505.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.0</text>
-<line x1="830.7" y1="405.0" x2="1144.0" y2="405.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="826.7" y="410.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">2.8</text>
-<line x1="830.7" y1="310.0" x2="1144.0" y2="310.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="826.7" y="315.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">5.5</text>
-<line x1="830.7" y1="215.0" x2="1144.0" y2="215.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="826.7" y="220.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">8.2</text>
-<line x1="830.7" y1="120.0" x2="1144.0" y2="120.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
-<text x="826.7" y="125.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">11.0</text>
-<rect x="840.7" y="291.1" width="87.8" height="208.9" fill="#d62728" rx="8"/>
-<text x="884.6" y="522.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">blackman</text>
-<text x="884.6" y="283.1" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">6.0</text>
-<rect x="944.4" y="297.6" width="87.8" height="202.4" fill="#9467bd" rx="8"/>
-<text x="988.3" y="522.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">kaiser-8.6</text>
-<text x="988.3" y="289.6" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">5.9</text>
-<rect x="1048.2" y="147.5" width="87.8" height="352.5" fill="#8b5cf6" rx="8"/>
-<text x="1092.1" y="522.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">flattop</text>
-<text x="1092.1" y="139.5" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">10.2</text>
-<text x="985.3" y="548.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">width (DFT bins)</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720">
+<rect width="1400" height="720" fill="#fcfcfd"/>
+<text x="700.0" y="42.0" fill="#222" font-size="28" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700"><tspan x="700.0" dy="0.0" text-anchor="middle">Flat-top buys amplitude honesty by spending bandwidth</tspan></text>
+<text x="700.0" y="77.0" fill="#4b5563" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal"><tspan x="700.0" dy="0.0" text-anchor="middle">Blackman and Kaiser stay compact; flat-top flattens the peak so hard that ENBW and main-lobe width jump.</tspan></text>
+<line x1="502.5" y1="105.0" x2="526.5" y2="105.0" stroke="#d62728" stroke-width="4"/>
+<text x="534.5" y="110.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">blackman</text>
+<line x1="631.5" y1="105.0" x2="655.5" y2="105.0" stroke="#9467bd" stroke-width="4"/>
+<text x="663.5" y="110.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">kaiser-8.6</text>
+<line x1="776.7" y1="105.0" x2="800.7" y2="105.0" stroke="#8b5cf6" stroke-width="4"/>
+<text x="808.7" y="110.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">flattop</text>
+<rect x="70.0" y="155.0" width="409.3" height="463.0" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
+<text x="274.7" y="179.0" fill="#111827" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700"><tspan x="274.7" dy="0.0" text-anchor="middle">Half-bin amplitude loss</tspan></text>
+<line x1="90.0" y1="618.0" x2="463.3" y2="618.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="86.0" y="623.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.00</text>
+<line x1="90.0" y1="513.2" x2="463.3" y2="513.2" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="86.0" y="518.2" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.30</text>
+<line x1="90.0" y1="408.5" x2="463.3" y2="408.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="86.0" y="413.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.60</text>
+<line x1="90.0" y1="303.8" x2="463.3" y2="303.8" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="86.0" y="308.8" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.90</text>
+<line x1="90.0" y1="199.0" x2="463.3" y2="199.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="86.0" y="204.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">1.20</text>
+<rect x="100.0" y="240.3" width="107.8" height="377.7" fill="#d62728" rx="8"/>
+<text x="153.9" y="642.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">blackman</text>
+<text x="153.9" y="230.3" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">1.082</text>
+<rect x="223.8" y="236.7" width="107.8" height="381.3" fill="#9467bd" rx="8"/>
+<text x="277.7" y="642.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">kaiser-8.6</text>
+<text x="277.7" y="226.7" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">1.092</text>
+<rect x="347.6" y="614.8" width="107.8" height="3.2" fill="#8b5cf6" rx="8"/>
+<text x="401.4" y="642.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">flattop</text>
+<text x="401.4" y="604.8" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">0.009</text>
+<text x="274.7" y="670.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal"><tspan x="274.7" dy="0.0" text-anchor="middle">absolute scalloping loss (dB)</tspan></text>
+<rect x="505.3" y="155.0" width="409.3" height="463.0" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
+<text x="710.0" y="179.0" fill="#111827" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700"><tspan x="710.0" dy="0.0" text-anchor="middle">Equivalent noise bandwidth</tspan></text>
+<line x1="525.3" y1="618.0" x2="898.7" y2="618.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="521.3" y="623.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.0</text>
+<line x1="525.3" y1="513.2" x2="898.7" y2="513.2" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="521.3" y="518.2" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">1.0</text>
+<line x1="525.3" y1="408.5" x2="898.7" y2="408.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="521.3" y="413.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">2.0</text>
+<line x1="525.3" y1="303.8" x2="898.7" y2="303.8" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="521.3" y="308.8" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">3.1</text>
+<line x1="525.3" y1="199.0" x2="898.7" y2="199.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="521.3" y="204.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">4.1</text>
+<rect x="535.3" y="440.2" width="107.8" height="177.8" fill="#d62728" rx="8"/>
+<text x="589.2" y="642.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">blackman</text>
+<text x="589.2" y="430.2" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">1.74</text>
+<rect x="659.1" y="440.7" width="107.8" height="177.3" fill="#9467bd" rx="8"/>
+<text x="713.0" y="642.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">kaiser-8.6</text>
+<text x="713.0" y="430.7" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">1.73</text>
+<rect x="782.9" y="229.7" width="107.8" height="388.3" fill="#8b5cf6" rx="8"/>
+<text x="836.8" y="642.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">flattop</text>
+<text x="836.8" y="219.7" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">3.80</text>
+<text x="710.0" y="670.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal"><tspan x="710.0" dy="0.0" text-anchor="middle">ENBW (bins)</tspan></text>
+<rect x="940.7" y="155.0" width="409.3" height="463.0" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
+<text x="1145.3" y="179.0" fill="#111827" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700"><tspan x="1145.3" dy="0.0" text-anchor="middle">Null-to-null main-lobe width</tspan></text>
+<line x1="960.7" y1="618.0" x2="1334.0" y2="618.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="956.7" y="623.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.0</text>
+<line x1="960.7" y1="513.2" x2="1334.0" y2="513.2" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="956.7" y="518.2" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">2.8</text>
+<line x1="960.7" y1="408.5" x2="1334.0" y2="408.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="956.7" y="413.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">5.5</text>
+<line x1="960.7" y1="303.8" x2="1334.0" y2="303.8" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="956.7" y="308.8" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">8.2</text>
+<line x1="960.7" y1="199.0" x2="1334.0" y2="199.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="956.7" y="204.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">11.0</text>
+<rect x="970.7" y="387.7" width="107.8" height="230.3" fill="#d62728" rx="8"/>
+<text x="1024.6" y="642.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">blackman</text>
+<text x="1024.6" y="377.7" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">6.0</text>
+<rect x="1094.4" y="394.9" width="107.8" height="223.1" fill="#9467bd" rx="8"/>
+<text x="1148.3" y="642.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">kaiser-8.6</text>
+<text x="1148.3" y="384.9" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">5.9</text>
+<rect x="1218.2" y="229.3" width="107.8" height="388.7" fill="#8b5cf6" rx="8"/>
+<text x="1272.1" y="642.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">flattop</text>
+<text x="1272.1" y="219.3" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">10.2</text>
+<text x="1145.3" y="670.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal"><tspan x="1145.3" dy="0.0" text-anchor="middle">width (DFT bins)</tspan></text>
 </svg>
