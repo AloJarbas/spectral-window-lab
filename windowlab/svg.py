@@ -9,6 +9,8 @@ PALETTE = {
     "hamming": "#2ca02c",
     "blackman": "#d62728",
     "kaiser-8.6": "#9467bd",
+    "blackman-harris": "#0f766e",
+    "nuttall": "#b45309",
     "flattop": "#8b5cf6",
 }
 

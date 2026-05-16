@@ -3,3 +3,4 @@ __pycache__/
 art/*.csv
 !art/window-metrics.csv
 !art/kaiser-beta-sweep.csv
+!art/window-specialist-metrics.csv

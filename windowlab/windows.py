@@ -8,6 +8,18 @@ WindowBuilder = Callable[[int], list[float]]
 
 
 KAISER_BETA_86 = 8.6
+BLACKMAN_HARRIS_COEFFICIENTS = (
+    0.35875,
+    0.48829,
+    0.14128,
+    0.01168,
+)
+NUTTALL_COEFFICIENTS = (
+    0.3635819,
+    0.4891775,
+    0.1365995,
+    0.0106411,
+)
 FLATTOP_COEFFICIENTS = (
     0.21557895,
     0.41663158,
@@ -65,6 +77,14 @@ def blackman(length: int) -> list[float]:
     return _generalized_cosine(length, (0.42, 0.5, 0.08))
 
 
+def blackman_harris(length: int) -> list[float]:
+    return _generalized_cosine(length, BLACKMAN_HARRIS_COEFFICIENTS)
+
+
+def nuttall(length: int) -> list[float]:
+    return _generalized_cosine(length, NUTTALL_COEFFICIENTS)
+
+
 def flattop(length: int) -> list[float]:
     return _generalized_cosine(length, FLATTOP_COEFFICIENTS)
 
@@ -91,6 +111,8 @@ WINDOW_BUILDERS: dict[str, WindowBuilder] = {
     "hamming": hamming,
     "blackman": blackman,
     "kaiser-8.6": kaiser_86,
+    "blackman-harris": blackman_harris,
+    "nuttall": nuttall,
     "flattop": flattop,
 }
 

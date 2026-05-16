@@ -109,6 +109,40 @@ class WindowTests(unittest.TestCase):
         )
         self.assertLess(coherent_gain(flattop), coherent_gain(blackman))
 
+    def test_blackman_harris_and_nuttall_are_deep_sidelobe_specialists(self) -> None:
+        size = 129
+        blackman = build_window("blackman", size)
+        kaiser_86 = build_window("kaiser-8.6", size)
+        blackman_harris = build_window("blackman-harris", size)
+        nuttall = build_window("nuttall", size)
+        flattop = build_window("flattop", size)
+
+        self.assertAlmostEqual(blackman_harris[size // 2], 1.0, places=12)
+        self.assertAlmostEqual(nuttall[size // 2], 1.0, places=12)
+
+        self.assertLess(
+            peak_sidelobe_level_db(blackman_harris, fft_size=2048),
+            peak_sidelobe_level_db(blackman, fft_size=2048),
+        )
+        self.assertLess(
+            peak_sidelobe_level_db(nuttall, fft_size=2048),
+            peak_sidelobe_level_db(blackman_harris, fft_size=2048),
+        )
+
+        self.assertGreater(
+            equivalent_noise_bandwidth_bins(blackman_harris),
+            equivalent_noise_bandwidth_bins(blackman),
+        )
+        self.assertGreater(
+            equivalent_noise_bandwidth_bins(nuttall),
+            equivalent_noise_bandwidth_bins(kaiser_86),
+        )
+
+        self.assertLess(abs(scalloping_loss_db(blackman_harris)), abs(scalloping_loss_db(blackman)))
+        self.assertLess(abs(scalloping_loss_db(nuttall)), abs(scalloping_loss_db(blackman)))
+        self.assertGreater(abs(scalloping_loss_db(blackman_harris)), abs(scalloping_loss_db(flattop)))
+        self.assertGreater(abs(scalloping_loss_db(nuttall)), abs(scalloping_loss_db(flattop)))
+
     def test_kaiser_tradeoffs_move_monotonically_with_beta(self) -> None:
         size = 129
         betas = [0.0, 5.0, 8.6, 14.0]

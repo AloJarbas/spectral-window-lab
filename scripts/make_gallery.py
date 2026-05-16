@@ -3,6 +3,8 @@ from __future__ import annotations
 
 import csv
 import math
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -27,15 +29,55 @@ from windowlab.windows import WINDOW_BUILDERS, kaiser
 ART = ROOT / "art"
 LENGTH = 129
 FFT_SIZE = 4096
-WINDOW_ORDER = tuple(WINDOW_BUILDERS)
+PNG_PREVIEW_SIZE = 2400
+WINDOW_ORDER = ("rectangular", "hann", "hamming", "blackman", "kaiser-8.6", "flattop")
+METRICS_ORDER = WINDOW_ORDER + ("blackman-harris", "nuttall")
 SPECTRUM_ORDER = ("rectangular", "hann", "hamming", "blackman", "kaiser-8.6")
 AMPLITUDE_SPECIALISTS = ("blackman", "kaiser-8.6", "flattop")
+SPECIALIST_ORDER = ("blackman", "kaiser-8.6", "blackman-harris", "nuttall", "flattop")
 KAISER_SWEEP_BETAS = tuple(sorted({step / 2 for step in range(29)} | {8.6}))
 KAISER_HIGHLIGHTS = (0.0, 5.0, 8.6, 14.0)
 
 
 def builders_for(names: tuple[str, ...]) -> list[tuple[str, object]]:
     return [(name, WINDOW_BUILDERS[name]) for name in names]
+
+
+def export_png_preview(svg_path: Path) -> None:
+    if sys.platform != "darwin":
+        return
+    qlmanage = shutil.which("qlmanage")
+    sips = shutil.which("sips")
+    if not qlmanage or not sips:
+        return
+
+    temp_png_path = svg_path.parent / f"{svg_path.name}.png"
+    png_path = svg_path.with_suffix(".png")
+    try:
+        subprocess.run(
+            [qlmanage, "-t", "-s", str(PNG_PREVIEW_SIZE), "-o", str(svg_path.parent), str(svg_path)],
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        if not temp_png_path.exists():
+            return
+        temp_png_path.replace(png_path)
+        subprocess.run(
+            [sips, "-s", "dpiHeight", "300", "-s", "dpiWidth", "300", str(png_path)],
+            check=True,
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+    finally:
+        if temp_png_path.exists():
+            temp_png_path.unlink()
+
+
+def write_svg_asset(filename: str, payload: str) -> None:
+    path = ART / filename
+    path.write_text(payload)
+    export_png_preview(path)
 
 
 def build_shapes() -> dict[str, list[tuple[float, float]]]:
@@ -69,10 +111,34 @@ def build_half_bin_leakage() -> dict[str, list[tuple[float, float]]]:
     return series
 
 
+def build_specialist_offset_loss() -> dict[str, list[tuple[float, float]]]:
+    series: dict[str, list[tuple[float, float]]] = {}
+    for name, builder in builders_for(SPECIALIST_ORDER):
+        series[name] = offset_response_curve(builder(LENGTH), max_offset=0.5, steps=200)
+    return series
+
+
 def build_metrics() -> list[dict[str, float | str]]:
     rows = []
-    for name, builder in builders_for(WINDOW_ORDER):
+    for name, builder in builders_for(METRICS_ORDER):
         rows.append(metrics_row(name, builder(LENGTH), fft_size=FFT_SIZE))
+    return rows
+
+
+def build_specialist_metrics_rows() -> list[dict[str, float | str]]:
+    rows: list[dict[str, float | str]] = []
+    for name, builder in builders_for(SPECIALIST_ORDER):
+        window = builder(LENGTH)
+        rows.append(
+            {
+                "name": name,
+                "coherent_gain": coherent_gain(window),
+                "enbw_bins": equivalent_noise_bandwidth_bins(window),
+                "peak_sidelobe_db": peak_sidelobe_level_db(window, fft_size=FFT_SIZE),
+                "main_lobe_width_bins": LENGTH * null_to_null_main_lobe_width(window, fft_size=FFT_SIZE),
+                "scalloping_loss_db": scalloping_loss_db(window),
+            }
+        )
     return rows
 
 
@@ -116,6 +182,50 @@ def build_amplitude_summary() -> str:
         "Flat-top buys amplitude honesty by spending bandwidth",
         "Blackman and Kaiser stay compact; flat-top flattens the peak so hard that ENBW and main-lobe width jump.",
         panels,
+    )
+
+
+def build_specialist_tradeoff_summary() -> str:
+    panels = [
+        {
+            "title": "Peak sidelobe suppression",
+            "y_label": "absolute peak sidelobe (dB)",
+            "y_range": (0.0, 102.0),
+            "tick_format": "{:.0f}",
+            "value_format": "{:.1f}",
+            "values": {
+                name: abs(peak_sidelobe_level_db(WINDOW_BUILDERS[name](LENGTH), fft_size=FFT_SIZE))
+                for name in SPECIALIST_ORDER
+            },
+        },
+        {
+            "title": "Half-bin amplitude loss",
+            "y_label": "absolute scalloping loss (dB)",
+            "y_range": (0.0, 1.2),
+            "tick_format": "{:.2f}",
+            "value_format": "{:.3f}",
+            "values": {
+                name: abs(scalloping_loss_db(WINDOW_BUILDERS[name](LENGTH)))
+                for name in SPECIALIST_ORDER
+            },
+        },
+        {
+            "title": "Equivalent noise bandwidth",
+            "y_label": "ENBW (bins)",
+            "y_range": (0.0, 4.1),
+            "tick_format": "{:.1f}",
+            "value_format": "{:.2f}",
+            "values": {
+                name: equivalent_noise_bandwidth_bins(WINDOW_BUILDERS[name](LENGTH))
+                for name in SPECIALIST_ORDER
+            },
+        },
+    ]
+    return triptych_bar_svg(
+        "Deep-sidelobe specialists are not the same as amplitude specialists",
+        "Blackman-Harris and Nuttall drive sidelobes much lower than Blackman or Kaiser, but flat-top still owns between-bin amplitude honesty and pays far more ENBW for it.",
+        panels,
+        width=1520,
     )
 
 
@@ -255,7 +365,7 @@ def main() -> int:
         build_shapes(),
         y_range=(0.0, 1.05),
     )
-    (ART / "window-shapes.svg").write_text(shapes_svg)
+    write_svg_asset("window-shapes.svg", shapes_svg)
 
     spectra_svg = chart_svg(
         "Window spectra near DC",
@@ -265,7 +375,7 @@ def main() -> int:
         y_range=(-120.0, 5.0),
         x_range=(0.0, 1.0),
     )
-    (ART / "window-spectra.svg").write_text(spectra_svg)
+    write_svg_asset("window-spectra.svg", spectra_svg)
 
     offset_loss_svg = chart_svg(
         "Amplitude loss versus bin offset",
@@ -275,7 +385,7 @@ def main() -> int:
         y_range=(-4.5, 0.1),
         x_range=(0.0, 0.5),
     )
-    (ART / "window-offset-loss.svg").write_text(offset_loss_svg)
+    write_svg_asset("window-offset-loss.svg", offset_loss_svg)
 
     half_bin_svg = chart_svg(
         "Half-bin tone leakage near the peak",
@@ -285,12 +395,24 @@ def main() -> int:
         y_range=(-80.0, 2.0),
         x_range=(-4.0, 4.0),
     )
-    (ART / "window-half-bin-leakage.svg").write_text(half_bin_svg)
+    write_svg_asset("window-half-bin-leakage.svg", half_bin_svg)
 
-    (ART / "window-amplitude-specialist-summary.svg").write_text(build_amplitude_summary())
+    specialist_offset_svg = chart_svg(
+        "Blackman-Harris and Nuttall help between bins, but they do not become flat-top",
+        "fractional bin offset",
+        "coherent-gain-normalized response (dB)",
+        build_specialist_offset_loss(),
+        y_range=(-1.25, 0.05),
+        x_range=(0.0, 0.5),
+        height=800,
+    )
+    write_svg_asset("window-specialist-offset-loss.svg", specialist_offset_svg)
+
+    write_svg_asset("window-amplitude-specialist-summary.svg", build_amplitude_summary())
+    write_svg_asset("window-specialist-tradeoffs.svg", build_specialist_tradeoff_summary())
 
     kaiser_rows = build_kaiser_sweep_rows()
-    (ART / "window-kaiser-beta-sweep.svg").write_text(build_kaiser_sweep_svg(kaiser_rows))
+    write_svg_asset("window-kaiser-beta-sweep.svg", build_kaiser_sweep_svg(kaiser_rows))
     with (ART / "kaiser-beta-sweep.csv").open("w", newline="") as handle:
         writer = csv.DictWriter(
             handle,
@@ -305,6 +427,22 @@ def main() -> int:
         )
         writer.writeheader()
         writer.writerows(kaiser_rows)
+
+    specialist_rows = build_specialist_metrics_rows()
+    with (ART / "window-specialist-metrics.csv").open("w", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=[
+                "name",
+                "coherent_gain",
+                "enbw_bins",
+                "peak_sidelobe_db",
+                "main_lobe_width_bins",
+                "scalloping_loss_db",
+            ],
+        )
+        writer.writeheader()
+        writer.writerows(specialist_rows)
 
     rows = build_metrics()
     with (ART / "window-metrics.csv").open("w", newline="") as handle:
