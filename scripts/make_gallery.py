@@ -23,7 +23,8 @@ from windowlab.metrics import (
     positive_frequency_spectrum,
     scalloping_loss_db,
 )
-from windowlab.svg import chart_svg, stacked_line_panels_svg, triptych_bar_svg
+from windowlab.overlap import normalized_overlap_add_profile, overlap_add_summary
+from windowlab.svg import PALETTE, chart_svg, stacked_line_panels_svg, triptych_bar_svg
 from windowlab.windows import WINDOW_BUILDERS, kaiser
 
 ART = ROOT / "art"
@@ -37,6 +38,27 @@ AMPLITUDE_SPECIALISTS = ("blackman", "kaiser-8.6", "flattop")
 SPECIALIST_ORDER = ("blackman", "kaiser-8.6", "blackman-harris", "nuttall", "flattop")
 KAISER_SWEEP_BETAS = tuple(sorted({step / 2 for step in range(29)} | {8.6}))
 KAISER_HIGHLIGHTS = (0.0, 5.0, 8.6, 14.0)
+OVERLAP_LENGTH = 128
+OVERLAP_ORDER = (
+    "rectangular",
+    "hann",
+    "hamming",
+    "blackman",
+    "kaiser-8.6",
+    "blackman-harris",
+    "nuttall",
+    "flattop",
+)
+OVERLAP_FIGURE_WINDOWS = (
+    ("rectangular", "rectangular"),
+    ("hann", "hann"),
+    ("hamming", "hamming"),
+    ("blackman", "blackman"),
+    ("kaiser-8.6", "kaiser β=8.6"),
+    ("blackman-harris", "Blackman-Harris"),
+    ("flattop", "flat-top"),
+)
+OVERLAP_HOPS = (64, 32, 16)
 
 
 def builders_for(names: tuple[str, ...]) -> list[tuple[str, object]]:
@@ -355,6 +377,65 @@ def build_kaiser_sweep_svg(rows: list[dict[str, float]]) -> str:
     )
 
 
+def build_overlap_add_rows() -> list[dict[str, float | str]]:
+    rows: list[dict[str, float | str]] = []
+    for hop in OVERLAP_HOPS:
+        overlap_fraction = 1.0 - hop / OVERLAP_LENGTH
+        for name, builder in builders_for(OVERLAP_ORDER):
+            summary = overlap_add_summary(builder(OVERLAP_LENGTH), hop)
+            rows.append(
+                {
+                    "name": name,
+                    "length": OVERLAP_LENGTH,
+                    "hop": hop,
+                    "overlap_fraction": overlap_fraction,
+                    "mean_sum": summary.mean_sum,
+                    "min_sum": summary.min_sum,
+                    "max_sum": summary.max_sum,
+                    "max_deviation_pct": summary.max_deviation_fraction * 100.0,
+                    "ripple_db": summary.ripple_db,
+                }
+            )
+    return rows
+
+
+def build_overlap_add_svg() -> str:
+    panels = []
+    for hop in OVERLAP_HOPS:
+        overlap_fraction = (1.0 - hop / OVERLAP_LENGTH) * 100.0
+        values_for_range: list[float] = []
+        panel_series = []
+        for name, builder in builders_for(tuple(key for key, _ in OVERLAP_FIGURE_WINDOWS)):
+            points = normalized_overlap_add_profile(builder(OVERLAP_LENGTH), hop)
+            values_for_range.extend(value for _, value in points)
+            display_name = next(label for key, label in OVERLAP_FIGURE_WINDOWS if key == name)
+            panel_series.append({"name": display_name, "stroke": PALETTE.get(name, "#111827"), "points": points, "width": 3})
+        y_range = _padded_range(values_for_range, pad_low=0.08, pad_high=0.1)
+        if y_range[0] > 0.94:
+            y_range = (min(y_range[0], 0.998), max(y_range[1], 1.002))
+        panels.append(
+            {
+                "title": f"Hop = {hop} samples ({overlap_fraction:.1f}% overlap)",
+                "y_label": "normalized overlap sum",
+                "y_range": y_range,
+                "tick_format": "{:.2f}",
+                "x_range": (0.0, 1.0),
+                "x_tick_format": "{:.2f}",
+                "series": panel_series,
+                "references": [
+                    {"label": "ideal flat sum", "value": 1.0, "stroke": "#111827", "dash": "7 7"},
+                ],
+            }
+        )
+    return stacked_line_panels_svg(
+        "Overlap-add flatness is a second window bill, not a footnote",
+        "The same window can look fine in one-shot FFT plots and still demand a smaller STFT hop before its overlap sum becomes flat. This pass uses the repo's symmetric window tables at frame length 128; each panel has its own y-scale so the flatter cases stay visible.",
+        "phase inside one hop period",
+        panels,
+        height=1180,
+    )
+
+
 def main() -> int:
     ART.mkdir(exist_ok=True)
 
@@ -410,6 +491,7 @@ def main() -> int:
 
     write_svg_asset("window-amplitude-specialist-summary.svg", build_amplitude_summary())
     write_svg_asset("window-specialist-tradeoffs.svg", build_specialist_tradeoff_summary())
+    write_svg_asset("window-overlap-add-flatness.svg", build_overlap_add_svg())
 
     kaiser_rows = build_kaiser_sweep_rows()
     write_svg_asset("window-kaiser-beta-sweep.svg", build_kaiser_sweep_svg(kaiser_rows))
@@ -443,6 +525,25 @@ def main() -> int:
         )
         writer.writeheader()
         writer.writerows(specialist_rows)
+
+    overlap_rows = build_overlap_add_rows()
+    with (ART / "window-overlap-add-metrics.csv").open("w", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=[
+                "name",
+                "length",
+                "hop",
+                "overlap_fraction",
+                "mean_sum",
+                "min_sum",
+                "max_sum",
+                "max_deviation_pct",
+                "ripple_db",
+            ],
+        )
+        writer.writeheader()
+        writer.writerows(overlap_rows)
 
     rows = build_metrics()
     with (ART / "window-metrics.csv").open("w", newline="") as handle:

@@ -10,6 +10,7 @@ from windowlab.metrics import (
     peak_sidelobe_level_db,
     scalloping_loss_db,
 )
+from windowlab.overlap import overlap_add_summary, periodic_overlap_add_profile
 from windowlab.windows import KAISER_BETA_86, build_window, kaiser
 
 
@@ -154,6 +155,22 @@ class WindowTests(unittest.TestCase):
         self.assertEqual(enbw, sorted(enbw))
         self.assertEqual(main_lobe, sorted(main_lobe))
         self.assertEqual(sidelobes, sorted(sidelobes, reverse=True))
+
+    def test_rectangular_overlap_add_is_exact_for_integer_hops(self) -> None:
+        profile = periodic_overlap_add_profile(build_window("rectangular", 128), 64)
+        self.assertTrue(all(value == profile[0] for value in profile))
+
+    def test_blackman_needs_smaller_hop_than_half_overlap(self) -> None:
+        half_overlap = overlap_add_summary(build_window("blackman", 128), 64)
+        quarter_hop = overlap_add_summary(build_window("blackman", 128), 32)
+        self.assertGreater(half_overlap.max_deviation_fraction, 0.15)
+        self.assertLess(quarter_hop.max_deviation_fraction, 0.001)
+
+    def test_flattop_stays_less_flat_than_hann_at_quarter_hop(self) -> None:
+        flattop = overlap_add_summary(build_window("flattop", 128), 32)
+        hann = overlap_add_summary(build_window("hann", 128), 32)
+        self.assertGreater(flattop.max_deviation_fraction, 0.03)
+        self.assertLess(hann.max_deviation_fraction, 0.002)
 
 
 if __name__ == "__main__":

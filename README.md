@@ -14,9 +14,11 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 
 - `windowlab/windows.py` builds rectangular, Hann, Hamming, Blackman, Kaiser (`beta=8.6`), Blackman-Harris, Nuttall, and flat-top windows
 - `windowlab/metrics.py` computes coherent gain, ENBW, main-lobe width, and peak sidelobe level
+- `windowlab/overlap.py` measures periodic overlap-add profiles and flatness for STFT framing hops
 - `windowlab/svg.py` renders clean SVG comparison plots without external plotting libraries
-- `scripts/make_gallery.py` regenerates the figures and metrics CSV
-- `tests/test_windows.py` checks a few useful ordering facts about the windows
+- `scripts/make_gallery.py` regenerates the figures and metrics CSVs
+- `notebooks/overlap_add_and_stft_framing.ipynb` is the slower companion for the new STFT framing sidecar
+- `tests/test_windows.py` checks a few useful ordering facts about the windows and the new overlap-add lane
 
 ## Generated artifacts
 
@@ -54,7 +56,13 @@ Blackman-Harris and Nuttall deserve a place here, but not because they secretly 
 
 This sweep turns Kaiser from a single named checkpoint into a real family. `beta` is the knob: push it up and ENBW rises, the main lobe widens, and sidelobes fall.
 
-The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, and `art/kaiser-beta-sweep.csv` now give compact numeric summaries for the named windows, the specialist sidecar, and the Kaiser family sweep.
+### Overlap-add flatness for common STFT hops
+
+![Overlap-add flatness](art/window-overlap-add-flatness.png)
+
+This sidecar is the repo's first framing pass. A window can look fine in a one-shot FFT and still demand a smaller STFT hop before its overlap-add sum stops wavering.
+
+The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, and `art/window-overlap-add-metrics.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, and the new overlap-add pass.
 
 ## Quick run
 
@@ -77,16 +85,19 @@ The new Kaiser sweep matters because it replaces folklore like "Kaiser is kind o
 
 The Blackman-Harris / Nuttall sidecar matters for a different reason: it keeps the repo from teaching the lazy idea that every low-sidelobe window is basically the same thing with different branding.
 
+The overlap-add sidecar matters because it brings STFT framing into the same conversation. Flat overlap is not the same thing as low leakage, and flat-top turns out to be expensive on both fronts.
+
 ## Notes
 
 - [Flat-top is the amplitude specialist, not the default](notes/flattop-amplitude-specialist.md)
 - [Blackman-Harris and Nuttall are deep-sidelobe specialists, not amplitude specialists](notes/blackman-harris-and-nuttall-are-deep-sidelobe-specialists.md)
+- [Overlap-add flatness is a second window bill](notes/overlap-add-and-stft-framing.md)
 
 
 ## Next directions
 
-- add overlap-add and STFT framing notes
 - port the metrics core to Julia and Fortran for cross-language comparison once those toolchains are live
 - compare the Kaiser sweep at two FFT lengths or iteration densities only if that reveals something real instead of redrawing the same curve
+- add one compact window-selection map only if it sharpens real task choices instead of collapsing back into a vague window zoo
 
 Jarbas
