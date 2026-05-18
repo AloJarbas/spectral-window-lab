@@ -10,7 +10,12 @@ from windowlab.metrics import (
     peak_sidelobe_level_db,
     scalloping_loss_db,
 )
-from windowlab.overlap import overlap_add_summary, periodic_overlap_add_profile
+from windowlab.overlap import (
+    normalized_synthesis_gain_profile,
+    overlap_add_summary,
+    periodic_overlap_add_profile,
+    squared_overlap_add_summary,
+)
 from windowlab.windows import KAISER_BETA_86, build_window, kaiser
 
 
@@ -171,6 +176,23 @@ class WindowTests(unittest.TestCase):
         hann = overlap_add_summary(build_window("hann", 128), 32)
         self.assertGreater(flattop.max_deviation_fraction, 0.03)
         self.assertLess(hann.max_deviation_fraction, 0.002)
+
+    def test_blackman_harris_quarter_hop_raw_sum_can_hide_weighted_ripple(self) -> None:
+        raw = overlap_add_summary(build_window("blackman-harris", 128), 32)
+        squared = squared_overlap_add_summary(build_window("blackman-harris", 128), 32)
+        self.assertLess(raw.max_deviation_fraction, 0.001)
+        self.assertGreater(squared.max_deviation_fraction, 0.05)
+
+    def test_hann_quarter_hop_squared_sum_is_flatter_than_raw_sum(self) -> None:
+        raw = overlap_add_summary(build_window("hann", 128), 32)
+        squared = squared_overlap_add_summary(build_window("hann", 128), 32)
+        self.assertLess(squared.max_deviation_fraction, raw.max_deviation_fraction)
+
+    def test_flattop_quarter_hop_needs_large_synthesis_gain_swing(self) -> None:
+        gain_profile = normalized_synthesis_gain_profile(build_window("flattop", 128), 32)
+        gains = [value for _, value in gain_profile]
+        self.assertGreater(max(gains), 1.4)
+        self.assertLess(min(gains), 0.7)
 
 
 if __name__ == "__main__":

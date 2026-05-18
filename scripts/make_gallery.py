@@ -23,7 +23,13 @@ from windowlab.metrics import (
     positive_frequency_spectrum,
     scalloping_loss_db,
 )
-from windowlab.overlap import normalized_overlap_add_profile, overlap_add_summary
+from windowlab.overlap import (
+    normalized_overlap_add_profile,
+    normalized_squared_overlap_add_profile,
+    normalized_synthesis_gain_profile,
+    overlap_add_summary,
+    squared_overlap_add_summary,
+)
 from windowlab.svg import PALETTE, chart_svg, stacked_line_panels_svg, triptych_bar_svg
 from windowlab.windows import WINDOW_BUILDERS, kaiser
 
@@ -59,6 +65,13 @@ OVERLAP_FIGURE_WINDOWS = (
     ("flattop", "flat-top"),
 )
 OVERLAP_HOPS = (64, 32, 16)
+SYNTHESIS_FIGURE_HOP = 32
+SYNTHESIS_FIGURE_WINDOWS = (
+    ("hann", "Hann"),
+    ("blackman", "Blackman"),
+    ("blackman-harris", "Blackman-Harris"),
+    ("flattop", "Flat-top"),
+)
 
 
 def builders_for(names: tuple[str, ...]) -> list[tuple[str, object]]:
@@ -399,6 +412,30 @@ def build_overlap_add_rows() -> list[dict[str, float | str]]:
     return rows
 
 
+def build_weighted_overlap_rows() -> list[dict[str, float | str]]:
+    rows: list[dict[str, float | str]] = []
+    for hop in OVERLAP_HOPS:
+        overlap_fraction = 1.0 - hop / OVERLAP_LENGTH
+        for name, builder in builders_for(OVERLAP_ORDER):
+            window = builder(OVERLAP_LENGTH)
+            raw_summary = overlap_add_summary(window, hop)
+            squared_summary = squared_overlap_add_summary(window, hop)
+            rows.append(
+                {
+                    "name": name,
+                    "length": OVERLAP_LENGTH,
+                    "hop": hop,
+                    "overlap_fraction": overlap_fraction,
+                    "raw_max_deviation_pct": raw_summary.max_deviation_fraction * 100.0,
+                    "squared_max_deviation_pct": squared_summary.max_deviation_fraction * 100.0,
+                    "squared_min_sum": squared_summary.min_sum,
+                    "squared_max_sum": squared_summary.max_sum,
+                    "synthesis_gain_span_db": squared_summary.ripple_db,
+                }
+            )
+    return rows
+
+
 def build_overlap_add_svg() -> str:
     panels = []
     for hop in OVERLAP_HOPS:
@@ -431,6 +468,67 @@ def build_overlap_add_svg() -> str:
         "Overlap-add flatness is a second window bill, not a footnote",
         "The same window can look fine in one-shot FFT plots and still demand a smaller STFT hop before its overlap sum becomes flat. This pass uses the repo's symmetric window tables at frame length 128; each panel has its own y-scale so the flatter cases stay visible.",
         "phase inside one hop period",
+        panels,
+        height=1180,
+    )
+
+
+def build_synthesis_normalization_svg() -> str:
+    raw_values: list[float] = []
+    squared_values: list[float] = []
+    gain_values: list[float] = []
+    raw_series = []
+    squared_series = []
+    gain_series = []
+    for name, builder in builders_for(tuple(key for key, _ in SYNTHESIS_FIGURE_WINDOWS)):
+        window = builder(OVERLAP_LENGTH)
+        display_name = next(label for key, label in SYNTHESIS_FIGURE_WINDOWS if key == name)
+        raw_points = normalized_overlap_add_profile(window, SYNTHESIS_FIGURE_HOP)
+        squared_points = normalized_squared_overlap_add_profile(window, SYNTHESIS_FIGURE_HOP)
+        gain_points = normalized_synthesis_gain_profile(window, SYNTHESIS_FIGURE_HOP)
+        raw_values.extend(value for _, value in raw_points)
+        squared_values.extend(value for _, value in squared_points)
+        gain_values.extend(value for _, value in gain_points)
+        raw_series.append({"name": display_name, "stroke": PALETTE.get(name, "#111827"), "points": raw_points, "width": 3})
+        squared_series.append({"name": display_name, "stroke": PALETTE.get(name, "#111827"), "points": squared_points, "width": 3})
+        gain_series.append({"name": display_name, "stroke": PALETTE.get(name, "#111827"), "points": gain_points, "width": 3})
+
+    panels = [
+        {
+            "title": f"Quarter-hop raw overlap sum (H = {SYNTHESIS_FIGURE_HOP})",
+            "y_label": "normalized raw sum",
+            "y_range": _padded_range(raw_values, pad_low=0.08, pad_high=0.1),
+            "tick_format": "{:.2f}",
+            "x_range": (0.0, 1.0),
+            "x_tick_format": "{:.2f}",
+            "series": raw_series,
+            "references": [{"label": "ideal = 1", "value": 1.0, "stroke": "#6b7280", "dash": "7 7"}],
+        },
+        {
+            "title": "Weighted overlap sum",
+            "y_label": "normalized squared sum",
+            "y_range": _padded_range(squared_values, pad_low=0.1, pad_high=0.12),
+            "tick_format": "{:.2f}",
+            "x_range": (0.0, 1.0),
+            "x_tick_format": "{:.2f}",
+            "series": squared_series,
+            "references": [{"label": "ideal = 1", "value": 1.0, "stroke": "#6b7280", "dash": "7 7"}],
+        },
+        {
+            "title": "Implied synthesis gain swing",
+            "y_label": "relative synthesis gain",
+            "y_range": _padded_range(gain_values, pad_low=0.1, pad_high=0.12),
+            "tick_format": "{:.2f}",
+            "x_range": (0.0, 1.0),
+            "x_tick_format": "{:.2f}",
+            "series": gain_series,
+            "references": [{"label": "ideal = 1", "value": 1.0, "stroke": "#6b7280", "dash": "7 7"}],
+        },
+    ]
+    return stacked_line_panels_svg(
+        "Raw overlap flatness is not the same as the synthesis-normalization rule",
+        "Quarter-hop framing is the revealing middle case: raw overlap can look calm while weighted overlap still forces phase-dependent reconstruction gain.",
+        "phase in one hop period",
         panels,
         height=1180,
     )
@@ -492,6 +590,7 @@ def main() -> int:
     write_svg_asset("window-amplitude-specialist-summary.svg", build_amplitude_summary())
     write_svg_asset("window-specialist-tradeoffs.svg", build_specialist_tradeoff_summary())
     write_svg_asset("window-overlap-add-flatness.svg", build_overlap_add_svg())
+    write_svg_asset("window-synthesis-normalization-bill.svg", build_synthesis_normalization_svg())
 
     kaiser_rows = build_kaiser_sweep_rows()
     write_svg_asset("window-kaiser-beta-sweep.svg", build_kaiser_sweep_svg(kaiser_rows))
@@ -544,6 +643,25 @@ def main() -> int:
         )
         writer.writeheader()
         writer.writerows(overlap_rows)
+
+    weighted_rows = build_weighted_overlap_rows()
+    with (ART / "window-synthesis-normalization-metrics.csv").open("w", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=[
+                "name",
+                "length",
+                "hop",
+                "overlap_fraction",
+                "raw_max_deviation_pct",
+                "squared_max_deviation_pct",
+                "squared_min_sum",
+                "squared_max_sum",
+                "synthesis_gain_span_db",
+            ],
+        )
+        writer.writeheader()
+        writer.writerows(weighted_rows)
 
     rows = build_metrics()
     with (ART / "window-metrics.csv").open("w", newline="") as handle:

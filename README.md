@@ -14,10 +14,11 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 
 - `windowlab/windows.py` builds rectangular, Hann, Hamming, Blackman, Kaiser (`beta=8.6`), Blackman-Harris, Nuttall, and flat-top windows
 - `windowlab/metrics.py` computes coherent gain, ENBW, main-lobe width, and peak sidelobe level
-- `windowlab/overlap.py` measures periodic overlap-add profiles and flatness for STFT framing hops
+- `windowlab/overlap.py` measures both raw and squared overlap profiles, plus the implied synthesis-normalization swing for STFT framing hops
 - `windowlab/svg.py` renders clean SVG comparison plots without external plotting libraries
 - `scripts/make_gallery.py` regenerates the figures and metrics CSVs
 - `notebooks/overlap_add_and_stft_framing.ipynb` is the slower companion for the new STFT framing sidecar
+- `notebooks/synthesis_normalization_and_weighted_overlap.ipynb` is the companion notebook for the new weighted overlap-add sidecar
 - `tests/test_windows.py` checks a few useful ordering facts about the windows and the new overlap-add lane
 
 ## Generated artifacts
@@ -62,7 +63,13 @@ This sweep turns Kaiser from a single named checkpoint into a real family. `beta
 
 This sidecar is the repo's first framing pass. A window can look fine in a one-shot FFT and still demand a smaller STFT hop before its overlap-add sum stops wavering.
 
-The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, and `art/window-overlap-add-metrics.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, and the new overlap-add pass.
+### Raw overlap versus synthesis normalization
+
+![Raw overlap versus synthesis normalization](art/window-synthesis-normalization-bill.png)
+
+This second framing sidecar is the sharper follow-up. Quarter-hop framing can already look calm on the raw overlap sum while the squared overlap still forces a visibly phase-dependent synthesis gain. That turns out to be a real difference between Hann/Hamming and the heavier deep-sidelobe or amplitude-specialist windows.
+
+The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, `art/window-overlap-add-metrics.csv`, and `art/window-synthesis-normalization-metrics.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, the raw overlap-add pass, and the new synthesis-normalization pass.
 
 ## Quick run
 
@@ -87,11 +94,14 @@ The Blackman-Harris / Nuttall sidecar matters for a different reason: it keeps t
 
 The overlap-add sidecar matters because it brings STFT framing into the same conversation. Flat overlap is not the same thing as low leakage, and flat-top turns out to be expensive on both fronts.
 
+The new synthesis-normalization sidecar matters because it closes the loophole inside the framing story: a raw overlap sum can look almost flat while the squared overlap still implies a real weighted overlap-add gain swing. That keeps the repo from quietly teaching that one overlap metric is enough.
+
 ## Notes
 
 - [Flat-top is the amplitude specialist, not the default](notes/flattop-amplitude-specialist.md)
 - [Blackman-Harris and Nuttall are deep-sidelobe specialists, not amplitude specialists](notes/blackman-harris-and-nuttall-are-deep-sidelobe-specialists.md)
 - [Overlap-add flatness is a second window bill](notes/overlap-add-and-stft-framing.md)
+- [Raw overlap flatness is not the synthesis rule](notes/raw-overlap-is-not-the-synthesis-rule.md)
 
 
 ## Next directions
