@@ -30,7 +30,8 @@ from windowlab.overlap import (
     overlap_add_summary,
     squared_overlap_add_summary,
 )
-from windowlab.svg import PALETTE, chart_svg, stacked_line_panels_svg, triptych_bar_svg
+from windowlab.recommend import TASK_PROFILES, build_task_metrics, build_task_rankings
+from windowlab.svg import PALETTE, chart_svg, stacked_line_panels_svg, task_heatmap_svg, triptych_bar_svg
 from windowlab.windows import WINDOW_BUILDERS, kaiser
 
 ART = ROOT / "art"
@@ -72,6 +73,7 @@ SYNTHESIS_FIGURE_WINDOWS = (
     ("blackman-harris", "Blackman-Harris"),
     ("flattop", "Flat-top"),
 )
+TASK_WINDOW_ORDER = ("rectangular", "hann", "hamming", "blackman", "kaiser-8.6", "blackman-harris", "nuttall", "flattop")
 
 
 def builders_for(names: tuple[str, ...]) -> list[tuple[str, object]]:
@@ -534,6 +536,56 @@ def build_synthesis_normalization_svg() -> str:
     )
 
 
+def build_window_selection_rows() -> list[dict[str, float | int | str | bool]]:
+    metrics_rows = build_task_metrics(names=TASK_WINDOW_ORDER)
+    rankings = build_task_rankings(metrics_rows)
+    rows: list[dict[str, float | int | str | bool]] = []
+    for task in TASK_PROFILES:
+        for ranking in rankings[task.key]:
+            rows.append(
+                {
+                    "task_key": ranking.task_key,
+                    "task_title": ranking.task_title,
+                    "window": ranking.window,
+                    "eligible": ranking.eligible,
+                    "rank": ranking.rank,
+                    "score": ranking.score,
+                    "suitability": ranking.suitability,
+                    "enbw_bins": ranking.enbw_bins,
+                    "peak_sidelobe_db": ranking.peak_sidelobe_db,
+                    "main_lobe_width_bins": ranking.main_lobe_width_bins,
+                    "scalloping_loss_db": ranking.scalloping_loss_db,
+                    "synthesis_gain_span_db": ranking.synthesis_gain_span_db,
+                }
+            )
+    return rows
+
+
+def build_window_selection_svg(rows: list[dict[str, float | int | str | bool]]) -> str:
+    rankings_by_task: dict[str, list[dict[str, object]]] = {}
+    for task in TASK_PROFILES:
+        task_rows = [row for row in rows if row["task_key"] == task.key]
+        rankings_by_task[task.key] = task_rows
+    tasks = [
+        {
+            "key": task.key,
+            "title": task.title,
+            "short_label": task.short_label,
+            "summary": task.summary,
+        }
+        for task in TASK_PROFILES
+    ]
+    return task_heatmap_svg(
+        "A bounded window-selection map for actual tasks",
+        "This repo now has enough lanes that a single default answer is worse than a short task map. Each column uses guardrails first, then ranks the surviving windows with the repo's existing metrics.",
+        list(TASK_WINDOW_ORDER),
+        tasks,
+        rankings_by_task,
+        width=1600,
+        height=1600,
+    )
+
+
 def main() -> int:
     ART.mkdir(exist_ok=True)
 
@@ -591,6 +643,9 @@ def main() -> int:
     write_svg_asset("window-specialist-tradeoffs.svg", build_specialist_tradeoff_summary())
     write_svg_asset("window-overlap-add-flatness.svg", build_overlap_add_svg())
     write_svg_asset("window-synthesis-normalization-bill.svg", build_synthesis_normalization_svg())
+
+    selection_rows = build_window_selection_rows()
+    write_svg_asset("window-selection-map.svg", build_window_selection_svg(selection_rows))
 
     kaiser_rows = build_kaiser_sweep_rows()
     write_svg_asset("window-kaiser-beta-sweep.svg", build_kaiser_sweep_svg(kaiser_rows))
@@ -662,6 +717,27 @@ def main() -> int:
         )
         writer.writeheader()
         writer.writerows(weighted_rows)
+
+    with (ART / "window-selection-map.csv").open("w", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=[
+                "task_key",
+                "task_title",
+                "window",
+                "eligible",
+                "rank",
+                "score",
+                "suitability",
+                "enbw_bins",
+                "peak_sidelobe_db",
+                "main_lobe_width_bins",
+                "scalloping_loss_db",
+                "synthesis_gain_span_db",
+            ],
+        )
+        writer.writeheader()
+        writer.writerows(selection_rows)
 
     rows = build_metrics()
     with (ART / "window-metrics.csv").open("w", newline="") as handle:

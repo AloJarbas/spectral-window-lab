@@ -15,11 +15,13 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 - `windowlab/windows.py` builds rectangular, Hann, Hamming, Blackman, Kaiser (`beta=8.6`), Blackman-Harris, Nuttall, and flat-top windows
 - `windowlab/metrics.py` computes coherent gain, ENBW, main-lobe width, and peak sidelobe level
 - `windowlab/overlap.py` measures both raw and squared overlap profiles, plus the implied synthesis-normalization swing for STFT framing hops
+- `windowlab/recommend.py` turns the repo's existing metrics into a bounded task-selection map instead of a fake one-size-fits-all ranking
 - `windowlab/svg.py` renders clean SVG comparison plots without external plotting libraries
 - `scripts/make_gallery.py` regenerates the figures and metrics CSVs
 - `notebooks/overlap_add_and_stft_framing.ipynb` is the slower companion for the new STFT framing sidecar
 - `notebooks/synthesis_normalization_and_weighted_overlap.ipynb` is the companion notebook for the new weighted overlap-add sidecar
-- `tests/test_windows.py` checks a few useful ordering facts about the windows and the new overlap-add lane
+- `notebooks/window_selection_map.ipynb` slows down the new task-selection map and the guardrails behind it
+- `tests/test_windows.py` checks a few useful ordering facts about the windows, the overlap-add lane, and the new task map
 
 ## Generated artifacts
 
@@ -69,7 +71,13 @@ This sidecar is the repo's first framing pass. A window can look fine in a one-s
 
 This second framing sidecar is the sharper follow-up. Quarter-hop framing can already look calm on the raw overlap sum while the squared overlap still forces a visibly phase-dependent synthesis gain. That turns out to be a real difference between Hann/Hamming and the heavier deep-sidelobe or amplitude-specialist windows.
 
-The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, `art/window-overlap-add-metrics.csv`, and `art/window-synthesis-normalization-metrics.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, the raw overlap-add pass, and the new synthesis-normalization pass.
+### Task-based window selection map
+
+![Task-based window selection map](art/window-selection-map.png)
+
+This new sidecar is the repo's first explicit decision card. Instead of pretending one window is "best," it uses guardrails plus the existing metrics to say different things for different jobs: rectangular for very tight equal-strength tone separation, Kaiser `β=8.6` for a compact low-sidelobe compromise, Nuttall for weak-spur hunting, flat-top for isolated-tone amplitude honesty, and Hamming for the repo's bounded quarter-hop STFT lane.
+
+The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, `art/window-overlap-add-metrics.csv`, `art/window-synthesis-normalization-metrics.csv`, and `art/window-selection-map.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, the raw overlap-add pass, the synthesis-normalization pass, and the new task map.
 
 ## Quick run
 
@@ -96,18 +104,21 @@ The overlap-add sidecar matters because it brings STFT framing into the same con
 
 The new synthesis-normalization sidecar matters because it closes the loophole inside the framing story: a raw overlap sum can look almost flat while the squared overlap still implies a real weighted overlap-add gain swing. That keeps the repo from quietly teaching that one overlap metric is enough.
 
+The new task-selection sidecar matters for a different reason: it forces the repo to stop hiding behind generic advice like "Hann is a good default." The winners are different because the tasks are different, and now the repo has one compact artifact that makes that visible.
+
 ## Notes
 
 - [Flat-top is the amplitude specialist, not the default](notes/flattop-amplitude-specialist.md)
 - [Blackman-Harris and Nuttall are deep-sidelobe specialists, not amplitude specialists](notes/blackman-harris-and-nuttall-are-deep-sidelobe-specialists.md)
 - [Overlap-add flatness is a second window bill](notes/overlap-add-and-stft-framing.md)
 - [Raw overlap flatness is not the synthesis rule](notes/raw-overlap-is-not-the-synthesis-rule.md)
+- [A bounded window-selection map for actual tasks](notes/window-selection-map.md)
 
 
 ## Next directions
 
 - port the metrics core to Julia and Fortran for cross-language comparison once those toolchains are live
 - compare the Kaiser sweep at two FFT lengths or iteration densities only if that reveals something real instead of redrawing the same curve
-- add one compact window-selection map only if it sharpens real task choices instead of collapsing back into a vague window zoo
+- add one bounded reconstruction note on when the same analysis/synthesis window pair stays numerically calm after actual overlap-add normalization
 
 Jarbas

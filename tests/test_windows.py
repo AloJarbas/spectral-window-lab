@@ -16,6 +16,7 @@ from windowlab.overlap import (
     periodic_overlap_add_profile,
     squared_overlap_add_summary,
 )
+from windowlab.recommend import TASK_PROFILES, build_task_metrics, rank_windows_for_task
 from windowlab.windows import KAISER_BETA_86, build_window, kaiser
 
 
@@ -193,6 +194,41 @@ class WindowTests(unittest.TestCase):
         gains = [value for _, value in gain_profile]
         self.assertGreater(max(gains), 1.4)
         self.assertLess(min(gains), 0.7)
+
+    def test_task_map_picks_rectangular_for_close_equal_strength_tones(self) -> None:
+        rows = build_task_metrics()
+        task = next(task for task in TASK_PROFILES if task.key == "close_tones")
+        rankings = rank_windows_for_task(rows, task)
+        best = next(ranking for ranking in rankings if ranking.eligible)
+        self.assertEqual(best.window, "rectangular")
+
+    def test_task_map_picks_kaiser_for_compact_low_sidelobe_compromise(self) -> None:
+        rows = build_task_metrics()
+        task = next(task for task in TASK_PROFILES if task.key == "compact_compromise")
+        rankings = rank_windows_for_task(rows, task)
+        best = next(ranking for ranking in rankings if ranking.eligible)
+        self.assertEqual(best.window, "kaiser-8.6")
+
+    def test_task_map_picks_nuttall_for_weak_spur_next_to_strong_line(self) -> None:
+        rows = build_task_metrics()
+        task = next(task for task in TASK_PROFILES if task.key == "weak_near_strong")
+        rankings = rank_windows_for_task(rows, task)
+        best = next(ranking for ranking in rankings if ranking.eligible)
+        self.assertEqual(best.window, "nuttall")
+
+    def test_task_map_picks_flattop_for_isolated_tone_amplitude(self) -> None:
+        rows = build_task_metrics()
+        task = next(task for task in TASK_PROFILES if task.key == "amplitude")
+        rankings = rank_windows_for_task(rows, task)
+        best = next(ranking for ranking in rankings if ranking.eligible)
+        self.assertEqual(best.window, "flattop")
+
+    def test_task_map_picks_hamming_for_quarter_hop_stft_lane(self) -> None:
+        rows = build_task_metrics()
+        task = next(task for task in TASK_PROFILES if task.key == "stft_qhop")
+        rankings = rank_windows_for_task(rows, task)
+        best = next(ranking for ranking in rankings if ranking.eligible)
+        self.assertEqual(best.window, "hamming")
 
 
 if __name__ == "__main__":

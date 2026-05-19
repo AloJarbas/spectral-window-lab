@@ -438,3 +438,151 @@ def stacked_line_panels_svg(
     parts.append(_text((left + right) / 2, height - 32, x_label, size=16, anchor="middle", fill="#374151"))
     parts.append('</svg>')
     return "\n".join(parts)
+
+
+def _hex_to_rgb(value: str) -> tuple[int, int, int]:
+    cleaned = value.lstrip("#")
+    return tuple(int(cleaned[index : index + 2], 16) for index in (0, 2, 4))
+
+
+def _rgb_to_hex(rgb: tuple[int, int, int]) -> str:
+    return "#" + "".join(f"{max(0, min(255, channel)):02x}" for channel in rgb)
+
+
+def _blend_hex(start: str, end: str, t: float) -> str:
+    t = max(0.0, min(1.0, t))
+    a = _hex_to_rgb(start)
+    b = _hex_to_rgb(end)
+    mixed = tuple(int(round(a[idx] + (b[idx] - a[idx]) * t)) for idx in range(3))
+    return _rgb_to_hex(mixed)
+
+
+def task_heatmap_svg(
+    title: str,
+    subtitle: str,
+    windows: list[str],
+    tasks: list[dict[str, str]],
+    rankings_by_task: dict[str, list[dict[str, object]]],
+    *,
+    width: int = 2040,
+    height: int = 1120,
+    background: str = "#fcfcfd",
+) -> str:
+    left = 300
+    top = 170
+    cell_width = 252
+    cell_height = 70
+    grid_width = cell_width * len(tasks)
+    grid_height = cell_height * len(windows)
+
+    title_svg, title_height = _text_block(
+        width / 2,
+        42,
+        title,
+        size=28,
+        anchor="middle",
+        fill="#222",
+        weight="700",
+        max_width=width - 520,
+    )
+    subtitle_svg, subtitle_height = _text_block(
+        width / 2,
+        42 + title_height,
+        subtitle,
+        size=16,
+        anchor="middle",
+        fill="#4b5563",
+        max_width=width - 560,
+    )
+    top = 42 + title_height + subtitle_height + 42
+
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
+        f'<rect width="{width}" height="{height}" fill="{background}"/>',
+        title_svg,
+        subtitle_svg,
+    ]
+
+    legend_left = left
+    legend_top = top - 42
+    for idx in range(11):
+        x = legend_left + idx * 34
+        fill = _blend_hex("#f3f4f6", "#1d4ed8", idx / 10)
+        parts.append(f'<rect x="{x:.1f}" y="{legend_top:.1f}" width="34" height="14" fill="{fill}" rx="4"/>')
+    parts.append(_text(legend_left, legend_top - 8, "lighter = worse fit, darker = stronger fit", size=12, fill="#6b7280"))
+    parts.append(_text(legend_left + 380, legend_top + 12, "gray = outside this task's guardrails", size=12, fill="#6b7280"))
+
+    parts.append(f'<rect x="{left:.1f}" y="{top:.1f}" width="{grid_width:.1f}" height="{grid_height:.1f}" fill="#ffffff" stroke="#e5e7eb" rx="16"/>')
+
+    for row_idx, window in enumerate(windows):
+        y = top + row_idx * cell_height
+        if row_idx:
+            parts.append(_line(left, y, left + grid_width, y, stroke="#e5e7eb", width=1))
+        parts.append(_text(left - 16, y + cell_height / 2 + 6, window, size=16, anchor="end", fill="#111827", weight="700" if window in {"rectangular", "kaiser-8.6", "nuttall", "flattop", "hamming"} else "normal"))
+
+    for column_idx, task in enumerate(tasks):
+        x = left + column_idx * cell_width
+        if column_idx:
+            parts.append(_line(x, top, x, top + grid_height, stroke="#e5e7eb", width=1))
+        title_block, _ = _text_block(
+            x + cell_width / 2,
+            top - 14,
+            task["title"],
+            size=14,
+            anchor="middle",
+            fill="#111827",
+            weight="700",
+            max_width=cell_width - 24,
+        )
+        parts.append(title_block)
+
+        by_window = {str(row["window"]): row for row in rankings_by_task[task["key"]]}
+        for row_idx, window in enumerate(windows):
+            row = by_window[window]
+            y = top + row_idx * cell_height
+            eligible = bool(row["eligible"])
+            suitability = float(row["suitability"])
+            fill = "#e5e7eb" if not eligible else _blend_hex("#eef2ff", "#1d4ed8", suitability)
+            text_fill = "#374151" if not eligible or suitability < 0.58 else "#ffffff"
+            parts.append(
+                f'<rect x="{x + 6:.1f}" y="{y + 6:.1f}" width="{cell_width - 12:.1f}" height="{cell_height - 12:.1f}" fill="{fill}" rx="10"/>'
+            )
+            rank_text = f'#{int(row["rank"])}' if eligible else 'out'
+            parts.append(_text(x + 20, y + 37, rank_text, size=17, fill=text_fill, weight="700"))
+            parts.append(_text(x + cell_width - 18, y + 34, f'{int(round(suitability * 100.0)):d}', size=15, anchor="end", fill=text_fill, weight="700" if eligible else "normal"))
+            parts.append(_text(x + cell_width - 18, y + 54, 'fit', size=12, anchor="end", fill=text_fill))
+            if int(row["rank"]) == 1 and eligible:
+                parts.append(f'<rect x="{x + cell_width - 58:.1f}" y="{y + 10:.1f}" width="38" height="16" rx="8" fill="#111827" opacity="0.92"/>')
+                parts.append(_text(x + cell_width - 39, y + 22, "pick", size=10, anchor="middle", fill="#ffffff", weight="700"))
+
+    winners_top = top + grid_height + 72
+    card_gap = 16
+    card_width = (grid_width - card_gap * (len(tasks) - 1)) / len(tasks)
+    parts.append(_text(left, winners_top - 18, "Top pick per task", size=15, fill="#111827", weight="700"))
+    for idx, task in enumerate(tasks):
+        x = left + idx * (card_width + card_gap)
+        winner = next(row for row in rankings_by_task[task["key"]] if bool(row["eligible"]))
+        summary_block, _ = _text_block(
+            x + 16,
+            winners_top + 62,
+            task["summary"],
+            size=12,
+            fill="#4b5563",
+            max_width=card_width - 32,
+        )
+        parts.append(f'<rect x="{x:.1f}" y="{winners_top:.1f}" width="{card_width:.1f}" height="148" fill="#ffffff" stroke="#dbe2ea" rx="14"/>')
+        parts.append(_text(x + 16, winners_top + 24, task["short_label"], size=12, fill="#6b7280", weight="700"))
+        parts.append(_text(x + 16, winners_top + 48, str(winner["window"]), size=18, fill="#111827", weight="700"))
+        parts.append(summary_block)
+
+    footer_block, _ = _text_block(
+        left,
+        height - 42,
+        "Task map uses this repo's existing frequency metrics at length 129 and quarter-hop synthesis-gain swing for the STFT lane. It is a bounded decision card, not a universal best-window law.",
+        size=13,
+        fill="#6b7280",
+        max_width=grid_width,
+    )
+    parts.append(footer_block)
+    parts.append('</svg>')
+    return "\n".join(parts)

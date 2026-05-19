@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1600" viewBox="0 0 1600 1600">
+<rect width="1600" height="1600" fill="#fcfcfd"/>
+<text x="800.0" y="42.0" fill="#222" font-size="28" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700"><tspan x="800.0" dy="0.0" text-anchor="middle">A bounded window-selection map for actual tasks</tspan></text>
+<text x="800.0" y="77.0" fill="#4b5563" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal"><tspan x="800.0" dy="0.0" text-anchor="middle">This repo now has enough lanes that a single default answer is worse than a short task map. Each column uses</tspan><tspan x="800.0" dy="20.0" text-anchor="middle">guardrails first, then ranks the surviving windows with the repo&#x27;s existing metrics.</tspan></text>
+<rect x="300.0" y="117.0" width="34" height="14" fill="#f3f4f6" rx="4"/>
+<rect x="334.0" y="117.0" width="34" height="14" fill="#dee3f3" rx="4"/>
+<rect x="368.0" y="117.0" width="34" height="14" fill="#c8d3f0" rx="4"/>
+<rect x="402.0" y="117.0" width="34" height="14" fill="#b3c2ed" rx="4"/>
+<rect x="436.0" y="117.0" width="34" height="14" fill="#9db2ea" rx="4"/>
+<rect x="470.0" y="117.0" width="34" height="14" fill="#88a1e7" rx="4"/>
+<rect x="504.0" y="117.0" width="34" height="14" fill="#7390e4" rx="4"/>
+<rect x="538.0" y="117.0" width="34" height="14" fill="#5d80e1" rx="4"/>
+<rect x="572.0" y="117.0" width="34" height="14" fill="#486fde" rx="4"/>
+<rect x="606.0" y="117.0" width="34" height="14" fill="#325fdb" rx="4"/>
+<rect x="640.0" y="117.0" width="34" height="14" fill="#1d4ed8" rx="4"/>
+<text x="300.0" y="109.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">lighter = worse fit, darker = stronger fit</text>
+<text x="680.0" y="129.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">gray = outside this task&#x27;s guardrails</text>
+<rect x="300.0" y="159.0" width="1260.0" height="560.0" fill="#ffffff" stroke="#e5e7eb" rx="16"/>
+<text x="284.0" y="200.0" fill="#111827" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">rectangular</text>
+<line x1="300.0" y1="229.0" x2="1560.0" y2="229.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="284.0" y="270.0" fill="#111827" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">hann</text>
+<line x1="300.0" y1="299.0" x2="1560.0" y2="299.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="284.0" y="340.0" fill="#111827" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">hamming</text>
+<line x1="300.0" y1="369.0" x2="1560.0" y2="369.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="284.0" y="410.0" fill="#111827" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">blackman</text>
+<line x1="300.0" y1="439.0" x2="1560.0" y2="439.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="284.0" y="480.0" fill="#111827" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">kaiser-8.6</text>
+<line x1="300.0" y1="509.0" x2="1560.0" y2="509.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="284.0" y="550.0" fill="#111827" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">blackman-harris</text>
+<line x1="300.0" y1="579.0" x2="1560.0" y2="579.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="284.0" y="620.0" fill="#111827" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">nuttall</text>
+<line x1="300.0" y1="649.0" x2="1560.0" y2="649.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="284.0" y="690.0" fill="#111827" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">flattop</text>
+<text x="426.0" y="145.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700"><tspan x="426.0" dy="0.0" text-anchor="middle">Separate very close</tspan><tspan x="426.0" dy="17.5" text-anchor="middle">equal-strength tones</tspan></text>
+<rect x="306.0" y="165.0" width="240.0" height="58.0" fill="#325edc" rx="10"/>
+<text x="320.0" y="196.0" fill="#ffffff" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#1</text>
+<text x="534.0" y="193.0" fill="#ffffff" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">90</text>
+<text x="534.0" y="213.0" fill="#ffffff" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="494.0" y="169.0" width="38" height="16" rx="8" fill="#111827" opacity="0.92"/>
+<text x="513.0" y="181.0" fill="#ffffff" font-size="10" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">pick</text>
+<rect x="306.0" y="235.0" width="240.0" height="58.0" fill="#dde4fc" rx="10"/>
+<text x="320.0" y="266.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#3</text>
+<text x="534.0" y="263.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">8</text>
+<text x="534.0" y="283.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="306.0" y="305.0" width="240.0" height="58.0" fill="#ced9f9" rx="10"/>
+<text x="320.0" y="336.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#2</text>
+<text x="534.0" y="333.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">16</text>
+<text x="534.0" y="353.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="306.0" y="375.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="320.0" y="406.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="534.0" y="403.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="534.0" y="423.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="306.0" y="445.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="320.0" y="476.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="534.0" y="473.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="534.0" y="493.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="306.0" y="515.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="320.0" y="546.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="534.0" y="543.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="534.0" y="563.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="306.0" y="585.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="320.0" y="616.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="534.0" y="613.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="534.0" y="633.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="306.0" y="655.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="320.0" y="686.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="534.0" y="683.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="534.0" y="703.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<line x1="552.0" y1="159.0" x2="552.0" y2="719.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="678.0" y="145.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700"><tspan x="678.0" dy="0.0" text-anchor="middle">Compact low-sidelobe</tspan><tspan x="678.0" dy="17.5" text-anchor="middle">compromise</tspan></text>
+<rect x="558.0" y="165.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="572.0" y="196.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="786.0" y="193.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="786.0" y="213.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="558.0" y="235.0" width="240.0" height="58.0" fill="#9ab0ef" rx="10"/>
+<text x="572.0" y="266.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#4</text>
+<text x="786.0" y="263.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">40</text>
+<text x="786.0" y="283.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="558.0" y="305.0" width="240.0" height="58.0" fill="#7a97e9" rx="10"/>
+<text x="572.0" y="336.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#2</text>
+<text x="786.0" y="333.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">55</text>
+<text x="786.0" y="353.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="558.0" y="375.0" width="240.0" height="58.0" fill="#7f9bea" rx="10"/>
+<text x="572.0" y="406.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#3</text>
+<text x="786.0" y="403.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">53</text>
+<text x="786.0" y="423.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="558.0" y="445.0" width="240.0" height="58.0" fill="#6d8ce7" rx="10"/>
+<text x="572.0" y="476.0" fill="#ffffff" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#1</text>
+<text x="786.0" y="473.0" fill="#ffffff" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">62</text>
+<text x="786.0" y="493.0" fill="#ffffff" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="746.0" y="449.0" width="38" height="16" rx="8" fill="#111827" opacity="0.92"/>
+<text x="765.0" y="461.0" fill="#ffffff" font-size="10" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">pick</text>
+<rect x="558.0" y="515.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="572.0" y="546.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="786.0" y="543.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="786.0" y="563.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="558.0" y="585.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="572.0" y="616.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="786.0" y="613.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="786.0" y="633.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="558.0" y="655.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="572.0" y="686.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="786.0" y="683.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="786.0" y="703.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<line x1="804.0" y1="159.0" x2="804.0" y2="719.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="930.0" y="145.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700"><tspan x="930.0" dy="0.0" text-anchor="middle">Hunt a weak spur beside a</tspan><tspan x="930.0" dy="17.5" text-anchor="middle">strong line</tspan></text>
+<rect x="810.0" y="165.0" width="240.0" height="58.0" fill="#a5b9f1" rx="10"/>
+<text x="824.0" y="196.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#7</text>
+<text x="1038.0" y="193.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">35</text>
+<text x="1038.0" y="213.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="810.0" y="235.0" width="240.0" height="58.0" fill="#a5b9f1" rx="10"/>
+<text x="824.0" y="266.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#6</text>
+<text x="1038.0" y="263.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">35</text>
+<text x="1038.0" y="283.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="810.0" y="305.0" width="240.0" height="58.0" fill="#8fa7ed" rx="10"/>
+<text x="824.0" y="336.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#5</text>
+<text x="1038.0" y="333.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">46</text>
+<text x="1038.0" y="353.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="810.0" y="375.0" width="240.0" height="58.0" fill="#8ea7ed" rx="10"/>
+<text x="824.0" y="406.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#4</text>
+<text x="1038.0" y="403.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">46</text>
+<text x="1038.0" y="423.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="810.0" y="445.0" width="240.0" height="58.0" fill="#85a0eb" rx="10"/>
+<text x="824.0" y="476.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#3</text>
+<text x="1038.0" y="473.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">50</text>
+<text x="1038.0" y="493.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="810.0" y="515.0" width="240.0" height="58.0" fill="#6d8de7" rx="10"/>
+<text x="824.0" y="546.0" fill="#ffffff" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#2</text>
+<text x="1038.0" y="543.0" fill="#ffffff" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">61</text>
+<text x="1038.0" y="563.0" fill="#ffffff" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="810.0" y="585.0" width="240.0" height="58.0" fill="#6587e5" rx="10"/>
+<text x="824.0" y="616.0" fill="#ffffff" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#1</text>
+<text x="1038.0" y="613.0" fill="#ffffff" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">65</text>
+<text x="1038.0" y="633.0" fill="#ffffff" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="998.0" y="589.0" width="38" height="16" rx="8" fill="#111827" opacity="0.92"/>
+<text x="1017.0" y="601.0" fill="#ffffff" font-size="10" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">pick</text>
+<rect x="810.0" y="655.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="824.0" y="686.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="1038.0" y="683.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="1038.0" y="703.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<line x1="1056.0" y1="159.0" x2="1056.0" y2="719.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="1182.0" y="145.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700"><tspan x="1182.0" dy="0.0" text-anchor="middle">Measure isolated-tone</tspan><tspan x="1182.0" dy="17.5" text-anchor="middle">amplitude honestly</tspan></text>
+<rect x="1062.0" y="165.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="1076.0" y="196.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="1290.0" y="193.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="1290.0" y="213.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1062.0" y="235.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="1076.0" y="266.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="1290.0" y="263.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="1290.0" y="283.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1062.0" y="305.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="1076.0" y="336.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="1290.0" y="333.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="1290.0" y="353.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1062.0" y="375.0" width="240.0" height="58.0" fill="#c3d0f7" rx="10"/>
+<text x="1076.0" y="406.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#4</text>
+<text x="1290.0" y="403.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">21</text>
+<text x="1290.0" y="423.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1062.0" y="445.0" width="240.0" height="58.0" fill="#c4d1f7" rx="10"/>
+<text x="1076.0" y="476.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#5</text>
+<text x="1290.0" y="473.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">20</text>
+<text x="1290.0" y="493.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1062.0" y="515.0" width="240.0" height="58.0" fill="#a3b7f1" rx="10"/>
+<text x="1076.0" y="546.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#2</text>
+<text x="1290.0" y="543.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">36</text>
+<text x="1290.0" y="563.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1062.0" y="585.0" width="240.0" height="58.0" fill="#a6baf2" rx="10"/>
+<text x="1076.0" y="616.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#3</text>
+<text x="1290.0" y="613.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">34</text>
+<text x="1290.0" y="633.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1062.0" y="655.0" width="240.0" height="58.0" fill="#476fe0" rx="10"/>
+<text x="1076.0" y="686.0" fill="#ffffff" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#1</text>
+<text x="1290.0" y="683.0" fill="#ffffff" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">80</text>
+<text x="1290.0" y="703.0" fill="#ffffff" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1250.0" y="659.0" width="38" height="16" rx="8" fill="#111827" opacity="0.92"/>
+<text x="1269.0" y="671.0" fill="#ffffff" font-size="10" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">pick</text>
+<line x1="1308.0" y1="159.0" x2="1308.0" y2="719.0" stroke="#e5e7eb" stroke-width="1"/>
+<text x="1434.0" y="145.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700"><tspan x="1434.0" dy="0.0" text-anchor="middle">Quarter-hop STFT with calmer</tspan><tspan x="1434.0" dy="17.5" text-anchor="middle">reconstruction</tspan></text>
+<rect x="1314.0" y="165.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="1328.0" y="196.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="1542.0" y="193.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="1542.0" y="213.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1314.0" y="235.0" width="240.0" height="58.0" fill="#557ae3" rx="10"/>
+<text x="1328.0" y="266.0" fill="#ffffff" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#2</text>
+<text x="1542.0" y="263.0" fill="#ffffff" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">73</text>
+<text x="1542.0" y="283.0" fill="#ffffff" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1314.0" y="305.0" width="240.0" height="58.0" fill="#3964dd" rx="10"/>
+<text x="1328.0" y="336.0" fill="#ffffff" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#1</text>
+<text x="1542.0" y="333.0" fill="#ffffff" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">87</text>
+<text x="1542.0" y="353.0" fill="#ffffff" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1502.0" y="309.0" width="38" height="16" rx="8" fill="#111827" opacity="0.92"/>
+<text x="1521.0" y="321.0" fill="#ffffff" font-size="10" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">pick</text>
+<rect x="1314.0" y="375.0" width="240.0" height="58.0" fill="#cbd6f8" rx="10"/>
+<text x="1328.0" y="406.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#4</text>
+<text x="1542.0" y="403.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">17</text>
+<text x="1542.0" y="423.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1314.0" y="445.0" width="240.0" height="58.0" fill="#bfcdf6" rx="10"/>
+<text x="1328.0" y="476.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">#3</text>
+<text x="1542.0" y="473.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">22</text>
+<text x="1542.0" y="493.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1314.0" y="515.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="1328.0" y="546.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="1542.0" y="543.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="1542.0" y="563.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1314.0" y="585.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="1328.0" y="616.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="1542.0" y="613.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="1542.0" y="633.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<rect x="1314.0" y="655.0" width="240.0" height="58.0" fill="#e5e7eb" rx="10"/>
+<text x="1328.0" y="686.0" fill="#374151" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">out</text>
+<text x="1542.0" y="683.0" fill="#374151" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0</text>
+<text x="1542.0" y="703.0" fill="#374151" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">fit</text>
+<text x="300.0" y="773.0" fill="#111827" font-size="15" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Top pick per task</text>
+<rect x="300.0" y="791.0" width="239.2" height="148" fill="#ffffff" stroke="#dbe2ea" rx="14"/>
+<text x="316.0" y="815.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">close tones</text>
+<text x="316.0" y="839.0" fill="#111827" font-size="18" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">rectangular</text>
+<text x="316.0" y="853.0" fill="#4b5563" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal"><tspan x="316.0" dy="0.0" text-anchor="start">Only for the narrow case</tspan><tspan x="316.0" dy="15.0" text-anchor="start">where main-lobe width matters</tspan><tspan x="316.0" dy="15.0" text-anchor="start">more than far-out leakage.</tspan></text>
+<rect x="555.2" y="791.0" width="239.2" height="148" fill="#ffffff" stroke="#dbe2ea" rx="14"/>
+<text x="571.2" y="815.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">compact compromise</text>
+<text x="571.2" y="839.0" fill="#111827" font-size="18" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">kaiser-8.6</text>
+<text x="571.2" y="853.0" fill="#4b5563" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal"><tspan x="571.2" dy="0.0" text-anchor="start">A bounded default lane when</tspan><tspan x="571.2" dy="15.0" text-anchor="start">you want cleaner sidelobes</tspan><tspan x="571.2" dy="15.0" text-anchor="start">without paying the flat-top</tspan><tspan x="571.2" dy="15.0" text-anchor="start">bill.</tspan></text>
+<rect x="810.4" y="791.0" width="239.2" height="148" fill="#ffffff" stroke="#dbe2ea" rx="14"/>
+<text x="826.4" y="815.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">weak beside strong</text>
+<text x="826.4" y="839.0" fill="#111827" font-size="18" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">nuttall</text>
+<text x="826.4" y="853.0" fill="#4b5563" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal"><tspan x="826.4" dy="0.0" text-anchor="start">This lane mostly pays for</tspan><tspan x="826.4" dy="15.0" text-anchor="start">sidelobe suppression, but</tspan><tspan x="826.4" dy="15.0" text-anchor="start">still caps width so the</tspan><tspan x="826.4" dy="15.0" text-anchor="start">answer does not become</tspan><tspan x="826.4" dy="15.0" text-anchor="start">absurdly wide.</tspan></text>
+<rect x="1065.6" y="791.0" width="239.2" height="148" fill="#ffffff" stroke="#dbe2ea" rx="14"/>
+<text x="1081.6" y="815.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">amplitude honesty</text>
+<text x="1081.6" y="839.0" fill="#111827" font-size="18" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">flattop</text>
+<text x="1081.6" y="853.0" fill="#4b5563" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal"><tspan x="1081.6" dy="0.0" text-anchor="start">This is the lane where</tspan><tspan x="1081.6" dy="15.0" text-anchor="start">scalloping loss dominates and</tspan><tspan x="1081.6" dy="15.0" text-anchor="start">flat-top is allowed to win on</tspan><tspan x="1081.6" dy="15.0" text-anchor="start">purpose.</tspan></text>
+<rect x="1320.8" y="791.0" width="239.2" height="148" fill="#ffffff" stroke="#dbe2ea" rx="14"/>
+<text x="1336.8" y="815.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">quarter-hop STFT</text>
+<text x="1336.8" y="839.0" fill="#111827" font-size="18" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">hamming</text>
+<text x="1336.8" y="853.0" fill="#4b5563" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal"><tspan x="1336.8" dy="0.0" text-anchor="start">This uses the repo&#x27;s</tspan><tspan x="1336.8" dy="15.0" text-anchor="start">quarter-hop</tspan><tspan x="1336.8" dy="15.0" text-anchor="start">synthesis-normalization swing</tspan><tspan x="1336.8" dy="15.0" text-anchor="start">and refuses windows whose</tspan><tspan x="1336.8" dy="15.0" text-anchor="start">reconstruction bill is</tspan><tspan x="1336.8" dy="15.0" text-anchor="start">already loud.</tspan></text>
+<text x="300.0" y="1558.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal"><tspan x="300.0" dy="0.0" text-anchor="start">Task map uses this repo&#x27;s existing frequency metrics at length 129 and quarter-hop synthesis-gain swing for the STFT lane. It is a bounded decision card, not a</tspan><tspan x="300.0" dy="16.2" text-anchor="start">universal best-window law.</tspan></text>
+</svg>
