@@ -30,6 +30,12 @@ from windowlab.overlap import (
     overlap_add_summary,
     squared_overlap_add_summary,
 )
+from windowlab.reconstruct import (
+    build_reference_signal,
+    periodic_same_window_reconstruction,
+    reconstruction_condition_summary,
+    simulated_relative_noise_gain,
+)
 from windowlab.recommend import TASK_PROFILES, build_task_metrics, build_task_rankings
 from windowlab.svg import PALETTE, chart_svg, stacked_line_panels_svg, task_heatmap_svg, triptych_bar_svg
 from windowlab.windows import WINDOW_BUILDERS, kaiser
@@ -74,6 +80,17 @@ SYNTHESIS_FIGURE_WINDOWS = (
     ("flattop", "Flat-top"),
 )
 TASK_WINDOW_ORDER = ("rectangular", "hann", "hamming", "blackman", "kaiser-8.6", "blackman-harris", "nuttall", "flattop")
+RECONSTRUCTION_ORDER = (
+    "hann",
+    "hamming",
+    "blackman",
+    "blackman-harris",
+    "nuttall",
+    "flattop",
+)
+RECONSTRUCTION_HOPS = (64, 32, 16, 8)
+RECONSTRUCTION_LENGTH = 128
+RECONSTRUCTION_PERIODS = 64
 
 
 def builders_for(names: tuple[str, ...]) -> list[tuple[str, object]]:
@@ -586,6 +603,92 @@ def build_window_selection_svg(rows: list[dict[str, float | int | str | bool]]) 
     )
 
 
+def build_reconstruction_condition_rows() -> list[dict[str, float | str]]:
+    rows: list[dict[str, float | str]] = []
+    for hop in RECONSTRUCTION_HOPS:
+        overlap_fraction = 1.0 - hop / RECONSTRUCTION_LENGTH
+        reference_signal = build_reference_signal(RECONSTRUCTION_PERIODS * hop)
+        for name, builder in builders_for(RECONSTRUCTION_ORDER):
+            window = builder(RECONSTRUCTION_LENGTH)
+            summary = reconstruction_condition_summary(window, hop)
+            exact = periodic_same_window_reconstruction(reference_signal, window, hop)
+            simulated_gain = simulated_relative_noise_gain(window, hop, periods=RECONSTRUCTION_PERIODS, coefficient_noise_std=1e-6, seed=7)
+            rows.append(
+                {
+                    "name": name,
+                    "length": RECONSTRUCTION_LENGTH,
+                    "hop": hop,
+                    "overlap_fraction": overlap_fraction,
+                    "min_squared_overlap_fraction": summary.min_denominator_fraction,
+                    "max_synthesis_gain": summary.max_synthesis_gain,
+                    "mean_relative_noise_gain": summary.mean_relative_noise_gain,
+                    "rms_relative_noise_gain": summary.rms_relative_noise_gain,
+                    "worst_relative_noise_gain": summary.worst_relative_noise_gain,
+                    "simulated_relative_noise_gain": simulated_gain,
+                    "exact_reconstruction_rmse": exact.rmse,
+                    "exact_reconstruction_max_abs_error": exact.max_abs_error,
+                }
+            )
+    return rows
+
+
+def build_reconstruction_condition_svg(rows: list[dict[str, float | str]]) -> str:
+    x_values = sorted({float(row["overlap_fraction"]) * 100.0 for row in rows})
+    panels = []
+    configs = [
+        (
+            "Squared-overlap floor after normalization",
+            "minimum d[n] / mean(d)",
+            "min_squared_overlap_fraction",
+            "{:.2f}",
+            1.0,
+        ),
+        (
+            "RMS coefficient-noise gain from normalized overlap-add",
+            "relative RMS noise gain",
+            "rms_relative_noise_gain",
+            "{:.2f}",
+            1.0,
+        ),
+        (
+            "Worst-point coefficient-noise gain",
+            "relative worst-case noise gain",
+            "worst_relative_noise_gain",
+            "{:.2f}",
+            1.0,
+        ),
+    ]
+    for title, y_label, key, tick_format, reference in configs:
+        values: list[float] = [float(row[key]) for row in rows]
+        panel_series = []
+        for name, _ in builders_for(RECONSTRUCTION_ORDER):
+            points = [
+                (float(row["overlap_fraction"]) * 100.0, float(row[key]))
+                for row in rows
+                if row["name"] == name
+            ]
+            panel_series.append({"name": name, "stroke": PALETTE.get(name, "#111827"), "points": points, "width": 3})
+        panels.append(
+            {
+                "title": title,
+                "y_label": y_label,
+                "y_range": _padded_range(values + [reference], pad_low=0.08, pad_high=0.1, clamp_min=0.0),
+                "tick_format": tick_format,
+                "x_range": (min(x_values), max(x_values)),
+                "x_tick_format": "{:.1f}",
+                "series": panel_series,
+                "references": [{"label": "ideal = 1", "value": reference, "stroke": "#6b7280", "dash": "7 7"}],
+            }
+        )
+    return stacked_line_panels_svg(
+        "Same-window overlap-add can be exact and still be poorly conditioned",
+        "Normalized overlap-add reconstructs perfectly in exact arithmetic whenever the squared-overlap denominator stays positive. The calmer question is different: how much tiny frame-coefficient noise gets amplified after normalization as the hop shrinks or grows?",
+        "overlap (%)",
+        panels,
+        height=1180,
+    )
+
+
 def main() -> int:
     ART.mkdir(exist_ok=True)
 
@@ -643,6 +746,9 @@ def main() -> int:
     write_svg_asset("window-specialist-tradeoffs.svg", build_specialist_tradeoff_summary())
     write_svg_asset("window-overlap-add-flatness.svg", build_overlap_add_svg())
     write_svg_asset("window-synthesis-normalization-bill.svg", build_synthesis_normalization_svg())
+
+    reconstruction_rows = build_reconstruction_condition_rows()
+    write_svg_asset("window-reconstruction-conditioning.svg", build_reconstruction_condition_svg(reconstruction_rows))
 
     selection_rows = build_window_selection_rows()
     write_svg_asset("window-selection-map.svg", build_window_selection_svg(selection_rows))
@@ -738,6 +844,27 @@ def main() -> int:
         )
         writer.writeheader()
         writer.writerows(selection_rows)
+
+    with (ART / "window-reconstruction-conditioning.csv").open("w", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=[
+                "name",
+                "length",
+                "hop",
+                "overlap_fraction",
+                "min_squared_overlap_fraction",
+                "max_synthesis_gain",
+                "mean_relative_noise_gain",
+                "rms_relative_noise_gain",
+                "worst_relative_noise_gain",
+                "simulated_relative_noise_gain",
+                "exact_reconstruction_rmse",
+                "exact_reconstruction_max_abs_error",
+            ],
+        )
+        writer.writeheader()
+        writer.writerows(reconstruction_rows)
 
     rows = build_metrics()
     with (ART / "window-metrics.csv").open("w", newline="") as handle:

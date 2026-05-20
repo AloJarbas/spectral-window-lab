@@ -17,6 +17,12 @@ from windowlab.overlap import (
     squared_overlap_add_summary,
 )
 from windowlab.recommend import TASK_PROFILES, build_task_metrics, rank_windows_for_task
+from windowlab.reconstruct import (
+    build_reference_signal,
+    periodic_same_window_reconstruction,
+    reconstruction_condition_summary,
+    simulated_relative_noise_gain,
+)
 from windowlab.windows import KAISER_BETA_86, build_window, kaiser
 
 
@@ -229,6 +235,36 @@ class WindowTests(unittest.TestCase):
         rankings = rank_windows_for_task(rows, task)
         best = next(ranking for ranking in rankings if ranking.eligible)
         self.assertEqual(best.window, "hamming")
+
+    def test_same_window_reconstruction_is_exact_when_denominator_stays_positive(self) -> None:
+        signal = build_reference_signal(1024)
+        run = periodic_same_window_reconstruction(signal, build_window("hann", 128), 32)
+        self.assertLess(run.rmse, 1e-12)
+        self.assertLess(run.max_abs_error, 1e-11)
+
+    def test_rectangular_integer_hop_has_flat_conditioning(self) -> None:
+        summary = reconstruction_condition_summary(build_window("rectangular", 128), 64)
+        self.assertAlmostEqual(summary.min_denominator_fraction, 1.0, places=12)
+        self.assertAlmostEqual(summary.rms_relative_noise_gain, 1.0, places=12)
+        self.assertAlmostEqual(summary.worst_relative_noise_gain, 1.0, places=12)
+
+    def test_flattop_quarter_hop_is_less_calm_than_hamming(self) -> None:
+        flattop = reconstruction_condition_summary(build_window("flattop", 128), 32)
+        hamming = reconstruction_condition_summary(build_window("hamming", 128), 32)
+        self.assertGreater(flattop.worst_relative_noise_gain, 1.3)
+        self.assertLess(hamming.worst_relative_noise_gain, 1.05)
+        self.assertGreater(flattop.worst_relative_noise_gain, hamming.worst_relative_noise_gain)
+
+    def test_flattop_becomes_calmer_at_eighth_hop(self) -> None:
+        quarter = reconstruction_condition_summary(build_window("flattop", 128), 32)
+        eighth = reconstruction_condition_summary(build_window("flattop", 128), 8)
+        self.assertLess(eighth.rms_relative_noise_gain, quarter.rms_relative_noise_gain)
+        self.assertLess(eighth.worst_relative_noise_gain, quarter.worst_relative_noise_gain)
+
+    def test_simulated_noise_gain_matches_profile_prediction(self) -> None:
+        summary = reconstruction_condition_summary(build_window("blackman-harris", 128), 32)
+        simulated = simulated_relative_noise_gain(build_window("blackman-harris", 128), 32, periods=64, coefficient_noise_std=1e-6, seed=11)
+        self.assertAlmostEqual(simulated, summary.rms_relative_noise_gain, delta=0.03)
 
 
 if __name__ == "__main__":

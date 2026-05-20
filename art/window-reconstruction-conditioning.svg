@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1180" viewBox="0 0 1400 1180">
+<defs>
+<clipPath id="stacked-panel-0"><rect x="116.0" y="213.0" width="1224.0" height="215.0" rx="10"/></clipPath>
+<clipPath id="stacked-panel-1"><rect x="116.0" y="522.0" width="1224.0" height="215.0" rx="10"/></clipPath>
+<clipPath id="stacked-panel-2"><rect x="116.0" y="831.0" width="1224.0" height="215.0" rx="10"/></clipPath>
+</defs>
+<rect width="1400" height="1180" fill="#fcfcfd"/>
+<text x="700.0" y="40.0" fill="#222" font-size="28" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700"><tspan x="700.0" dy="0.0" text-anchor="middle">Same-window overlap-add can be exact and still be poorly conditioned</tspan></text>
+<text x="700.0" y="75.0" fill="#4b5563" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal"><tspan x="700.0" dy="0.0" text-anchor="middle">Normalized overlap-add reconstructs perfectly in exact arithmetic whenever the squared-overlap denominator stays positive. The</tspan><tspan x="700.0" dy="20.0" text-anchor="middle">calmer question is different: how much tiny frame-coefficient noise gets amplified after normalization as the hop shrinks or grows?</tspan></text>
+<line x1="244.6" y1="123.0" x2="268.6" y2="123.0" stroke="#ff7f0e" stroke-width="4"/>
+<text x="276.6" y="128.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">hann</text>
+<line x1="341.1" y1="123.0" x2="365.1" y2="123.0" stroke="#2ca02c" stroke-width="4"/>
+<text x="373.1" y="128.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">hamming</text>
+<line x1="461.9" y1="123.0" x2="485.9" y2="123.0" stroke="#d62728" stroke-width="4"/>
+<text x="493.9" y="128.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">blackman</text>
+<line x1="590.9" y1="123.0" x2="614.9" y2="123.0" stroke="#0f766e" stroke-width="4"/>
+<text x="622.9" y="128.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">blackman-harris</text>
+<line x1="776.7" y1="123.0" x2="800.7" y2="123.0" stroke="#b45309" stroke-width="4"/>
+<text x="808.7" y="128.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">nuttall</text>
+<line x1="897.5" y1="123.0" x2="921.5" y2="123.0" stroke="#8b5cf6" stroke-width="4"/>
+<text x="929.5" y="128.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">flattop</text>
+<line x1="1018.3" y1="123.0" x2="1042.3" y2="123.0" stroke="#6b7280" stroke-width="4" stroke-dasharray="7 7"/>
+<text x="1050.3" y="128.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="normal">ideal = 1</text>
+<rect x="96.0" y="173.0" width="1260.0" height="271.0" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
+<text x="114.0" y="201.0" fill="#111827" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700"><tspan x="114.0" dy="0.0" text-anchor="start">Squared-overlap floor after normalization</tspan></text>
+<text x="1346.0" y="201.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">minimum d[n] / mean(d)</text>
+<line x1="116.0" y1="428.0" x2="1340.0" y2="428.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="433.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.00</text>
+<line x1="116.0" y1="374.2" x2="1340.0" y2="374.2" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="379.2" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.27</text>
+<line x1="116.0" y1="320.5" x2="1340.0" y2="320.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="325.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.55</text>
+<line x1="116.0" y1="266.8" x2="1340.0" y2="266.8" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="271.8" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.82</text>
+<line x1="116.0" y1="213.0" x2="1340.0" y2="213.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="218.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">1.10</text>
+<line x1="96.0" y1="213.0" x2="96.0" y2="428.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="96.0" y="466.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">50.0</text>
+<line x1="276.0" y1="213.0" x2="276.0" y2="428.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="276.0" y="466.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">56.2</text>
+<line x1="456.0" y1="213.0" x2="456.0" y2="428.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="456.0" y="466.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">62.5</text>
+<line x1="636.0" y1="213.0" x2="636.0" y2="428.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="636.0" y="466.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">68.8</text>
+<line x1="816.0" y1="213.0" x2="816.0" y2="428.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="816.0" y="466.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">75.0</text>
+<line x1="996.0" y1="213.0" x2="996.0" y2="428.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="996.0" y="466.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">81.2</text>
+<line x1="1176.0" y1="213.0" x2="1176.0" y2="428.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1176.0" y="466.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">87.5</text>
+<line x1="1356.0" y1="213.0" x2="1356.0" y2="428.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1356.0" y="466.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">93.8</text>
+<g clip-path="url(#stacked-panel-0)">
+<line x1="116.0" y1="232.3" x2="1340.0" y2="232.3" stroke="#6b7280" stroke-width="2" stroke-dasharray="7 7"/>
+<polyline fill="none" stroke="#ff7f0e" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,299.7 816.0,232.4 1176.0,232.3 1356.0,232.3"/>
+<polyline fill="none" stroke="#2ca02c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,286.3 816.0,232.3 1176.0,232.3 1356.0,232.3"/>
+<polyline fill="none" stroke="#d62728" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,355.7 816.0,234.6 1176.0,232.3 1356.0,232.3"/>
+<polyline fill="none" stroke="#0f766e" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,393.5 816.0,244.9 1176.0,232.3 1356.0,232.3"/>
+<polyline fill="none" stroke="#b45309" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,390.8 816.0,243.8 1176.0,232.3 1356.0,232.3"/>
+<polyline fill="none" stroke="#8b5cf6" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,425.2 816.0,319.3 1176.0,232.3 1356.0,232.3"/>
+</g>
+<text x="1334.0" y="226.3" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">ideal = 1</text>
+<rect x="96.0" y="482.0" width="1260.0" height="271.0" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
+<text x="114.0" y="510.0" fill="#111827" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700"><tspan x="114.0" dy="0.0" text-anchor="start">RMS coefficient-noise gain from normalized overlap-add</tspan></text>
+<text x="1346.0" y="510.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">relative RMS noise gain</text>
+<line x1="116.0" y1="737.0" x2="1340.0" y2="737.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="742.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.75</text>
+<line x1="116.0" y1="683.2" x2="1340.0" y2="683.2" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="688.2" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">1.66</text>
+<line x1="116.0" y1="629.5" x2="1340.0" y2="629.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="634.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">2.57</text>
+<line x1="116.0" y1="575.8" x2="1340.0" y2="575.8" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="580.8" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">3.47</text>
+<line x1="116.0" y1="522.0" x2="1340.0" y2="522.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="527.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">4.38</text>
+<line x1="96.0" y1="522.0" x2="96.0" y2="737.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="96.0" y="775.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">50.0</text>
+<line x1="276.0" y1="522.0" x2="276.0" y2="737.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="276.0" y="775.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">56.2</text>
+<line x1="456.0" y1="522.0" x2="456.0" y2="737.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="456.0" y="775.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">62.5</text>
+<line x1="636.0" y1="522.0" x2="636.0" y2="737.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="636.0" y="775.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">68.8</text>
+<line x1="816.0" y1="522.0" x2="816.0" y2="737.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="816.0" y="775.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">75.0</text>
+<line x1="996.0" y1="522.0" x2="996.0" y2="737.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="996.0" y="775.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">81.2</text>
+<line x1="1176.0" y1="522.0" x2="1176.0" y2="737.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1176.0" y="775.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">87.5</text>
+<line x1="1356.0" y1="522.0" x2="1356.0" y2="737.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1356.0" y="775.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">93.8</text>
+<g clip-path="url(#stacked-panel-1)">
+<line x1="116.0" y1="722.4" x2="1340.0" y2="722.4" stroke="#6b7280" stroke-width="2" stroke-dasharray="7 7"/>
+<polyline fill="none" stroke="#ff7f0e" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,720.5 816.0,722.4 1176.0,722.4 1356.0,722.4"/>
+<polyline fill="none" stroke="#2ca02c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,721.2 816.0,722.4 1176.0,722.4 1356.0,722.4"/>
+<polyline fill="none" stroke="#d62728" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,714.2 816.0,722.4 1176.0,722.4 1356.0,722.4"/>
+<polyline fill="none" stroke="#0f766e" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,700.9 816.0,722.4 1176.0,722.4 1356.0,722.4"/>
+<polyline fill="none" stroke="#b45309" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,702.5 816.0,722.4 1176.0,722.4 1356.0,722.4"/>
+<polyline fill="none" stroke="#8b5cf6" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,540.2 816.0,719.0 1176.0,722.4 1356.0,722.4"/>
+</g>
+<text x="1334.0" y="716.4" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">ideal = 1</text>
+<rect x="96.0" y="791.0" width="1260.0" height="271.0" fill="#ffffff" stroke="#e5e7eb" rx="14"/>
+<text x="114.0" y="819.0" fill="#111827" font-size="17" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700"><tspan x="114.0" dy="0.0" text-anchor="start">Worst-point coefficient-noise gain</tspan></text>
+<text x="1346.0" y="819.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">relative worst-case noise gain</text>
+<line x1="116.0" y1="1046.0" x2="1340.0" y2="1046.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="1051.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">0.41</text>
+<line x1="116.0" y1="992.2" x2="1340.0" y2="992.2" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="997.2" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">2.58</text>
+<line x1="116.0" y1="938.5" x2="1340.0" y2="938.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="943.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">4.75</text>
+<line x1="116.0" y1="884.8" x2="1340.0" y2="884.8" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="889.8" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">6.92</text>
+<line x1="116.0" y1="831.0" x2="1340.0" y2="831.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="112.0" y="836.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="normal">9.10</text>
+<line x1="96.0" y1="831.0" x2="96.0" y2="1046.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="96.0" y="1084.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">50.0</text>
+<line x1="276.0" y1="831.0" x2="276.0" y2="1046.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="276.0" y="1084.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">56.2</text>
+<line x1="456.0" y1="831.0" x2="456.0" y2="1046.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="456.0" y="1084.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">62.5</text>
+<line x1="636.0" y1="831.0" x2="636.0" y2="1046.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="636.0" y="1084.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">68.8</text>
+<line x1="816.0" y1="831.0" x2="816.0" y2="1046.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="816.0" y="1084.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">75.0</text>
+<line x1="996.0" y1="831.0" x2="996.0" y2="1046.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="996.0" y="1084.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">81.2</text>
+<line x1="1176.0" y1="831.0" x2="1176.0" y2="1046.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1176.0" y="1084.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">87.5</text>
+<line x1="1356.0" y1="831.0" x2="1356.0" y2="1046.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1356.0" y="1084.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">93.8</text>
+<g clip-path="url(#stacked-panel-2)">
+<line x1="116.0" y1="1031.4" x2="1340.0" y2="1031.4" stroke="#6b7280" stroke-width="2" stroke-dasharray="7 7"/>
+<polyline fill="none" stroke="#ff7f0e" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,1025.6 816.0,1031.4 1176.0,1031.4 1356.0,1031.4"/>
+<polyline fill="none" stroke="#2ca02c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,1027.1 816.0,1031.4 1176.0,1031.4 1356.0,1031.4"/>
+<polyline fill="none" stroke="#d62728" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,1015.5 816.0,1031.3 1176.0,1031.4 1356.0,1031.4"/>
+<polyline fill="none" stroke="#0f766e" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,997.2 816.0,1030.6 1176.0,1031.4 1356.0,1031.4"/>
+<polyline fill="none" stroke="#b45309" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,999.4 816.0,1030.7 1176.0,1031.4 1356.0,1031.4"/>
+<polyline fill="none" stroke="#8b5cf6" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="96.0,849.2 816.0,1023.0 1176.0,1031.4 1356.0,1031.4"/>
+</g>
+<text x="1334.0" y="1025.4" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">ideal = 1</text>
+<text x="726.0" y="1148.0" fill="#374151" font-size="16" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="normal">overlap (%)</text>
+</svg>
