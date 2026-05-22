@@ -30,11 +30,160 @@ class ReconstructionRun:
     max_abs_error: float
 
 
+@dataclass(frozen=True)
+class DualWindowSummary:
+    hop: int
+    mean_window_value: float
+    relative_constant_rmse: float
+    l2_energy: float
+    rms_noise_gain: float
+    worst_noise_gain: float
+
+
+@dataclass(frozen=True)
+class DualWindowComparison:
+    hop: int
+    closest_constant_scale: float
+    canonical: DualWindowSummary
+    closest_constant: DualWindowSummary
+
+
 def _as_list(window: Iterable[float]) -> list[float]:
     values = list(window)
     if not values:
         raise ValueError("window must not be empty")
     return values
+
+
+def _residue_classes(length: int, hop: int) -> list[list[int]]:
+    if hop < 1:
+        raise ValueError("hop must be positive")
+    if length < 1:
+        raise ValueError("length must be positive")
+    return [list(range(offset, length, hop)) for offset in range(hop)]
+
+
+def _phase_noise_energies(window: list[float], hop: int) -> list[float]:
+    return [sum(window[index] * window[index] for index in indices) for indices in _residue_classes(len(window), hop)]
+
+
+def canonical_dual_window(window: Iterable[float], hop: int) -> list[float]:
+    analysis = _as_list(window)
+    dual = [0.0] * len(analysis)
+    for indices in _residue_classes(len(analysis), hop):
+        norm = sum(analysis[index] * analysis[index] for index in indices)
+        if norm <= 0.0:
+            raise ValueError("analysis window leaves an uncovered residue class")
+        for index in indices:
+            dual[index] = analysis[index] / norm
+    return dual
+
+
+def closest_scaled_constant_dual_window(window: Iterable[float], hop: int) -> tuple[list[float], float]:
+    analysis = _as_list(window)
+    classes = _residue_classes(len(analysis), hop)
+    class_stats: list[tuple[list[int], float, float]] = []
+    for indices in classes:
+        value_sum = sum(analysis[index] for index in indices)
+        squared_sum = sum(analysis[index] * analysis[index] for index in indices)
+        if squared_sum <= 0.0:
+            raise ValueError("analysis window leaves an uncovered residue class")
+        class_stats.append((indices, value_sum, squared_sum))
+
+    numerator = sum(value_sum / squared_sum for _, value_sum, squared_sum in class_stats)
+    denominator = sum((value_sum * value_sum) / squared_sum for _, value_sum, squared_sum in class_stats)
+    if denominator <= 0.0:
+        raise ValueError("closest constant dual is undefined when every class sum vanishes")
+    scale = numerator / denominator
+
+    dual = [0.0] * len(analysis)
+    for indices, value_sum, squared_sum in class_stats:
+        adjustment = (1.0 - scale * value_sum) / squared_sum
+        for index in indices:
+            dual[index] = scale + adjustment * analysis[index]
+    return dual, scale
+
+
+def dual_window_summary(window: Iterable[float], hop: int) -> DualWindowSummary:
+    synthesis = _as_list(window)
+    mean_window_value = sum(synthesis) / len(synthesis)
+    if abs(mean_window_value) <= 1e-12:
+        raise ValueError("mean synthesis value is too small for a stable flatness summary")
+    relative_constant_rmse = math.sqrt(sum((value - mean_window_value) ** 2 for value in synthesis) / len(synthesis)) / abs(mean_window_value)
+    phase_energies = _phase_noise_energies(synthesis, hop)
+    return DualWindowSummary(
+        hop=hop,
+        mean_window_value=mean_window_value,
+        relative_constant_rmse=relative_constant_rmse,
+        l2_energy=sum(value * value for value in synthesis),
+        rms_noise_gain=math.sqrt(sum(phase_energies) / len(phase_energies)),
+        worst_noise_gain=math.sqrt(max(phase_energies)),
+    )
+
+
+def compare_dual_windows(window: Iterable[float], hop: int) -> DualWindowComparison:
+    canonical = canonical_dual_window(window, hop)
+    closest_constant, scale = closest_scaled_constant_dual_window(window, hop)
+    return DualWindowComparison(
+        hop=hop,
+        closest_constant_scale=scale,
+        canonical=dual_window_summary(canonical, hop),
+        closest_constant=dual_window_summary(closest_constant, hop),
+    )
+
+
+def periodic_dual_window_reconstruction(
+    signal: Iterable[float],
+    analysis_window: Iterable[float],
+    synthesis_window: Iterable[float],
+    hop: int,
+    *,
+    coefficient_noise_std: float = 0.0,
+    seed: int = 0,
+) -> ReconstructionRun:
+    samples = list(signal)
+    if not samples:
+        raise ValueError("signal must not be empty")
+    if hop < 1:
+        raise ValueError("hop must be positive")
+    if len(samples) % hop != 0:
+        raise ValueError("signal length must be a multiple of hop for periodic reconstruction")
+
+    analysis = _as_list(analysis_window)
+    synthesis = _as_list(synthesis_window)
+    if len(analysis) != len(synthesis):
+        raise ValueError("analysis and synthesis windows must have the same length")
+
+    frame_length = len(analysis)
+    sample_count = len(samples)
+    rng = random.Random(seed)
+    reconstructed = [0.0] * sample_count
+    denominator = [0.0] * sample_count
+
+    for start in range(0, sample_count, hop):
+        for offset, (analysis_weight, synthesis_weight) in enumerate(zip(analysis, synthesis)):
+            index = (start + offset) % sample_count
+            coefficient = samples[index] * analysis_weight
+            if coefficient_noise_std:
+                coefficient += rng.gauss(0.0, coefficient_noise_std)
+            reconstructed[index] += coefficient * synthesis_weight
+            denominator[index] += analysis_weight * synthesis_weight
+
+    error_sq = 0.0
+    max_abs_error = 0.0
+    for expected, actual in zip(samples, reconstructed):
+        error = actual - expected
+        error_sq += error * error
+        max_abs_error = max(max_abs_error, abs(error))
+
+    rmse = math.sqrt(error_sq / sample_count)
+    return ReconstructionRun(
+        signal=samples,
+        reconstructed=reconstructed,
+        denominator=denominator,
+        rmse=rmse,
+        max_abs_error=max_abs_error,
+    )
 
 
 def reconstruction_condition_summary(window: Iterable[float], hop: int) -> ReconstructionConditionSummary:

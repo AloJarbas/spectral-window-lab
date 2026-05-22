@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+from html import escape
 import math
 import shutil
 import subprocess
@@ -32,6 +33,9 @@ from windowlab.overlap import (
 )
 from windowlab.reconstruct import (
     build_reference_signal,
+    compare_dual_windows,
+    closest_scaled_constant_dual_window,
+    periodic_dual_window_reconstruction,
     periodic_same_window_reconstruction,
     reconstruction_condition_summary,
     simulated_relative_noise_gain,
@@ -91,6 +95,14 @@ RECONSTRUCTION_ORDER = (
 RECONSTRUCTION_HOPS = (64, 32, 16, 8)
 RECONSTRUCTION_LENGTH = 128
 RECONSTRUCTION_PERIODS = 64
+DUAL_WINDOW_CASES = (
+    ("hann", 64, "Hann", "50% overlap"),
+    ("hann", 32, "Hann", "75% overlap"),
+    ("blackman-harris", 64, "Blackman-Harris", "50% overlap"),
+    ("blackman-harris", 32, "Blackman-Harris", "75% overlap"),
+    ("flattop", 64, "Flat-top", "50% overlap"),
+    ("flattop", 32, "Flat-top", "75% overlap"),
+)
 
 
 def builders_for(names: tuple[str, ...]) -> list[tuple[str, object]]:
@@ -689,6 +701,231 @@ def build_reconstruction_condition_svg(rows: list[dict[str, float | str]]) -> st
     )
 
 
+def build_dual_window_rows() -> list[dict[str, float | str]]:
+    rows: list[dict[str, float | str]] = []
+    for name, hop, label, overlap_label in DUAL_WINDOW_CASES:
+        analysis = WINDOW_BUILDERS[name](RECONSTRUCTION_LENGTH)
+        analysis_energy = sum(value * value for value in analysis)
+        comparison = compare_dual_windows(analysis, hop)
+        reference_signal = build_reference_signal(RECONSTRUCTION_PERIODS * hop)
+        canonical_run = periodic_same_window_reconstruction(reference_signal, analysis, hop)
+        closest_constant_dual, scale = closest_scaled_constant_dual_window(analysis, hop)
+        closest_constant_run = periodic_dual_window_reconstruction(reference_signal, analysis, closest_constant_dual, hop)
+        rows.append(
+            {
+                "name": name,
+                "label": label,
+                "overlap_label": overlap_label,
+                "hop": hop,
+                "overlap_fraction": 1.0 - hop / RECONSTRUCTION_LENGTH,
+                "closest_constant_scale": scale,
+                "canonical_relative_constant_rmse": comparison.canonical.relative_constant_rmse,
+                "closest_constant_relative_constant_rmse": comparison.closest_constant.relative_constant_rmse,
+                "canonical_rms_noise_gain": comparison.canonical.rms_noise_gain,
+                "closest_constant_rms_noise_gain": comparison.closest_constant.rms_noise_gain,
+                "canonical_worst_noise_gain": comparison.canonical.worst_noise_gain,
+                "closest_constant_worst_noise_gain": comparison.closest_constant.worst_noise_gain,
+                "canonical_energy_ratio": comparison.canonical.l2_energy / analysis_energy,
+                "closest_constant_energy_ratio": comparison.closest_constant.l2_energy / analysis_energy,
+                "canonical_exact_rmse": canonical_run.rmse,
+                "canonical_exact_max_abs_error": canonical_run.max_abs_error,
+                "closest_constant_exact_rmse": closest_constant_run.rmse,
+                "closest_constant_exact_max_abs_error": closest_constant_run.max_abs_error,
+            }
+        )
+    return rows
+
+
+def _estimate_text_width(text: str, size: int) -> float:
+    return max(size * 0.58 * len(text), size * 0.9)
+
+
+def _wrap_lines(text: str, max_width: float, size: int) -> list[str]:
+    words = text.split()
+    if not words:
+        return [text]
+    lines: list[str] = []
+    current = words[0]
+    for word in words[1:]:
+        proposal = f"{current} {word}"
+        if _estimate_text_width(proposal, size) <= max_width:
+            current = proposal
+        else:
+            lines.append(current)
+            current = word
+    lines.append(current)
+    return lines
+
+
+def _text_block(x: float, y: float, text: str, *, size: int, max_width: float, anchor: str = "start", fill: str = "#222", weight: str = "normal") -> tuple[str, float]:
+    lines = _wrap_lines(text, max_width, size)
+    spans = []
+    for index, line in enumerate(lines):
+        dy = 0.0 if index == 0 else size * 1.25
+        spans.append(f'<tspan x="{x:.1f}" dy="{dy:.1f}" text-anchor="{anchor}">{escape(line)}</tspan>')
+    svg = (
+        f'<text x="{x:.1f}" y="{y:.1f}" fill="{fill}" font-size="{size}" '
+        f'font-family="Inter, Arial, sans-serif" text-anchor="{anchor}" font-weight="{weight}">' + "".join(spans) + "</text>"
+    )
+    return svg, len(lines) * size * 1.25
+
+
+def build_dual_window_svg(rows: list[dict[str, float | str]]) -> str:
+    width = 1420
+    height = 1320
+    background = "#fcfcfd"
+    methods = [
+        ("canonical", "canonical dual", "#0f172a"),
+        ("closest_constant", "closest constant-looking dual", "#2563eb"),
+    ]
+    panels = [
+        ("Flatness versus the best scaled constant", "relative constant RMSE", "relative_constant_rmse", "{:.2f}"),
+        ("RMS coefficient-noise gain", "output noise / coefficient noise", "rms_noise_gain", "{:.2f}"),
+        ("Worst-point coefficient-noise gain", "worst output noise / coefficient noise", "worst_noise_gain", "{:.2f}"),
+        ("Dual energy ratio", "dual L2 energy / analysis L2 energy", "energy_ratio", "{:.2f}"),
+    ]
+
+    title_svg, title_height = _text_block(
+        width / 2,
+        44,
+        "Dual windows can look flatter and still cost more noise",
+        size=28,
+        max_width=width - 180,
+        anchor="middle",
+        fill="#111827",
+        weight="700",
+    )
+    subtitle_svg, subtitle_height = _text_block(
+        width / 2,
+        44 + title_height,
+        "This bounded follow-up checks the uncomfortable cases the repo already exposed: Hann, Blackman-Harris, and flat-top at half-overlap and quarter-hop. In this painless setting, normalized same-window synthesis already gives the canonical dual, so the real comparison is against the closest constant-looking dual.",
+        size=16,
+        max_width=width - 220,
+        anchor="middle",
+        fill="#4b5563",
+    )
+
+    legend_y = 44 + title_height + subtitle_height + 18
+    legend = []
+    legend_x = width / 2 - 210
+    for index, (_, label, color) in enumerate(methods):
+        x = legend_x + index * 260
+        legend.append(f'<rect x="{x:.1f}" y="{legend_y:.1f}" width="28" height="12" rx="6" fill="{color}"/>')
+        legend.append(f'<text x="{x + 40:.1f}" y="{legend_y + 11:.1f}" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif">{escape(label)}</text>')
+
+    top = legend_y + 46
+    left = 58
+    right = width - 58
+    bottom = height - 118
+    panel_gap_x = 28
+    panel_gap_y = 34
+    panel_width = (right - left - panel_gap_x) / 2
+    panel_height = (bottom - top - panel_gap_y) / 2
+
+    def metric_values(metric_key: str) -> list[float]:
+        return [
+            float(row[f"canonical_{metric_key}"])
+            for row in rows
+        ] + [
+            float(row[f"closest_constant_{metric_key}"])
+            for row in rows
+        ]
+
+    def case_label(row: dict[str, float | str]) -> tuple[str, str]:
+        return str(row["label"]), str(row["overlap_label"])
+
+    parts = [
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">',
+        f'<rect width="{width}" height="{height}" fill="{background}"/>',
+        title_svg,
+        subtitle_svg,
+        *legend,
+    ]
+
+    for panel_index, (title, y_label, metric_key, tick_format) in enumerate(panels):
+        row_index = panel_index // 2
+        col_index = panel_index % 2
+        panel_left = left + col_index * (panel_width + panel_gap_x)
+        panel_top = top + row_index * (panel_height + panel_gap_y)
+        plot_left = panel_left + 72
+        plot_right = panel_left + panel_width - 28
+        plot_top = panel_top + 74
+        plot_bottom = panel_top + panel_height - 88
+        values = metric_values(metric_key)
+        y_min = 0.0
+        y_max = max(values) * 1.14 if max(values) > 0.0 else 1.0
+        group_width = (plot_right - plot_left) / len(rows)
+        bar_width = min(24.0, (group_width - 28.0) / 2)
+        bar_gap = 10.0
+
+        def map_y(value: float) -> float:
+            return plot_bottom - (value - y_min) / (y_max - y_min) * (plot_bottom - plot_top)
+
+        parts.append(f'<rect x="{panel_left:.1f}" y="{panel_top:.1f}" width="{panel_width:.1f}" height="{panel_height:.1f}" fill="#ffffff" stroke="#e5e7eb" rx="16"/>')
+        panel_title_svg, _ = _text_block(
+            panel_left + panel_width / 2,
+            panel_top + 28,
+            title,
+            size=18,
+            max_width=panel_width - 40,
+            anchor="middle",
+            fill="#111827",
+            weight="700",
+        )
+        parts.append(panel_title_svg)
+
+        for step in range(5):
+            fraction = step / 4
+            value = y_min + fraction * (y_max - y_min)
+            y = map_y(value)
+            parts.append(f'<line x1="{plot_left:.1f}" y1="{y:.1f}" x2="{plot_right:.1f}" y2="{y:.1f}" stroke="#e5e7eb" stroke-dasharray="4 6"/>')
+            parts.append(f'<text x="{plot_left - 10:.1f}" y="{y + 5:.1f}" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end">{tick_format.format(value)}</text>')
+
+        parts.append(f'<line x1="{plot_left:.1f}" y1="{plot_top:.1f}" x2="{plot_left:.1f}" y2="{plot_bottom:.1f}" stroke="#374151" stroke-width="1.5"/>')
+        parts.append(f'<line x1="{plot_left:.1f}" y1="{plot_bottom:.1f}" x2="{plot_right:.1f}" y2="{plot_bottom:.1f}" stroke="#374151" stroke-width="1.5"/>')
+
+        for case_index, row in enumerate(rows):
+            group_left = plot_left + case_index * group_width + 14
+            canonical_value = float(row[f"canonical_{metric_key}"])
+            closest_value = float(row[f"closest_constant_{metric_key}"])
+            for method_index, value in enumerate((canonical_value, closest_value)):
+                color = methods[method_index][2]
+                x = group_left + method_index * (bar_width + bar_gap)
+                y = map_y(value)
+                height_px = max(1.5, plot_bottom - y)
+                parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bar_width:.1f}" height="{height_px:.1f}" fill="{color}" rx="8"/>')
+                parts.append(f'<text x="{x + bar_width / 2:.1f}" y="{y - 8:.1f}" fill="#111827" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">{tick_format.format(value)}</text>')
+
+            label, overlap_label = case_label(row)
+            label_x = group_left + (2 * bar_width + bar_gap) / 2
+            parts.append(f'<text x="{label_x:.1f}" y="{plot_bottom + 22:.1f}" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">{escape(label)}</text>')
+            parts.append(f'<text x="{label_x:.1f}" y="{plot_bottom + 38:.1f}" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle">{escape(overlap_label)}</text>')
+
+        ylabel_svg, _ = _text_block(
+            panel_left + panel_width / 2,
+            panel_top + panel_height - 20,
+            y_label,
+            size=13,
+            max_width=panel_width - 60,
+            anchor="middle",
+            fill="#6b7280",
+        )
+        parts.append(ylabel_svg)
+
+    footer_svg, _ = _text_block(
+        width / 2,
+        height - 52,
+        "All twelve paths reconstruct the periodic reference signal to floating-point precision. The real split is elsewhere: the closest constant-looking dual does what its name promises, but the canonical dual stays lower-energy and lower-noise in every case here. For the worst windows, shrinking hop is still the cleaner fix.",
+        size=14,
+        max_width=width - 180,
+        anchor="middle",
+        fill="#4b5563",
+    )
+    parts.append(footer_svg)
+    parts.append("</svg>")
+    return "\n".join(parts)
+
+
 def main() -> int:
     ART.mkdir(exist_ok=True)
 
@@ -749,6 +986,9 @@ def main() -> int:
 
     reconstruction_rows = build_reconstruction_condition_rows()
     write_svg_asset("window-reconstruction-conditioning.svg", build_reconstruction_condition_svg(reconstruction_rows))
+
+    dual_window_rows = build_dual_window_rows()
+    write_svg_asset("window-dual-window-comparison.svg", build_dual_window_svg(dual_window_rows))
 
     selection_rows = build_window_selection_rows()
     write_svg_asset("window-selection-map.svg", build_window_selection_svg(selection_rows))
@@ -865,6 +1105,33 @@ def main() -> int:
         )
         writer.writeheader()
         writer.writerows(reconstruction_rows)
+
+    with (ART / "window-dual-window-comparison.csv").open("w", newline="") as handle:
+        writer = csv.DictWriter(
+            handle,
+            fieldnames=[
+                "name",
+                "label",
+                "overlap_label",
+                "hop",
+                "overlap_fraction",
+                "closest_constant_scale",
+                "canonical_relative_constant_rmse",
+                "closest_constant_relative_constant_rmse",
+                "canonical_rms_noise_gain",
+                "closest_constant_rms_noise_gain",
+                "canonical_worst_noise_gain",
+                "closest_constant_worst_noise_gain",
+                "canonical_energy_ratio",
+                "closest_constant_energy_ratio",
+                "canonical_exact_rmse",
+                "canonical_exact_max_abs_error",
+                "closest_constant_exact_rmse",
+                "closest_constant_exact_max_abs_error",
+            ],
+        )
+        writer.writeheader()
+        writer.writerows(dual_window_rows)
 
     rows = build_metrics()
     with (ART / "window-metrics.csv").open("w", newline="") as handle:

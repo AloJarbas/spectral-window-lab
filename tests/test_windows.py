@@ -19,7 +19,11 @@ from windowlab.overlap import (
 from windowlab.recommend import TASK_PROFILES, build_task_metrics, rank_windows_for_task
 from windowlab.reconstruct import (
     build_reference_signal,
+    canonical_dual_window,
+    closest_scaled_constant_dual_window,
+    compare_dual_windows,
     periodic_same_window_reconstruction,
+    periodic_dual_window_reconstruction,
     reconstruction_condition_summary,
     simulated_relative_noise_gain,
 )
@@ -265,6 +269,39 @@ class WindowTests(unittest.TestCase):
         summary = reconstruction_condition_summary(build_window("blackman-harris", 128), 32)
         simulated = simulated_relative_noise_gain(build_window("blackman-harris", 128), 32, periods=64, coefficient_noise_std=1e-6, seed=11)
         self.assertAlmostEqual(simulated, summary.rms_relative_noise_gain, delta=0.03)
+
+    def test_canonical_dual_matches_same_window_normalized_reconstruction(self) -> None:
+        signal = build_reference_signal(1024)
+        analysis = build_window("hann", 128)
+        canonical = canonical_dual_window(analysis, 32)
+        normalized = periodic_same_window_reconstruction(signal, analysis, 32)
+        dual = periodic_dual_window_reconstruction(signal, analysis, canonical, 32)
+        self.assertLess(dual.rmse, 1e-12)
+        self.assertLess(max(abs(left - right) for left, right in zip(normalized.reconstructed, dual.reconstructed)), 1e-12)
+
+    def test_closest_scaled_constant_dual_reconstructs_exactly(self) -> None:
+        signal = build_reference_signal(1024)
+        analysis = build_window("blackman-harris", 128)
+        dual, scale = closest_scaled_constant_dual_window(analysis, 32)
+        self.assertGreater(scale, 0.0)
+        run = periodic_dual_window_reconstruction(signal, analysis, dual, 32)
+        self.assertLess(run.rmse, 1e-12)
+        self.assertLess(max(abs(value - 1.0) for value in run.denominator), 1e-12)
+
+    def test_closest_constant_dual_is_flatter_but_noisier_than_canonical(self) -> None:
+        comparison = compare_dual_windows(build_window("flattop", 128), 32)
+        self.assertLess(
+            comparison.closest_constant.relative_constant_rmse,
+            comparison.canonical.relative_constant_rmse,
+        )
+        self.assertGreater(
+            comparison.closest_constant.rms_noise_gain,
+            comparison.canonical.rms_noise_gain,
+        )
+        self.assertGreater(
+            comparison.closest_constant.l2_energy,
+            comparison.canonical.l2_energy,
+        )
 
 
 if __name__ == "__main__":
