@@ -16,6 +16,7 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 - `windowlab/metrics.py` computes coherent gain, ENBW, main-lobe width, and peak sidelobe level
 - `windowlab/overlap.py` measures both raw and squared overlap profiles, plus the implied synthesis-normalization swing for STFT framing hops
 - `windowlab/reconstruct.py` adds a same-window normalized overlap-add reconstruction path, explicit dual-window helpers, conditioning summaries, and a small coefficient-noise simulation so the framing lane can talk about exactness versus numerical calmness instead of only flatness
+- `windowlab/dual_path.py` studies the whole exact path between the canonical dual and the constant-looking dual instead of pretending the framing tradeoff only lives at two endpoints
 - `windowlab/recommend.py` turns the repo's existing metrics into a bounded task-selection map instead of a fake one-size-fits-all ranking
 - `windowlab/svg.py` renders clean SVG comparison plots without external plotting libraries
 - `scripts/make_gallery.py` regenerates the figures and metrics CSVs
@@ -23,8 +24,9 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 - `notebooks/synthesis_normalization_and_weighted_overlap.ipynb` is the companion notebook for the weighted overlap-add sidecar
 - `notebooks/reconstruction_conditioning_and_normalized_overlap_add.ipynb` slows down the new exactness-versus-conditioning pass
 - `notebooks/dual_window_synthesis_tradeoffs.ipynb` slows down the new canonical-dual versus constant-looking-dual comparison
+- `notebooks/dual_window_tradeoff_paths.ipynb` slows down the new exact-dual interpolation follow-up and the midpoint tradeoff question
 - `notebooks/window_selection_map.ipynb` slows down the task-selection map and the guardrails behind it
-- `tests/test_windows.py` checks useful ordering facts about the windows, the overlap-add lane, the new reconstruction-conditioning pass, the dual-window sidecar, and the task map
+- `tests/test_windows.py` checks useful ordering facts about the windows, the overlap-add lane, the reconstruction-conditioning pass, the dual-window sidecars, and the task map
 
 ## Generated artifacts
 
@@ -86,13 +88,19 @@ This new sidecar closes one more loophole in the framing story. Same-window norm
 
 This follow-up makes the next framing split explicit. In this repo's bounded periodic setting, normalized same-window synthesis already gives the canonical dual. The real comparison is therefore against the closest constant-looking dual. That dual can look much flatter, but it still spends more energy and usually amplifies more coefficient noise.
 
+### Dual-window tradeoff paths
+
+![Dual-window tradeoff paths](art/window-dual-tradeoff-paths.png)
+
+This follow-up is the sharper dual-window question. The old sidecar only compared two exact duals: the calm canonical one and the flattest constant-looking one. This one traces the whole exact path between them. That makes the real split visible: some windows have a usable middle lane where flatness improves faster than noise, while others stay hostile no matter how you retune the synthesis window.
+
 ### Task-based window selection map
 
 ![Task-based window selection map](art/window-selection-map.png)
 
 This sidecar is the repo's explicit decision card. Instead of pretending one window is "best," it uses guardrails plus the existing metrics to say different things for different jobs: rectangular for very tight equal-strength tone separation, Kaiser `β=8.6` for a compact low-sidelobe compromise, Nuttall for weak-spur hunting, flat-top for isolated-tone amplitude honesty, and Hamming for the repo's bounded quarter-hop STFT lane.
 
-The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, `art/window-overlap-add-metrics.csv`, `art/window-synthesis-normalization-metrics.csv`, `art/window-reconstruction-conditioning.csv`, `art/window-dual-window-comparison.csv`, and `art/window-selection-map.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, the raw overlap-add pass, the synthesis-normalization pass, the reconstruction-conditioning pass, the new dual-window comparison, and the task map.
+The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, `art/window-overlap-add-metrics.csv`, `art/window-synthesis-normalization-metrics.csv`, `art/window-reconstruction-conditioning.csv`, `art/window-dual-window-comparison.csv`, `art/window-dual-tradeoff-paths.csv`, and `art/window-selection-map.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, the raw overlap-add pass, the synthesis-normalization pass, the reconstruction-conditioning pass, the endpoint dual-window comparison, the new exact-dual path follow-up, and the task map.
 
 ## Quick run
 
@@ -123,6 +131,8 @@ The new reconstruction-conditioning sidecar matters because it splits two ideas 
 
 The new dual-window sidecar matters because it closes the next loophole honestly instead of theatrically. In this bounded setting, normalized same-window synthesis already *is* the canonical dual, so the interesting comparison is against a flatter, more COLA-looking dual. That dual reconstructs exactly too, but it does not make the noise bill disappear. For the ugly cases, the canonical dual stays calmer and shrinking hop is still the cleaner fix.
 
+The new dual-path follow-up matters because it turns that binary comparison into a real design question. Once both endpoints are exact, the honest question is whether there is a usable middle lane between them. For Hann and especially Blackman-Harris at quarter-hop, there is. For flat-top at half-overlap, there really is not.
+
 The task-selection sidecar matters for a different reason: it forces the repo to stop hiding behind generic advice like "Hann is a good default." The winners are different because the tasks are different, and now the repo has one compact artifact that makes that visible.
 
 ## Notes
@@ -134,12 +144,13 @@ The task-selection sidecar matters for a different reason: it forces the repo to
 - [Exact overlap-add reconstruction is not the conditioning story](notes/exact-overlap-add-is-not-the-conditioning-story.md)
 - [Dual windows are real, but flatter duals are not free](notes/dual-windows-do-not-make-conditioning-free.md)
 - [Why dual windows were the next honest framing split](notes/dual-window-next-pass.md)
+- [Dual-window tradeoff paths](notes/dual-window-tradeoff-paths.md)
 - [A bounded window-selection map for actual tasks](notes/window-selection-map.md)
 
 
 ## Next directions
 
-- compare the canonical dual against one second desired synthesis target only if it changes the story instead of dressing up the same noise tradeoff in a new costume
+- test one genuinely different desired-dual family only if it bends the new path instead of just landing somewhere between the same two endpoints
 - port the metrics core to Julia and Fortran for cross-language comparison once those toolchains are live
 - compare the Kaiser sweep at two FFT lengths or iteration densities only if that reveals something real instead of redrawing the same curve
 

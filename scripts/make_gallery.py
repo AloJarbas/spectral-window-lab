@@ -24,6 +24,13 @@ from windowlab.metrics import (
     positive_frequency_spectrum,
     scalloping_loss_db,
 )
+from windowlab.dual_path import (
+    render_dual_window_path_report,
+    render_dual_window_path_svg,
+    study_dual_window_paths,
+    write_dual_window_path_csv,
+    write_dual_window_path_notebook,
+)
 from windowlab.overlap import (
     normalized_overlap_add_profile,
     normalized_squared_overlap_add_profile,
@@ -989,6 +996,12 @@ def main() -> int:
 
     dual_window_rows = build_dual_window_rows()
     write_svg_asset("window-dual-window-comparison.svg", build_dual_window_svg(dual_window_rows))
+
+    dual_path_rows = study_dual_window_paths()
+    write_svg_asset("window-dual-tradeoff-paths.svg", render_dual_window_path_svg(dual_path_rows))
+    (ROOT / "notes" / "dual-window-tradeoff-paths.md").write_text(render_dual_window_path_report(dual_path_rows))
+    write_dual_window_path_notebook(ROOT / "notebooks" / "dual_window_tradeoff_paths.ipynb")
+    write_dual_window_path_csv(dual_path_rows, ART / "window-dual-tradeoff-paths.csv")
 
     selection_rows = build_window_selection_rows()
     write_svg_asset("window-selection-map.svg", build_window_selection_svg(selection_rows))

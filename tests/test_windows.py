@@ -10,6 +10,7 @@ from windowlab.metrics import (
     peak_sidelobe_level_db,
     scalloping_loss_db,
 )
+from windowlab.dual_path import interpolate_dual_windows, study_dual_window_paths
 from windowlab.overlap import (
     normalized_synthesis_gain_profile,
     overlap_add_summary,
@@ -302,6 +303,28 @@ class WindowTests(unittest.TestCase):
             comparison.closest_constant.l2_energy,
             comparison.canonical.l2_energy,
         )
+
+    def test_interpolated_dual_window_stays_exact(self) -> None:
+        signal = build_reference_signal(1024)
+        analysis = build_window("blackman-harris", 128)
+        canonical = canonical_dual_window(analysis, 32)
+        closest_constant, _ = closest_scaled_constant_dual_window(analysis, 32)
+        midpoint = interpolate_dual_windows(canonical, closest_constant, 0.5)
+        run = periodic_dual_window_reconstruction(signal, analysis, midpoint, 32)
+        self.assertLess(run.rmse, 1e-12)
+        self.assertLess(max(abs(value - 1.0) for value in run.denominator), 1e-12)
+
+    def test_blackman_harris_quarter_hop_has_useful_midpoint_tradeoff(self) -> None:
+        rows = study_dual_window_paths()
+        midpoint = next(row for row in rows if row.name == "blackman-harris" and row.hop == 32 and row.mix == 0.5)
+        self.assertLess(midpoint.flatness_gap_fraction, 0.35)
+        self.assertLess(midpoint.noise_ratio_to_canonical, 1.15)
+
+    def test_flattop_half_overlap_midpoint_stays_absolutely_bad(self) -> None:
+        rows = study_dual_window_paths()
+        midpoint = next(row for row in rows if row.name == "flattop" and row.hop == 64 and row.mix == 0.5)
+        self.assertGreater(midpoint.relative_constant_rmse, 4.0)
+        self.assertGreater(midpoint.rms_noise_gain, 6.9)
 
 
 if __name__ == "__main__":

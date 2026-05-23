@@ -1,0 +1,206 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1440" viewBox="0 0 1440 1440">
+<rect width="100%" height="100%" fill="#fcfcfd"/>
+<text x="720.0" y="44.0" fill="#111827" font-size="30" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">Dual-window tradeoff paths: some middle lanes are real, some are not</text>
+<text x="720.0" y="78.0" fill="#4b5563" font-size="16" font-family="Inter, Arial, sans-serif"><tspan x="720.0" dy="0" text-anchor="middle">The old sidecar compared two exact duals: the calm canonical dual and the flattest constant-looking dual. This follow-up traces the</tspan><tspan x="720.0" dy="19.0" text-anchor="middle">whole exact path between them. Because the dual constraint is linear, every convex mix is still exact, so the real question is how</tspan><tspan x="720.0" dy="19.0" text-anchor="middle">quickly the noise bill rises once you start flattening the synthesis window.</tspan></text>
+<rect x="72" y="156" width="380" height="28" rx="14" fill="#eff6ff" stroke="#bfdbfe"/>
+<rect x="468" y="156" width="380" height="28" rx="14" fill="#fef2f2" stroke="#fecaca"/>
+<text x="262.0" y="175.0" fill="#1d4ed8" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="600">blue = 50% overlap</text>
+<text x="658.0" y="175.0" fill="#dc2626" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="600">red = 75% overlap</text>
+<text x="1110.0" y="175.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="600">each path uses λ = 0, 0.25, 0.5, 0.75, 1</text>
+<rect x="70.0" y="200.0" width="634.0" height="568.0" fill="#ffffff" stroke="#e5e7eb" rx="18"/>
+<text x="94.0" y="232.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Hann</text>
+<text x="94.0" y="258.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="94.0" dy="0" text-anchor="start">The 75% overlap path buys a lot of flatness before</tspan><tspan x="94.0" dy="19.0" text-anchor="start">the noise bill gets serious.</tspan></text>
+<text x="136.0" y="302.0" fill="#374151" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">relative constant RMSE</text>
+<line x1="136.0" y1="320.0" x2="160.0" y2="320.0" stroke="#2563eb" stroke-width="4"/>
+<text x="170.0" y="325.0" fill="#2563eb" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">50% overlap</text>
+<line x1="286.0" y1="320.0" x2="310.0" y2="320.0" stroke="#dc2626" stroke-width="4"/>
+<text x="320.0" y="325.0" fill="#dc2626" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">75% overlap</text>
+<line x1="136.0" y1="702.0" x2="678.0" y2="702.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="126.0" y="707.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.00</text>
+<line x1="136.0" y1="607.0" x2="678.0" y2="607.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="126.0" y="612.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.20</text>
+<line x1="136.0" y1="512.0" x2="678.0" y2="512.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="126.0" y="517.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.40</text>
+<line x1="136.0" y1="417.0" x2="678.0" y2="417.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="126.0" y="422.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.60</text>
+<line x1="136.0" y1="322.0" x2="678.0" y2="322.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="126.0" y="327.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.80</text>
+<line x1="136.0" y1="322.0" x2="136.0" y2="702.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="136.0" y="726.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">0.77</text>
+<line x1="271.5" y1="322.0" x2="271.5" y2="702.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="271.5" y="726.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">0.95</text>
+<line x1="407.0" y1="322.0" x2="407.0" y2="702.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="407.0" y="726.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">1.12</text>
+<line x1="542.5" y1="322.0" x2="542.5" y2="702.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="542.5" y="726.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">1.30</text>
+<line x1="678.0" y1="322.0" x2="678.0" y2="702.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="678.0" y="726.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">1.48</text>
+<line x1="136.0" y1="322.0" x2="136.0" y2="702.0" stroke="#334155" stroke-width="1.5"/>
+<line x1="136.0" y1="702.0" x2="678.0" y2="702.0" stroke="#334155" stroke-width="1.5"/>
+<text x="407.0" y="750.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="600">RMS coefficient-noise gain</text>
+<polyline fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" points="463.1,393.9 475.2,493.0 510.3,574.8 566.2,643.5 639.7,700.5"/>
+<circle cx="463.1" cy="393.9" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="455.1" y="383.9" fill="#2563eb" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">λ=0.0</text>
+<circle cx="475.2" cy="493.0" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="510.3" cy="574.8" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="510.3" y="564.8" fill="#2563eb" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">λ=0.5</text>
+<circle cx="566.2" cy="643.5" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="639.7" cy="700.5" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="649.7" y="690.5" fill="#2563eb" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">λ=1.0</text>
+<polyline fill="none" stroke="#dc2626" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" points="174.3,362.7 184.3,476.4 213.3,566.9 259.1,640.7 318.6,701.7"/>
+<circle cx="174.3" cy="362.7" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="166.3" y="352.7" fill="#dc2626" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">λ=0.0</text>
+<circle cx="184.3" cy="476.4" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<circle cx="213.3" cy="566.9" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="213.3" y="556.9" fill="#dc2626" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">λ=0.5</text>
+<circle cx="259.1" cy="640.7" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<circle cx="318.6" cy="701.7" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="328.6" y="691.7" fill="#dc2626" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">λ=1.0</text>
+<rect x="736.0" y="200.0" width="634.0" height="568.0" fill="#ffffff" stroke="#e5e7eb" rx="18"/>
+<text x="760.0" y="232.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Blackman-Harris</text>
+<text x="760.0" y="258.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="760.0" dy="0" text-anchor="start">Quarter-hop is the strongest compromise lane in the</tspan><tspan x="760.0" dy="19.0" text-anchor="start">whole set.</tspan></text>
+<text x="802.0" y="302.0" fill="#374151" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">relative constant RMSE</text>
+<line x1="802.0" y1="320.0" x2="826.0" y2="320.0" stroke="#2563eb" stroke-width="4"/>
+<text x="836.0" y="325.0" fill="#2563eb" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">50% overlap</text>
+<line x1="952.0" y1="320.0" x2="976.0" y2="320.0" stroke="#dc2626" stroke-width="4"/>
+<text x="986.0" y="325.0" fill="#dc2626" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">75% overlap</text>
+<line x1="802.0" y1="702.0" x2="1344.0" y2="702.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="792.0" y="707.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.00</text>
+<line x1="802.0" y1="607.0" x2="1344.0" y2="607.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="792.0" y="612.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.28</text>
+<line x1="802.0" y1="512.0" x2="1344.0" y2="512.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="792.0" y="517.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.56</text>
+<line x1="802.0" y1="417.0" x2="1344.0" y2="417.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="792.0" y="422.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.85</text>
+<line x1="802.0" y1="322.0" x2="1344.0" y2="322.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="792.0" y="327.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">1.13</text>
+<line x1="802.0" y1="322.0" x2="802.0" y2="702.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="802.0" y="726.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">0.92</text>
+<line x1="937.5" y1="322.0" x2="937.5" y2="702.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="937.5" y="726.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">1.31</text>
+<line x1="1073.0" y1="322.0" x2="1073.0" y2="702.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="1073.0" y="726.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">1.69</text>
+<line x1="1208.5" y1="322.0" x2="1208.5" y2="702.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="1208.5" y="726.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2.08</text>
+<line x1="1344.0" y1="322.0" x2="1344.0" y2="702.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="1344.0" y="726.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2.46</text>
+<line x1="802.0" y1="322.0" x2="802.0" y2="702.0" stroke="#334155" stroke-width="1.5"/>
+<line x1="802.0" y1="702.0" x2="1344.0" y2="702.0" stroke="#334155" stroke-width="1.5"/>
+<text x="1073.0" y="750.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="600">RMS coefficient-noise gain</text>
+<polyline fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" points="1148.4,405.2 1160.3,495.9 1194.9,560.5 1249.2,602.9 1319.4,622.4"/>
+<circle cx="1148.4" cy="405.2" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="1140.4" y="395.2" fill="#2563eb" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">λ=0.0</text>
+<circle cx="1160.3" cy="495.9" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="1194.9" cy="560.5" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="1194.9" y="550.5" fill="#2563eb" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">λ=0.5</text>
+<circle cx="1249.2" cy="602.9" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="1319.4" cy="622.4" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="1329.4" y="612.4" fill="#2563eb" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">λ=1.0</text>
+<polyline fill="none" stroke="#dc2626" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" points="826.6,362.7 837.5,499.1 868.3,589.5 914.7,653.9 972.5,702.0"/>
+<circle cx="826.6" cy="362.7" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="818.6" y="352.7" fill="#dc2626" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">λ=0.0</text>
+<circle cx="837.5" cy="499.1" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<circle cx="868.3" cy="589.5" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="868.3" y="579.5" fill="#dc2626" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">λ=0.5</text>
+<circle cx="914.7" cy="653.9" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<circle cx="972.5" cy="702.0" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="982.5" y="692.0" fill="#dc2626" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">λ=1.0</text>
+<rect x="70.0" y="800.0" width="634.0" height="568.0" fill="#ffffff" stroke="#e5e7eb" rx="18"/>
+<text x="94.0" y="832.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Flat-top</text>
+<text x="94.0" y="858.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="94.0" dy="0" text-anchor="start">The 75% overlap path has a middle lane, but the 50%</tspan><tspan x="94.0" dy="19.0" text-anchor="start">case still never becomes calm.</tspan></text>
+<text x="136.0" y="902.0" fill="#374151" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">relative constant RMSE</text>
+<line x1="136.0" y1="920.0" x2="160.0" y2="920.0" stroke="#2563eb" stroke-width="4"/>
+<text x="170.0" y="925.0" fill="#2563eb" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">50% overlap</text>
+<line x1="286.0" y1="920.0" x2="310.0" y2="920.0" stroke="#dc2626" stroke-width="4"/>
+<text x="320.0" y="925.0" fill="#dc2626" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">75% overlap</text>
+<line x1="136.0" y1="1302.0" x2="678.0" y2="1302.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="126.0" y="1307.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.00</text>
+<line x1="136.0" y1="1207.0" x2="678.0" y2="1207.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="126.0" y="1212.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">1.93</text>
+<line x1="136.0" y1="1112.0" x2="678.0" y2="1112.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="126.0" y="1117.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">3.86</text>
+<line x1="136.0" y1="1017.0" x2="678.0" y2="1017.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="126.0" y="1022.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">5.79</text>
+<line x1="136.0" y1="922.0" x2="678.0" y2="922.0" stroke="#e5e7eb" stroke-dasharray="4 6"/>
+<text x="126.0" y="927.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">7.73</text>
+<line x1="136.0" y1="922.0" x2="136.0" y2="1302.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="136.0" y="1326.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">0.98</text>
+<line x1="271.5" y1="922.0" x2="271.5" y2="1302.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="271.5" y="1326.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2.58</text>
+<line x1="407.0" y1="922.0" x2="407.0" y2="1302.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="407.0" y="1326.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">4.19</text>
+<line x1="542.5" y1="922.0" x2="542.5" y2="1302.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="542.5" y="1326.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">5.79</text>
+<line x1="678.0" y1="922.0" x2="678.0" y2="1302.0" stroke="#f1f5f9" stroke-dasharray="4 6"/>
+<text x="678.0" y="1326.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">7.39</text>
+<line x1="136.0" y1="922.0" x2="136.0" y2="1302.0" stroke="#334155" stroke-width="1.5"/>
+<line x1="136.0" y1="1302.0" x2="678.0" y2="1302.0" stroke="#334155" stroke-width="1.5"/>
+<text x="407.0" y="1350.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="600">RMS coefficient-noise gain</text>
+<polyline fill="none" stroke="#2563eb" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" points="637.0,962.7 638.1,1044.2 641.2,1094.2 646.3,1127.9 653.4,1152.1"/>
+<circle cx="637.0" cy="962.7" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="629.0" y="952.7" fill="#2563eb" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">λ=0.0</text>
+<circle cx="638.1" cy="1044.2" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="641.2" cy="1094.2" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="641.2" y="1084.2" fill="#2563eb" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">λ=0.5</text>
+<circle cx="646.3" cy="1127.9" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="653.4" cy="1152.1" r="5.3" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<text x="663.4" y="1142.1" fill="#2563eb" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">λ=1.0</text>
+<polyline fill="none" stroke="#dc2626" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" points="160.6,1224.9 168.6,1266.2 189.6,1284.7 218.8,1295.2 252.5,1301.3"/>
+<circle cx="160.6" cy="1224.9" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="152.6" y="1214.9" fill="#dc2626" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="700">λ=0.0</text>
+<circle cx="168.6" cy="1266.2" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<circle cx="189.6" cy="1284.7" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="189.6" y="1274.7" fill="#dc2626" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">λ=0.5</text>
+<circle cx="218.8" cy="1295.2" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<circle cx="252.5" cy="1301.3" r="5.3" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="262.5" y="1291.3" fill="#dc2626" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">λ=1.0</text>
+<rect x="736.0" y="800.0" width="634.0" height="568.0" fill="#ffffff" stroke="#e5e7eb" rx="18"/>
+<text x="760.0" y="832.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Midpoint snapshot (λ = 0.5)</text>
+<text x="760.0" y="858.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="760.0" dy="0" text-anchor="start">Compact read: exactness survives everywhere, so the</tspan><tspan x="760.0" dy="19.0" text-anchor="start">midpoint rows only track how much flatness the path</tspan><tspan x="760.0" dy="19.0" text-anchor="start">buys before noise and energy climb.</tspan></text>
+<text x="760.0" y="932.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">case</text>
+<text x="988.0" y="932.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">% gap left</text>
+<text x="1114.0" y="932.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">noise×</text>
+<text x="1206.0" y="932.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">energy×</text>
+<text x="1300.0" y="932.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">flatness</text>
+<line x1="758.0" y1="944.0" x2="1348.0" y2="944.0" stroke="#cbd5e1" stroke-width="1.4"/>
+<rect x="754.0" y="966.0" width="598.0" height="34" fill="#f8fafc" rx="8"/>
+<text x="760.0" y="986.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">Hann</text>
+<text x="760.0" y="1002.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">50% overlap</text>
+<text x="1022.0" y="994.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">41%</text>
+<text x="1130.0" y="994.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">1.05</text>
+<text x="1220.0" y="994.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">1.11</text>
+<text x="1314.0" y="994.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">0.27</text>
+<text x="760.0" y="1030.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">Hann</text>
+<text x="760.0" y="1046.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">75% overlap</text>
+<text x="1022.0" y="1038.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">40%</text>
+<text x="1130.0" y="1038.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">1.06</text>
+<text x="1220.0" y="1038.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">1.13</text>
+<text x="1314.0" y="1038.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">0.28</text>
+<rect x="754.0" y="1054.0" width="598.0" height="34" fill="#f8fafc" rx="8"/>
+<text x="760.0" y="1074.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">Blackman-Harris</text>
+<text x="760.0" y="1090.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">50% overlap</text>
+<text x="1022.0" y="1082.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">29%</text>
+<text x="1130.0" y="1082.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">1.07</text>
+<text x="1220.0" y="1082.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">1.14</text>
+<text x="1314.0" y="1082.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">0.42</text>
+<text x="760.0" y="1118.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">Blackman-Harris</text>
+<text x="760.0" y="1134.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">75% overlap</text>
+<text x="1022.0" y="1126.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">33%</text>
+<text x="1130.0" y="1126.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">1.12</text>
+<text x="1220.0" y="1126.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">1.25</text>
+<text x="1314.0" y="1126.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">0.33</text>
+<rect x="754.0" y="1142.0" width="598.0" height="34" fill="#f8fafc" rx="8"/>
+<text x="760.0" y="1162.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">Flat-top</text>
+<text x="760.0" y="1178.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">50% overlap</text>
+<text x="1022.0" y="1170.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">31%</text>
+<text x="1130.0" y="1170.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">1.01</text>
+<text x="1220.0" y="1170.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">1.01</text>
+<text x="1314.0" y="1170.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">4.22</text>
+<text x="760.0" y="1206.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">Flat-top</text>
+<text x="760.0" y="1222.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">75% overlap</text>
+<text x="1022.0" y="1214.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">22%</text>
+<text x="1130.0" y="1214.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">1.27</text>
+<text x="1220.0" y="1214.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">1.61</text>
+<text x="1314.0" y="1214.0" fill="#111827" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">0.35</text>
+<text x="760.0" y="1296.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="760.0" dy="0" text-anchor="start">Best middle lane: Blackman-Harris at 75% overlap. Worst</tspan><tspan x="760.0" dy="19.0" text-anchor="start">rescue attempt: flat-top at 50% overlap.</tspan></text>
+</svg>
