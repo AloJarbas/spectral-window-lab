@@ -17,6 +17,7 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 - `windowlab/overlap.py` measures both raw and squared overlap profiles, plus the implied synthesis-normalization swing for STFT framing hops
 - `windowlab/reconstruct.py` adds a same-window normalized overlap-add reconstruction path, explicit dual-window helpers, conditioning summaries, and a small coefficient-noise simulation so the framing lane can talk about exactness versus numerical calmness instead of only flatness
 - `windowlab/dual_path.py` studies the whole exact path between the canonical dual and the constant-looking dual instead of pretending the framing tradeoff only lives at two endpoints
+- `windowlab/kaiser_density.py` audits how much of the Kaiser family sweep is actually stable under coarse versus dense FFT sampling instead of pretending every plotted spectrum metric is equally settled
 - `windowlab/recommend.py` turns the repo's existing metrics into a bounded task-selection map instead of a fake one-size-fits-all ranking
 - `windowlab/svg.py` renders clean SVG comparison plots without external plotting libraries
 - `scripts/make_gallery.py` regenerates the figures and metrics CSVs
@@ -25,6 +26,7 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 - `notebooks/reconstruction_conditioning_and_normalized_overlap_add.ipynb` slows down the new exactness-versus-conditioning pass
 - `notebooks/dual_window_synthesis_tradeoffs.ipynb` slows down the new canonical-dual versus constant-looking-dual comparison
 - `notebooks/dual_window_tradeoff_paths.ipynb` slows down the new exact-dual interpolation follow-up and the midpoint tradeoff question
+- `notebooks/kaiser_fft_density_audit.ipynb` slows down the new coarse-versus-dense FFT audit for the Kaiser family
 - `notebooks/window_selection_map.ipynb` slows down the task-selection map and the guardrails behind it
 - `tests/test_windows.py` checks useful ordering facts about the windows, the overlap-add lane, the reconstruction-conditioning pass, the dual-window sidecars, and the task map
 
@@ -64,6 +66,12 @@ Blackman-Harris and Nuttall deserve a place here, but not because they secretly 
 
 This sweep turns Kaiser from a single named checkpoint into a real family. `beta` is the knob: push it up and ENBW rises, the main lobe widens, and sidelobes fall.
 
+### Kaiser FFT-density audit
+
+![Kaiser FFT-density audit](art/window-kaiser-fft-density-audit.png)
+
+This follow-up is the numerical honesty check for the sweep. For higher `beta`, a coarse FFT probe can make Kaiser look cleaner and broader than a denser probe actually supports, even though direct-sum metrics like ENBW and scalloping do not move at all.
+
 ### Overlap-add flatness for common STFT hops
 
 ![Overlap-add flatness](art/window-overlap-add-flatness.png)
@@ -100,7 +108,7 @@ This follow-up is the sharper dual-window question. The old sidecar only compare
 
 This sidecar is the repo's explicit decision card. Instead of pretending one window is "best," it uses guardrails plus the existing metrics to say different things for different jobs: rectangular for very tight equal-strength tone separation, Kaiser `β=8.6` for a compact low-sidelobe compromise, Nuttall for weak-spur hunting, flat-top for isolated-tone amplitude honesty, and Hamming for the repo's bounded quarter-hop STFT lane.
 
-The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, `art/window-overlap-add-metrics.csv`, `art/window-synthesis-normalization-metrics.csv`, `art/window-reconstruction-conditioning.csv`, `art/window-dual-window-comparison.csv`, `art/window-dual-tradeoff-paths.csv`, and `art/window-selection-map.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, the raw overlap-add pass, the synthesis-normalization pass, the reconstruction-conditioning pass, the endpoint dual-window comparison, the new exact-dual path follow-up, and the task map.
+The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, `art/window-kaiser-fft-density-audit.csv`, `art/window-overlap-add-metrics.csv`, `art/window-synthesis-normalization-metrics.csv`, `art/window-reconstruction-conditioning.csv`, `art/window-dual-window-comparison.csv`, `art/window-dual-tradeoff-paths.csv`, and `art/window-selection-map.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, the new FFT-density audit, the raw overlap-add pass, the synthesis-normalization pass, the reconstruction-conditioning pass, the endpoint dual-window comparison, the new exact-dual path follow-up, and the task map.
 
 ## Quick run
 
@@ -120,6 +128,8 @@ It changes what you think you measured.
 This repo is small, but it has a real spine: code, generated artifacts, tests, and now a clearer amplitude-specialist story instead of a pile of unnamed curves.
 
 The new Kaiser sweep matters because it replaces folklore like "Kaiser is kind of like Blackman" with an actual path you can inspect.
+
+The new FFT-density audit matters because it keeps the repo from quietly teaching that every plotted spectrum metric is equally settled. For higher `beta`, the Kaiser window itself does not change, but a coarse FFT probe can still over-credit its sidelobe suppression and overstate its main-lobe width. That is a numerical-measurement lesson, not a window-family lesson, and the repo is stronger for making that split explicit.
 
 The Blackman-Harris / Nuttall sidecar matters for a different reason: it keeps the repo from teaching the lazy idea that every low-sidelobe window is basically the same thing with different branding.
 
@@ -145,13 +155,14 @@ The task-selection sidecar matters for a different reason: it forces the repo to
 - [Dual windows are real, but flatter duals are not free](notes/dual-windows-do-not-make-conditioning-free.md)
 - [Why dual windows were the next honest framing split](notes/dual-window-next-pass.md)
 - [Dual-window tradeoff paths](notes/dual-window-tradeoff-paths.md)
+- [Kaiser sweep FFT-density audit](notes/kaiser-fft-density-audit.md)
 - [A bounded window-selection map for actual tasks](notes/window-selection-map.md)
 
 
 ## Next directions
 
 - test one genuinely different desired-dual family only if it bends the new path instead of just landing somewhere between the same two endpoints
+- repeat the new FFT-density audit on one second deep-sidelobe family only if it changes the read instead of merely replaying the same measurement drift
 - port the metrics core to Julia and Fortran for cross-language comparison once those toolchains are live
-- compare the Kaiser sweep at two FFT lengths or iteration densities only if that reveals something real instead of redrawing the same curve
 
 Jarbas

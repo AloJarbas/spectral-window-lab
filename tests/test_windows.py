@@ -11,6 +11,7 @@ from windowlab.metrics import (
     scalloping_loss_db,
 )
 from windowlab.dual_path import interpolate_dual_windows, study_dual_window_paths
+from windowlab.kaiser_density import study_kaiser_fft_density
 from windowlab.overlap import (
     normalized_synthesis_gain_profile,
     overlap_add_summary,
@@ -172,6 +173,20 @@ class WindowTests(unittest.TestCase):
         self.assertEqual(enbw, sorted(enbw))
         self.assertEqual(main_lobe, sorted(main_lobe))
         self.assertEqual(sidelobes, sorted(sidelobes, reverse=True))
+
+    def test_kaiser_fft_density_audit_shows_large_high_beta_error(self) -> None:
+        study = study_kaiser_fft_density(length=129, coarse_fft=512, fine_fft=4096, betas=(0.0, 4.0, 8.6, 14.0))
+        by_beta = {row.beta: row for row in study.rows}
+        self.assertLess(by_beta[4.0].peak_sidelobe_error_db, 1.0)
+        self.assertGreater(by_beta[8.6].peak_sidelobe_error_db, 4.0)
+        self.assertGreater(by_beta[8.6].main_lobe_width_error_bins, 1.0)
+        self.assertGreater(by_beta[14.0].peak_sidelobe_error_db, by_beta[8.6].peak_sidelobe_error_db)
+
+    def test_kaiser_fft_density_audit_keeps_direct_sum_metrics_fixed(self) -> None:
+        study = study_kaiser_fft_density(length=129, coarse_fft=512, fine_fft=4096, betas=(8.6,))
+        row = study.rows[0]
+        self.assertAlmostEqual(row.enbw_bins, equivalent_noise_bandwidth_bins(build_window("kaiser-8.6", 129)), places=12)
+        self.assertAlmostEqual(row.scalloping_loss_db, abs(scalloping_loss_db(build_window("kaiser-8.6", 129))), places=12)
 
     def test_rectangular_overlap_add_is_exact_for_integer_hops(self) -> None:
         profile = periodic_overlap_add_profile(build_window("rectangular", 128), 64)

@@ -31,6 +31,7 @@ from windowlab.dual_path import (
     write_dual_window_path_csv,
     write_dual_window_path_notebook,
 )
+from windowlab.kaiser_density import render_kaiser_fft_density_report, render_kaiser_fft_density_svg, study_kaiser_fft_density, write_kaiser_fft_density_csv, write_kaiser_fft_density_notebook
 from windowlab.overlap import (
     normalized_overlap_add_profile,
     normalized_squared_overlap_add_profile,
@@ -1022,6 +1023,12 @@ def main() -> int:
         )
         writer.writeheader()
         writer.writerows(kaiser_rows)
+
+    kaiser_density_study = study_kaiser_fft_density()
+    write_svg_asset("window-kaiser-fft-density-audit.svg", render_kaiser_fft_density_svg(kaiser_density_study))
+    (ROOT / "notes" / "kaiser-fft-density-audit.md").write_text(render_kaiser_fft_density_report(kaiser_density_study))
+    write_kaiser_fft_density_notebook(kaiser_density_study, ROOT / "notebooks" / "kaiser_fft_density_audit.ipynb")
+    write_kaiser_fft_density_csv(kaiser_density_study, ART / "window-kaiser-fft-density-audit.csv")
 
     specialist_rows = build_specialist_metrics_rows()
     with (ART / "window-specialist-metrics.csv").open("w", newline="") as handle:

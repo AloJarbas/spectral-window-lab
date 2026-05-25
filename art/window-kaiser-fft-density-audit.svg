@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1260" viewBox="0 0 1520 1260">
+<rect width="100%" height="100%" fill="#fcfcfd"/>
+<text x="760.0" y="42.0" fill="#111827" font-size="30" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">Kaiser sweep needs enough FFT density</text>
+<text x="760.0" y="78.0" fill="#4b5563" font-size="16" font-family="Inter, Arial, sans-serif"><tspan x="760.0" dy="0" text-anchor="middle">This sidecar reruns the same Kaiser family at length 129, but compares a coarse 512-point spectral probe against a denser 4096-point one.</tspan><tspan x="760.0" dy="19.0" text-anchor="middle">ENBW and scalloping stay fixed; the drift lives in the sampled sidelobe and main-lobe measurements.</tspan></text>
+<rect x="72" y="144" width="210" height="28" rx="14" fill="#eff6ff" stroke="#bfdbfe"/>
+<rect x="298" y="144" width="210" height="28" rx="14" fill="#fef2f2" stroke="#fecaca"/>
+<rect x="524" y="144" width="260" height="28" rx="14" fill="#f5f3ff" stroke="#ddd6fe"/>
+<text x="177.0" y="163.0" fill="#2563eb" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="600">blue = coarse FFT (512)</text>
+<text x="403.0" y="163.0" fill="#dc2626" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="600">red = dense FFT (4096)</text>
+<text x="654.0" y="163.0" fill="#7c3aed" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="600">markers = β = 0, 8.6, 14 checkpoints</text>
+<rect x="84.0" y="194.0" width="653.0" height="420.0" fill="#ffffff" stroke="#e5e7eb" rx="18"/>
+<text x="106.0" y="226.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Peak sidelobe level drifts under coarse zero padding</text>
+<text x="106.0" y="252.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="106.0" dy="0" text-anchor="start">The denser probe shows where the coarse spectrum grid</tspan><tspan x="106.0" dy="19.0" text-anchor="start">flatters the higher-beta windows.</tspan></text>
+<text x="148.0" y="296.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">peak sidelobe level (dB)</text>
+<line x1="148.0" y1="560.0" x2="701.0" y2="560.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="565.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">-123.2</text>
+<line x1="148.0" y1="497.5" x2="701.0" y2="497.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="502.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">-93.7</text>
+<line x1="148.0" y1="435.0" x2="701.0" y2="435.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="440.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">-64.2</text>
+<line x1="148.0" y1="372.5" x2="701.0" y2="372.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="377.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">-34.6</text>
+<line x1="148.0" y1="310.0" x2="701.0" y2="310.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="315.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">-5.1</text>
+<line x1="148.0" y1="310.0" x2="148.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="148.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">0</text>
+<line x1="227.0" y1="310.0" x2="227.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="227.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2</text>
+<line x1="306.0" y1="310.0" x2="306.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="306.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">4</text>
+<line x1="385.0" y1="310.0" x2="385.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="385.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">6</text>
+<line x1="464.0" y1="310.0" x2="464.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="464.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">8</text>
+<line x1="543.0" y1="310.0" x2="543.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="543.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">10</text>
+<line x1="622.0" y1="310.0" x2="622.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="622.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">12</text>
+<line x1="701.0" y1="310.0" x2="701.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="701.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">14</text>
+<line x1="148.0" y1="310.0" x2="148.0" y2="560.0" stroke="#334155" stroke-width="2"/>
+<line x1="148.0" y1="560.0" x2="701.0" y2="560.0" stroke="#334155" stroke-width="2"/>
+<polyline fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="148.0,327.8 167.8,328.5 187.5,330.4 207.2,333.8 227.0,338.8 246.8,345.5 266.5,350.0 286.2,356.9 306.0,364.4 325.8,370.3 345.5,379.6 365.2,384.7 385.0,394.8 404.8,399.6 424.5,409.8 444.2,425.9 464.0,424.8 483.8,442.0 487.7,442.9 503.5,440.1 523.2,458.6 543.0,464.8 562.8,471.6 582.5,481.9 602.2,493.0 622.0,499.7 641.8,509.9 661.5,517.2 681.2,526.3 701.0,542.8"/>
+<polyline fill="none" stroke="#dc2626" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="148.0,327.2 167.8,328.0 187.5,330.3 207.2,333.8 227.0,338.4 246.8,343.8 266.5,349.9 286.2,356.4 306.0,363.2 325.8,370.2 345.5,377.5 365.2,384.7 385.0,392.1 404.8,399.6 424.5,407.1 444.2,414.9 464.0,422.8 483.8,430.8 487.7,432.5 503.5,439.2 523.2,447.5 543.0,456.1 562.8,464.6 582.5,473.1 602.2,481.6 622.0,490.1 641.8,498.3 661.5,506.5 681.2,514.8 701.0,523.1"/>
+<circle cx="148.0" cy="327.8" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="148.0" cy="327.2" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="148.0" y="315.2" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=0.0</text>
+<circle cx="487.7" cy="442.9" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="487.7" cy="432.5" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="487.7" y="420.5" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=8.6</text>
+<circle cx="701.0" cy="542.8" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="701.0" cy="523.1" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="701.0" y="511.1" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=14.0</text>
+<text x="424.5" y="606.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">Kaiser beta</text>
+<rect x="783.0" y="194.0" width="653.0" height="420.0" fill="#ffffff" stroke="#e5e7eb" rx="18"/>
+<text x="805.0" y="226.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Main-lobe width drifts under coarse padding</text>
+<text x="805.0" y="252.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="805.0" dy="0" text-anchor="start">The same coarse probe also makes the higher-beta windows</tspan><tspan x="805.0" dy="19.0" text-anchor="start">look wider than the denser read does.</tspan></text>
+<text x="847.0" y="296.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">null-to-null width (DFT bins)</text>
+<line x1="847.0" y1="560.0" x2="1400.0" y2="560.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="565.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">1.3</text>
+<line x1="847.0" y1="497.5" x2="1400.0" y2="497.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="502.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">3.9</text>
+<line x1="847.0" y1="435.0" x2="1400.0" y2="435.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="440.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">6.6</text>
+<line x1="847.0" y1="372.5" x2="1400.0" y2="372.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="377.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">9.2</text>
+<line x1="847.0" y1="310.0" x2="1400.0" y2="310.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="315.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">11.8</text>
+<line x1="847.0" y1="310.0" x2="847.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="847.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">0</text>
+<line x1="926.0" y1="310.0" x2="926.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="926.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2</text>
+<line x1="1005.0" y1="310.0" x2="1005.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1005.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">4</text>
+<line x1="1084.0" y1="310.0" x2="1084.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1084.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">6</text>
+<line x1="1163.0" y1="310.0" x2="1163.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1163.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">8</text>
+<line x1="1242.0" y1="310.0" x2="1242.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1242.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">10</text>
+<line x1="1321.0" y1="310.0" x2="1321.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1321.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">12</text>
+<line x1="1400.0" y1="310.0" x2="1400.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1400.0" y="584.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">14</text>
+<line x1="847.0" y1="310.0" x2="847.0" y2="560.0" stroke="#334155" stroke-width="2"/>
+<line x1="847.0" y1="560.0" x2="1400.0" y2="560.0" stroke="#334155" stroke-width="2"/>
+<polyline fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="847.0,542.8 866.8,542.8 886.5,542.8 906.2,542.8 926.0,530.8 945.8,530.8 965.5,518.8 985.2,518.8 1005.0,506.8 1024.8,506.8 1044.5,494.9 1064.2,494.9 1084.0,482.9 1103.8,482.9 1123.5,470.9 1143.2,435.0 1163.0,458.9 1182.8,423.0 1186.7,423.0 1202.5,447.0 1222.2,411.1 1242.0,411.1 1261.8,423.0 1281.5,399.1 1301.2,387.1 1321.0,387.1 1340.8,375.1 1360.5,387.1 1380.2,363.2 1400.0,327.2"/>
+<polyline fill="none" stroke="#dc2626" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="847.0,542.8 866.8,542.8 886.5,541.3 906.2,538.3 926.0,533.8 945.8,529.3 965.5,524.8 985.2,518.8 1005.0,512.8 1024.8,506.8 1044.5,500.9 1064.2,493.4 1084.0,487.4 1103.8,479.9 1123.5,473.9 1143.2,466.4 1163.0,458.9 1182.8,453.0 1186.7,451.5 1202.5,445.5 1222.2,438.0 1242.0,430.5 1261.8,423.0 1281.5,415.5 1301.2,408.1 1321.0,402.1 1340.8,394.6 1360.5,387.1 1380.2,379.6 1400.0,372.1"/>
+<circle cx="847.0" cy="542.8" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="847.0" cy="542.8" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="847.0" y="530.8" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=0.0</text>
+<circle cx="1186.7" cy="423.0" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="1186.7" cy="451.5" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="1186.7" y="411.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=8.6</text>
+<circle cx="1400.0" cy="327.2" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<circle cx="1400.0" cy="372.1" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<text x="1400.0" y="315.2" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=14.0</text>
+<text x="1123.5" y="606.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">Kaiser beta</text>
+<rect x="84.0" y="648.0" width="653.0" height="420.0" fill="#ffffff" stroke="#e5e7eb" rx="18"/>
+<text x="106.0" y="680.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">How much the sidelobe read is off</text>
+<text x="106.0" y="706.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="106.0" dy="0" text-anchor="start">By β=5.0, the coarse probe is already at least 1 dB off.</tspan></text>
+<text x="148.0" y="750.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">absolute sidelobe error (dB)</text>
+<line x1="148.0" y1="1014.0" x2="701.0" y2="1014.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="1019.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">-0.7</text>
+<line x1="148.0" y1="951.5" x2="701.0" y2="951.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="956.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">1.9</text>
+<line x1="148.0" y1="889.0" x2="701.0" y2="889.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="894.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">4.6</text>
+<line x1="148.0" y1="826.5" x2="701.0" y2="826.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="831.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">7.3</text>
+<line x1="148.0" y1="764.0" x2="701.0" y2="764.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="769.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">10.0</text>
+<line x1="148.0" y1="764.0" x2="148.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="148.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">0</text>
+<line x1="227.0" y1="764.0" x2="227.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="227.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2</text>
+<line x1="306.0" y1="764.0" x2="306.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="306.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">4</text>
+<line x1="385.0" y1="764.0" x2="385.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="385.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">6</text>
+<line x1="464.0" y1="764.0" x2="464.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="464.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">8</text>
+<line x1="543.0" y1="764.0" x2="543.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="543.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">10</text>
+<line x1="622.0" y1="764.0" x2="622.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="622.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">12</text>
+<line x1="701.0" y1="764.0" x2="701.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="701.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">14</text>
+<line x1="148.0" y1="764.0" x2="148.0" y2="1014.0" stroke="#334155" stroke-width="2"/>
+<line x1="148.0" y1="1014.0" x2="701.0" y2="1014.0" stroke="#334155" stroke-width="2"/>
+<polyline fill="none" stroke="#7c3aed" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="148.0,990.5 167.8,991.7 187.5,994.8 207.2,996.8 227.0,992.8 246.8,978.3 266.5,994.9 286.2,990.7 306.0,984.0 325.8,995.6 345.5,973.2 365.2,996.8 385.0,967.4 404.8,996.1 424.5,967.4 444.2,875.9 464.0,975.2 483.8,874.4 487.7,882.4 503.5,986.7 523.2,874.5 543.0,900.6 562.8,920.4 582.5,900.0 602.2,871.7 622.0,891.1 641.8,869.6 661.5,879.2 681.2,870.5 701.0,781.2"/>
+<circle cx="148.0" cy="990.5" r="5.0" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+<text x="148.0" y="978.5" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=0.0</text>
+<circle cx="487.7" cy="882.4" r="5.0" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+<text x="487.7" y="870.4" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=8.6</text>
+<circle cx="701.0" cy="781.2" r="5.0" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+<text x="701.0" y="769.2" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=14.0</text>
+<text x="424.5" y="1060.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">Kaiser beta</text>
+<rect x="783.0" y="648.0" width="653.0" height="420.0" fill="#ffffff" stroke="#e5e7eb" rx="18"/>
+<text x="805.0" y="680.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">How much the width read is off</text>
+<text x="805.0" y="706.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="805.0" dy="0" text-anchor="start">By β=7.5, the coarse probe is already at least half a bin</tspan><tspan x="805.0" dy="19.0" text-anchor="start">too wide.</tspan></text>
+<text x="847.0" y="750.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">absolute width error (bins)</text>
+<line x1="847.0" y1="1014.0" x2="1400.0" y2="1014.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="1019.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">-0.2</text>
+<line x1="847.0" y1="951.5" x2="1400.0" y2="951.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="956.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.4</text>
+<line x1="847.0" y1="889.0" x2="1400.0" y2="889.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="894.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.9</text>
+<line x1="847.0" y1="826.5" x2="1400.0" y2="826.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="831.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">1.5</text>
+<line x1="847.0" y1="764.0" x2="1400.0" y2="764.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="769.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">2.1</text>
+<line x1="847.0" y1="764.0" x2="847.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="847.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">0</text>
+<line x1="926.0" y1="764.0" x2="926.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="926.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2</text>
+<line x1="1005.0" y1="764.0" x2="1005.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1005.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">4</text>
+<line x1="1084.0" y1="764.0" x2="1084.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1084.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">6</text>
+<line x1="1163.0" y1="764.0" x2="1163.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1163.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">8</text>
+<line x1="1242.0" y1="764.0" x2="1242.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1242.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">10</text>
+<line x1="1321.0" y1="764.0" x2="1321.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1321.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">12</text>
+<line x1="1400.0" y1="764.0" x2="1400.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1400.0" y="1038.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">14</text>
+<line x1="847.0" y1="764.0" x2="847.0" y2="1014.0" stroke="#334155" stroke-width="2"/>
+<line x1="847.0" y1="1014.0" x2="1400.0" y2="1014.0" stroke="#334155" stroke-width="2"/>
+<polyline fill="none" stroke="#0f766e" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="847.0,992.2 866.8,992.2 886.5,985.3 906.2,971.5 926.0,978.4 945.8,985.3 965.5,964.7 985.2,992.2 1005.0,964.7 1024.8,992.2 1044.5,964.7 1064.2,985.3 1084.0,971.5 1103.8,978.4 1123.5,978.4 1143.2,847.7 1163.0,992.2 1182.8,854.6 1186.7,861.5 1202.5,985.3 1222.2,868.4 1242.0,902.8 1261.8,992.2 1281.5,916.5 1301.2,895.9 1321.0,923.4 1340.8,902.8 1360.5,992.2 1380.2,916.5 1400.0,785.8"/>
+<circle cx="847.0" cy="992.2" r="5.0" fill="#0f766e" stroke="#ffffff" stroke-width="2"/>
+<text x="847.0" y="980.2" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=0.0</text>
+<circle cx="1186.7" cy="861.5" r="5.0" fill="#0f766e" stroke="#ffffff" stroke-width="2"/>
+<text x="1186.7" y="849.5" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=8.6</text>
+<circle cx="1400.0" cy="785.8" r="5.0" fill="#0f766e" stroke="#ffffff" stroke-width="2"/>
+<text x="1400.0" y="773.8" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">β=14.0</text>
+<text x="1123.5" y="1060.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">Kaiser beta</text>
+<text x="88.0" y="1178.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="88.0" dy="0" text-anchor="start">At β=8.6, the coarse 512-point probe makes the Kaiser window look 4.9 dB cleaner and 1.20 bins wider than the denser 4096-point read. By β=14.0, the coarse read is off by 9.3 dB</tspan><tspan x="88.0" dy="19.0" text-anchor="start">and 1.89 bins. ENBW and scalloping do not move at all across this audit, which is the point: the window did not change, only the sampled spectral probe did.</tspan></text>
+</svg>
