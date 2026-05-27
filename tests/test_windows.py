@@ -29,6 +29,7 @@ from windowlab.reconstruct import (
     reconstruction_condition_summary,
     simulated_relative_noise_gain,
 )
+from windowlab.specialist_density import study_specialist_fft_density
 from windowlab.windows import KAISER_BETA_86, build_window, kaiser
 
 
@@ -187,6 +188,32 @@ class WindowTests(unittest.TestCase):
         row = study.rows[0]
         self.assertAlmostEqual(row.enbw_bins, equivalent_noise_bandwidth_bins(build_window("kaiser-8.6", 129)), places=12)
         self.assertAlmostEqual(row.scalloping_loss_db, abs(scalloping_loss_db(build_window("kaiser-8.6", 129))), places=12)
+
+    def test_specialist_fft_density_audit_separates_blackman_harris_from_nuttall(self) -> None:
+        study = study_specialist_fft_density(length=129, reference_fft=16384, probe_ffts=(512, 2048))
+        by_key = {(row.window, row.fft_size): row for row in study.rows}
+        blackman_harris_512 = by_key[("blackman-harris", 512)]
+        nuttall_512 = by_key[("nuttall", 512)]
+        kaiser_512 = by_key[("kaiser-8.6", 512)]
+        self.assertLess(blackman_harris_512.peak_sidelobe_error_db, 0.02)
+        self.assertLess(blackman_harris_512.main_lobe_width_error_bins, 0.02)
+        self.assertGreater(nuttall_512.peak_sidelobe_error_db, 0.2)
+        self.assertGreater(nuttall_512.main_lobe_width_error_bins, 0.4)
+        self.assertGreater(kaiser_512.peak_sidelobe_error_db, nuttall_512.peak_sidelobe_error_db)
+
+    def test_specialist_fft_density_audit_keeps_direct_sum_metrics_fixed(self) -> None:
+        study = study_specialist_fft_density(length=129, reference_fft=16384, probe_ffts=(512,), windows=("blackman-harris", "nuttall"))
+        by_key = {row.window: row for row in study.rows}
+        self.assertAlmostEqual(
+            by_key["blackman-harris"].enbw_bins,
+            equivalent_noise_bandwidth_bins(build_window("blackman-harris", 129)),
+            places=12,
+        )
+        self.assertAlmostEqual(
+            by_key["nuttall"].scalloping_loss_db,
+            abs(scalloping_loss_db(build_window("nuttall", 129))),
+            places=12,
+        )
 
     def test_rectangular_overlap_add_is_exact_for_integer_hops(self) -> None:
         profile = periodic_overlap_add_profile(build_window("rectangular", 128), 64)

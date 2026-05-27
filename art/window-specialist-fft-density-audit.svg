@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1260" viewBox="0 0 1520 1260">
+<rect width="100%" height="100%" fill="#fcfcfd"/>
+<text x="760.0" y="42.0" fill="#111827" font-size="30" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">FFT-grid sensitivity is not one deep-sidelobe story</text>
+<text x="760.0" y="78.0" fill="#4b5563" font-size="16" font-family="Inter, Arial, sans-serif"><tspan x="760.0" dy="0" text-anchor="middle">This follow-up reruns the FFT-density audit on two deep-sidelobe windows instead of only the Kaiser family. Same length 129, same dense</tspan><tspan x="760.0" dy="19.0" text-anchor="middle">reference (16384 points), same probe ladder (256, 512, 1024, 2048, 4096).</tspan></text>
+<line x1="290.0" y1="152.0" x2="318.0" y2="152.0" stroke="#dc2626" stroke-width="3"/>
+<text x="330.0" y="157.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">Kaiser β=8.6</text>
+<line x1="570.0" y1="152.0" x2="598.0" y2="152.0" stroke="#2563eb" stroke-width="3"/>
+<text x="610.0" y="157.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">Blackman-Harris</text>
+<line x1="850.0" y1="152.0" x2="878.0" y2="152.0" stroke="#7c3aed" stroke-width="3"/>
+<text x="890.0" y="157.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">Nuttall</text>
+<rect x="84.0" y="194.0" width="653.0" height="420.0" fill="#ffffff" stroke="#e5e7eb" rx="18"/>
+<text x="106.0" y="226.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Peak sidelobe error versus FFT size</text>
+<text x="106.0" y="252.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="106.0" dy="0" text-anchor="start">Kaiser drifts hard, Blackman-Harris stays nearly locked, and</tspan><tspan x="106.0" dy="19.0" text-anchor="start">Nuttall lands in the middle.</tspan></text>
+<text x="148.0" y="296.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">absolute sidelobe error (dB)</text>
+<line x1="148.0" y1="560.0" x2="685.0" y2="560.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="565.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.00</text>
+<line x1="148.0" y1="497.5" x2="685.0" y2="497.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="502.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">2.29</text>
+<line x1="148.0" y1="435.0" x2="685.0" y2="435.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="440.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">4.59</text>
+<line x1="148.0" y1="372.5" x2="685.0" y2="372.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="377.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">6.88</text>
+<line x1="148.0" y1="310.0" x2="685.0" y2="310.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="315.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">9.18</text>
+<line x1="148.0" y1="310.0" x2="148.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="148.0" y="584.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">256</text>
+<line x1="282.2" y1="310.0" x2="282.2" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="282.2" y="584.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">512</text>
+<line x1="416.5" y1="310.0" x2="416.5" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="416.5" y="584.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">1024</text>
+<line x1="550.8" y1="310.0" x2="550.8" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="550.8" y="584.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2048</text>
+<line x1="685.0" y1="310.0" x2="685.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="685.0" y="584.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">4096</text>
+<line x1="148.0" y1="310.0" x2="148.0" y2="560.0" stroke="#334155" stroke-width="2"/>
+<line x1="148.0" y1="560.0" x2="685.0" y2="560.0" stroke="#334155" stroke-width="2"/>
+<polyline fill="none" stroke="#dc2626" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="148.0,336.8 282.2,425.7 416.5,553.2 550.8,556.3 685.0,559.8"/>
+<circle cx="282.2" cy="425.7" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="148.0,559.8 282.2,559.8 416.5,559.8 550.8,559.8 685.0,559.8"/>
+<circle cx="282.2" cy="559.8" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#7c3aed" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="148.0,530.6 282.2,550.4 416.5,558.9 550.8,558.9 685.0,560.0"/>
+<circle cx="282.2" cy="550.4" r="5.0" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+<text x="416.5" y="606.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">probe FFT size</text>
+<rect x="783.0" y="194.0" width="653.0" height="420.0" fill="#ffffff" stroke="#e5e7eb" rx="18"/>
+<text x="805.0" y="226.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Main-lobe width error versus FFT size</text>
+<text x="805.0" y="252.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="805.0" dy="0" text-anchor="start">Nuttall is the interesting surprise here: the width read can</tspan><tspan x="805.0" dy="19.0" text-anchor="start">stay wrong after the sidelobe read is already mostly calm.</tspan></text>
+<text x="847.0" y="296.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">absolute width error (bins)</text>
+<line x1="847.0" y1="560.0" x2="1384.0" y2="560.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="565.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.00</text>
+<line x1="847.0" y1="497.5" x2="1384.0" y2="497.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="502.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.61</text>
+<line x1="847.0" y1="435.0" x2="1384.0" y2="435.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="440.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">1.23</text>
+<line x1="847.0" y1="372.5" x2="1384.0" y2="372.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="377.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">1.84</text>
+<line x1="847.0" y1="310.0" x2="1384.0" y2="310.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="315.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">2.45</text>
+<line x1="847.0" y1="310.0" x2="847.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="847.0" y="584.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">256</text>
+<line x1="981.2" y1="310.0" x2="981.2" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="981.2" y="584.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">512</text>
+<line x1="1115.5" y1="310.0" x2="1115.5" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1115.5" y="584.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">1024</text>
+<line x1="1249.8" y1="310.0" x2="1249.8" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1249.8" y="584.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2048</text>
+<line x1="1384.0" y1="310.0" x2="1384.0" y2="560.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1384.0" y="584.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">4096</text>
+<line x1="847.0" y1="310.0" x2="847.0" y2="560.0" stroke="#334155" stroke-width="2"/>
+<line x1="847.0" y1="560.0" x2="1384.0" y2="560.0" stroke="#334155" stroke-width="2"/>
+<polyline fill="none" stroke="#dc2626" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="847.0,336.8 981.2,439.6 1115.5,552.0 1249.8,555.2 1384.0,558.4"/>
+<circle cx="981.2" cy="439.6" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="847.0,558.4 981.2,558.4 1115.5,558.4 1249.8,558.4 1384.0,558.4"/>
+<circle cx="981.2" cy="558.4" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#7c3aed" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="847.0,552.0 981.2,516.6 1115.5,516.6 1249.8,555.2 1384.0,558.4"/>
+<circle cx="981.2" cy="516.6" r="5.0" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+<text x="1115.5" y="606.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">probe FFT size</text>
+<rect x="84.0" y="648.0" width="653.0" height="420.0" fill="#ffffff" stroke="#e5e7eb" rx="18"/>
+<text x="106.0" y="680.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">First-sidelobe peak location miss</text>
+<text x="106.0" y="706.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="106.0" dy="0" text-anchor="start">Blackman-Harris keeps landing almost exactly on the same</tspan><tspan x="106.0" dy="19.0" text-anchor="start">sampled peak. Nuttall and Kaiser do not.</tspan></text>
+<text x="148.0" y="750.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">absolute peak-location miss (bins)</text>
+<line x1="148.0" y1="1014.0" x2="685.0" y2="1014.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="1019.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.00</text>
+<line x1="148.0" y1="951.5" x2="685.0" y2="951.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="956.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.40</text>
+<line x1="148.0" y1="889.0" x2="685.0" y2="889.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="894.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.80</text>
+<line x1="148.0" y1="826.5" x2="685.0" y2="826.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="831.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">1.20</text>
+<line x1="148.0" y1="764.0" x2="685.0" y2="764.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="138.0" y="769.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">1.60</text>
+<line x1="148.0" y1="764.0" x2="148.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="148.0" y="1038.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">256</text>
+<line x1="282.2" y1="764.0" x2="282.2" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="282.2" y="1038.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">512</text>
+<line x1="416.5" y1="764.0" x2="416.5" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="416.5" y="1038.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">1024</text>
+<line x1="550.8" y1="764.0" x2="550.8" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="550.8" y="1038.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2048</text>
+<line x1="685.0" y1="764.0" x2="685.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="685.0" y="1038.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">4096</text>
+<line x1="148.0" y1="764.0" x2="148.0" y2="1014.0" stroke="#334155" stroke-width="2"/>
+<line x1="148.0" y1="1014.0" x2="685.0" y2="1014.0" stroke="#334155" stroke-width="2"/>
+<polyline fill="none" stroke="#dc2626" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="148.0,790.8 282.2,909.2 416.5,1007.8 550.8,1010.3 685.0,1012.8"/>
+<circle cx="282.2" cy="909.2" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="148.0,1012.8 282.2,1012.8 416.5,1012.8 550.8,1012.8 685.0,1012.8"/>
+<circle cx="282.2" cy="1012.8" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#7c3aed" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="148.0,989.3 282.2,999.2 416.5,1009.1 550.8,1009.1 685.0,1014.0"/>
+<circle cx="282.2" cy="999.2" r="5.0" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+<text x="416.5" y="1060.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">probe FFT size</text>
+<rect x="783.0" y="648.0" width="653.0" height="420.0" fill="#ffffff" stroke="#e5e7eb" rx="18"/>
+<text x="805.0" y="680.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">First-null location miss</text>
+<text x="805.0" y="706.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="805.0" dy="0" text-anchor="start">This is why the Nuttall width read stays soft longer: at 512</tspan><tspan x="805.0" dy="19.0" text-anchor="start">and 1024 the first local minimum can jump to the wrong</tspan><tspan x="805.0" dy="19.0" text-anchor="start">sampled null.</tspan></text>
+<text x="847.0" y="750.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">absolute first-null miss (bins)</text>
+<line x1="847.0" y1="1014.0" x2="1384.0" y2="1014.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="1019.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.00</text>
+<line x1="847.0" y1="951.5" x2="1384.0" y2="951.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="956.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.31</text>
+<line x1="847.0" y1="889.0" x2="1384.0" y2="889.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="894.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.61</text>
+<line x1="847.0" y1="826.5" x2="1384.0" y2="826.5" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="831.5" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.92</text>
+<line x1="847.0" y1="764.0" x2="1384.0" y2="764.0" stroke="#e5e7eb" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="837.0" y="769.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">1.23</text>
+<line x1="847.0" y1="764.0" x2="847.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="847.0" y="1038.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">256</text>
+<line x1="981.2" y1="764.0" x2="981.2" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="981.2" y="1038.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">512</text>
+<line x1="1115.5" y1="764.0" x2="1115.5" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1115.5" y="1038.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">1024</text>
+<line x1="1249.8" y1="764.0" x2="1249.8" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1249.8" y="1038.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2048</text>
+<line x1="1384.0" y1="764.0" x2="1384.0" y2="1014.0" stroke="#eef1f5" stroke-width="1" stroke-dasharray="4 6"/>
+<text x="1384.0" y="1038.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">4096</text>
+<line x1="847.0" y1="764.0" x2="847.0" y2="1014.0" stroke="#334155" stroke-width="2"/>
+<line x1="847.0" y1="1014.0" x2="1384.0" y2="1014.0" stroke="#334155" stroke-width="2"/>
+<polyline fill="none" stroke="#dc2626" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="847.0,790.8 981.2,893.6 1115.5,1006.0 1249.8,1009.2 1384.0,1012.4"/>
+<circle cx="981.2" cy="893.6" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="847.0,1012.4 981.2,1012.4 1115.5,1012.4 1249.8,1012.4 1384.0,1012.4"/>
+<circle cx="981.2" cy="1012.4" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#7c3aed" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" points="847.0,1006.0 981.2,970.6 1115.5,970.6 1249.8,1009.2 1384.0,1012.4"/>
+<circle cx="981.2" cy="970.6" r="5.0" fill="#7c3aed" stroke="#ffffff" stroke-width="2"/>
+<text x="1115.5" y="1060.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">probe FFT size</text>
+<text x="88.0" y="1178.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="88.0" dy="0" text-anchor="start">At 512 points, Kaiser β=8.6 is still the harsh anchor: 4.93 dB of sidelobe error and 1.18 bins of width error. Blackman-Harris is effectively grid-stable at the same probe (0.01 dB,</tspan><tspan x="88.0" dy="19.0" text-anchor="start">0.02 bins) because both its first null and first sidelobe peak land almost exactly on sampled locations. Nuttall changes the family read instead of replaying Kaiser: its sidelobe</tspan><tspan x="88.0" dy="19.0" text-anchor="start">error at 512 is only 0.35 dB, but its first-null miss is 0.21 bins, so the width read stays much softer than the sidelobe read.</tspan></text>
+</svg>

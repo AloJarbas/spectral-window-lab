@@ -49,6 +49,7 @@ from windowlab.reconstruct import (
     simulated_relative_noise_gain,
 )
 from windowlab.recommend import TASK_PROFILES, build_task_metrics, build_task_rankings
+from windowlab.specialist_density import render_specialist_fft_density_report, render_specialist_fft_density_svg, study_specialist_fft_density, write_specialist_fft_density_csv, write_specialist_fft_density_notebook
 from windowlab.svg import PALETTE, chart_svg, stacked_line_panels_svg, task_heatmap_svg, triptych_bar_svg
 from windowlab.windows import WINDOW_BUILDERS, kaiser
 
@@ -1029,6 +1030,12 @@ def main() -> int:
     (ROOT / "notes" / "kaiser-fft-density-audit.md").write_text(render_kaiser_fft_density_report(kaiser_density_study))
     write_kaiser_fft_density_notebook(kaiser_density_study, ROOT / "notebooks" / "kaiser_fft_density_audit.ipynb")
     write_kaiser_fft_density_csv(kaiser_density_study, ART / "window-kaiser-fft-density-audit.csv")
+
+    specialist_density_study = study_specialist_fft_density()
+    write_svg_asset("window-specialist-fft-density-audit.svg", render_specialist_fft_density_svg(specialist_density_study))
+    (ROOT / "notes" / "deep-sidelobe-fft-density-family-audit.md").write_text(render_specialist_fft_density_report(specialist_density_study))
+    write_specialist_fft_density_notebook(specialist_density_study, ROOT / "notebooks" / "specialist_fft_density_audit.ipynb")
+    write_specialist_fft_density_csv(specialist_density_study, ART / "window-specialist-fft-density-audit.csv")
 
     specialist_rows = build_specialist_metrics_rows()
     with (ART / "window-specialist-metrics.csv").open("w", newline="") as handle:
