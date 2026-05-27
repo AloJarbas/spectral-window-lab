@@ -12,6 +12,7 @@ from windowlab.metrics import (
 )
 from windowlab.dual_path import interpolate_dual_windows, study_dual_window_paths
 from windowlab.kaiser_density import study_kaiser_fft_density
+from windowlab.nuttall_variants import study_nuttall_variant_split
 from windowlab.overlap import (
     normalized_synthesis_gain_profile,
     overlap_add_summary,
@@ -214,6 +215,27 @@ class WindowTests(unittest.TestCase):
             abs(scalloping_loss_db(build_window("nuttall", 129))),
             places=12,
         )
+
+    def test_nuttall_alias_matches_min4_bh_variant(self) -> None:
+        alias = build_window("nuttall", 129)
+        explicit = build_window("nuttall-min4-bh", 129)
+        continuous = build_window("nuttall-continuous", 129)
+        for expected, actual in zip(alias, explicit):
+            self.assertAlmostEqual(expected, actual, places=12)
+        self.assertGreater(sum(abs(a - b) for a, b in zip(alias, continuous)), 1e-4)
+
+    def test_nuttall_variant_split_separates_first_sidelobe_from_far_tail(self) -> None:
+        study = study_nuttall_variant_split(length=129, fft_size=16384)
+        rows = {row.window: row for row in study.rows}
+        blackman_harris = rows["blackman-harris"]
+        min4 = rows["nuttall-min4-bh"]
+        continuous = rows["nuttall-continuous"]
+
+        self.assertLess(min4.peak_sidelobe_db, blackman_harris.peak_sidelobe_db)
+        self.assertLess(min4.peak_sidelobe_db, continuous.peak_sidelobe_db)
+        self.assertLess(min4.max_6_12_db, continuous.max_6_12_db)
+        self.assertLess(continuous.max_24_48_db, min4.max_24_48_db - 10.0)
+        self.assertLess(continuous.max_24_48_db, blackman_harris.max_24_48_db)
 
     def test_rectangular_overlap_add_is_exact_for_integer_hops(self) -> None:
         profile = periodic_overlap_add_profile(build_window("rectangular", 128), 64)

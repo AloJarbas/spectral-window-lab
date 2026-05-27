@@ -32,6 +32,7 @@ from windowlab.dual_path import (
     write_dual_window_path_notebook,
 )
 from windowlab.kaiser_density import render_kaiser_fft_density_report, render_kaiser_fft_density_svg, study_kaiser_fft_density, write_kaiser_fft_density_csv, write_kaiser_fft_density_notebook
+from windowlab.nuttall_variants import render_nuttall_variant_report, render_nuttall_variant_svg, study_nuttall_variant_split, write_nuttall_variant_csv, write_nuttall_variant_notebook
 from windowlab.overlap import (
     normalized_overlap_add_profile,
     normalized_squared_overlap_add_profile,
@@ -1036,6 +1037,12 @@ def main() -> int:
     (ROOT / "notes" / "deep-sidelobe-fft-density-family-audit.md").write_text(render_specialist_fft_density_report(specialist_density_study))
     write_specialist_fft_density_notebook(specialist_density_study, ROOT / "notebooks" / "specialist_fft_density_audit.ipynb")
     write_specialist_fft_density_csv(specialist_density_study, ART / "window-specialist-fft-density-audit.csv")
+
+    nuttall_variant_study = study_nuttall_variant_split()
+    write_svg_asset("window-nuttall-variant-split.svg", render_nuttall_variant_svg(nuttall_variant_study))
+    (ROOT / "notes" / "nuttall-variant-split.md").write_text(render_nuttall_variant_report(nuttall_variant_study))
+    write_nuttall_variant_notebook(nuttall_variant_study, ROOT / "notebooks" / "nuttall_variant_split.ipynb")
+    write_nuttall_variant_csv(nuttall_variant_study, ART / "window-nuttall-variant-split.csv")
 
     specialist_rows = build_specialist_metrics_rows()
     with (ART / "window-specialist-metrics.csv").open("w", newline="") as handle:

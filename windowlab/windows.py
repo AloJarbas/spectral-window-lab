@@ -14,11 +14,17 @@ BLACKMAN_HARRIS_COEFFICIENTS = (
     0.14128,
     0.01168,
 )
-NUTTALL_COEFFICIENTS = (
+NUTTALL_MIN4_BH_COEFFICIENTS = (
     0.3635819,
     0.4891775,
     0.1365995,
     0.0106411,
+)
+NUTTALL_CONTINUOUS_COEFFICIENTS = (
+    0.355768,
+    0.487396,
+    0.144232,
+    0.012604,
 )
 FLATTOP_COEFFICIENTS = (
     0.21557895,
@@ -81,8 +87,16 @@ def blackman_harris(length: int) -> list[float]:
     return _generalized_cosine(length, BLACKMAN_HARRIS_COEFFICIENTS)
 
 
+def nuttall_min4_bh(length: int) -> list[float]:
+    return _generalized_cosine(length, NUTTALL_MIN4_BH_COEFFICIENTS)
+
+
+def nuttall_continuous(length: int) -> list[float]:
+    return _generalized_cosine(length, NUTTALL_CONTINUOUS_COEFFICIENTS)
+
+
 def nuttall(length: int) -> list[float]:
-    return _generalized_cosine(length, NUTTALL_COEFFICIENTS)
+    return nuttall_min4_bh(length)
 
 
 def flattop(length: int) -> list[float]:
@@ -113,6 +127,8 @@ WINDOW_BUILDERS: dict[str, WindowBuilder] = {
     "kaiser-8.6": kaiser_86,
     "blackman-harris": blackman_harris,
     "nuttall": nuttall,
+    "nuttall-min4-bh": nuttall_min4_bh,
+    "nuttall-continuous": nuttall_continuous,
     "flattop": flattop,
 }
 

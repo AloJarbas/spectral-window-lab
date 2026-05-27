@@ -12,13 +12,14 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 
 ## Included
 
-- `windowlab/windows.py` builds rectangular, Hann, Hamming, Blackman, Kaiser (`beta=8.6`), Blackman-Harris, Nuttall, and flat-top windows
+- `windowlab/windows.py` builds rectangular, Hann, Hamming, Blackman, Kaiser (`beta=8.6`), Blackman-Harris, the repo's current Nuttall alias, an explicit minimum-4-term-BH Nuttall, a continuous-derivative Nuttall, and flat-top windows
 - `windowlab/metrics.py` computes coherent gain, ENBW, main-lobe width, and peak sidelobe level
 - `windowlab/overlap.py` measures both raw and squared overlap profiles, plus the implied synthesis-normalization swing for STFT framing hops
 - `windowlab/reconstruct.py` adds a same-window normalized overlap-add reconstruction path, explicit dual-window helpers, conditioning summaries, and a small coefficient-noise simulation so the framing lane can talk about exactness versus numerical calmness instead of only flatness
 - `windowlab/dual_path.py` studies the whole exact path between the canonical dual and the constant-looking dual instead of pretending the framing tradeoff only lives at two endpoints
 - `windowlab/kaiser_density.py` audits how much of the Kaiser family sweep is actually stable under coarse versus dense FFT sampling instead of pretending every plotted spectrum metric is equally settled
 - `windowlab/specialist_density.py` checks whether the same FFT-density warning survives contact with Blackman-Harris and Nuttall instead of assuming one deep-sidelobe family story
+- `windowlab/nuttall_variants.py` splits the repo's old bare `nuttall` label into two explicit coefficient families so first-sidelobe depth and far-out decay stop getting flattened into one ranking
 - `windowlab/recommend.py` turns the repo's existing metrics into a bounded task-selection map instead of a fake one-size-fits-all ranking
 - `windowlab/svg.py` renders clean SVG comparison plots without external plotting libraries
 - `scripts/make_gallery.py` regenerates the figures and metrics CSVs
@@ -29,6 +30,7 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 - `notebooks/dual_window_tradeoff_paths.ipynb` slows down the new exact-dual interpolation follow-up and the midpoint tradeoff question
 - `notebooks/kaiser_fft_density_audit.ipynb` slows down the new coarse-versus-dense FFT audit for the Kaiser family
 - `notebooks/specialist_fft_density_audit.ipynb` slows down the new family-specific FFT-density follow-up for Blackman-Harris and Nuttall
+- `notebooks/nuttall_variant_split.ipynb` slows down the new first-sidelobe-versus-far-tail split inside the Nuttall family
 - `notebooks/window_selection_map.ipynb` slows down the task-selection map and the guardrails behind it
 - `tests/test_windows.py` checks useful ordering facts about the windows, the overlap-add lane, the reconstruction-conditioning pass, the dual-window sidecars, and the task map
 
@@ -80,6 +82,12 @@ This follow-up is the numerical honesty check for the sweep. For higher `beta`, 
 
 This next pass keeps the FFT-density warning from turning into a fake universal rule. Blackman-Harris is almost grid-stable on the same probe ladder. Nuttall is not. It lands in the useful middle: the sidelobe read settles fairly quickly, but the width read stays soft longer because the first sampled null can jump to the wrong place.
 
+### Nuttall variant split
+
+![Nuttall variant split](art/window-nuttall-variant-split.png)
+
+This follow-up closes the naming loophole inside that same branch. The repo's current `nuttall` really is strong on first-sidelobe depth, but the continuous-derivative variant wins the far tail, so the word `Nuttall` is not precise enough once the lesson shifts from peak sidelobes to weak spurs farther away.
+
 ### Overlap-add flatness for common STFT hops
 
 ![Overlap-add flatness](art/window-overlap-add-flatness.png)
@@ -116,7 +124,7 @@ This follow-up is the sharper dual-window question. The old sidecar only compare
 
 This sidecar is the repo's explicit decision card. Instead of pretending one window is "best," it uses guardrails plus the existing metrics to say different things for different jobs: rectangular for very tight equal-strength tone separation, Kaiser `β=8.6` for a compact low-sidelobe compromise, Nuttall for weak-spur hunting, flat-top for isolated-tone amplitude honesty, and Hamming for the repo's bounded quarter-hop STFT lane.
 
-The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, `art/window-kaiser-fft-density-audit.csv`, `art/window-specialist-fft-density-audit.csv`, `art/window-overlap-add-metrics.csv`, `art/window-synthesis-normalization-metrics.csv`, `art/window-reconstruction-conditioning.csv`, `art/window-dual-window-comparison.csv`, `art/window-dual-tradeoff-paths.csv`, and `art/window-selection-map.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, the two FFT-density audits, the raw overlap-add pass, the synthesis-normalization pass, the reconstruction-conditioning pass, the endpoint dual-window comparison, the new exact-dual path follow-up, and the task map.
+The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, `art/window-kaiser-fft-density-audit.csv`, `art/window-specialist-fft-density-audit.csv`, `art/window-nuttall-variant-split.csv`, `art/window-overlap-add-metrics.csv`, `art/window-synthesis-normalization-metrics.csv`, `art/window-reconstruction-conditioning.csv`, `art/window-dual-window-comparison.csv`, `art/window-dual-tradeoff-paths.csv`, and `art/window-selection-map.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, the two FFT-density audits, the new Nuttall-variant split, the raw overlap-add pass, the synthesis-normalization pass, the reconstruction-conditioning pass, the endpoint dual-window comparison, the new exact-dual path follow-up, and the task map.
 
 ## Quick run
 
@@ -143,6 +151,10 @@ The new deep-sidelobe family audit matters because it keeps that warning from ha
 
 The Blackman-Harris / Nuttall sidecar matters for a different reason: it keeps the repo from teaching the lazy idea that every low-sidelobe window is basically the same thing with different branding.
 
+The new Nuttall naming note matters because it closes a quieter loophole inside that same branch: `Nuttall` is not one universally fixed coefficient set in practice. The current repo implementation matches the minimum-4-term-Blackman-Harris variant, which really does push the first sidelobe very low. Some practical tables use a different continuous-derivative variant under the same label, and that one tells a different far-out-decay story.
+
+The new Nuttall-variant sidecar matters because it turns that warning into an actual measured split instead of leaving it as a footnote. The minimum-4-term-BH branch still wins the first-sidelobe contest. The continuous variant wins the deeper far tail. That makes the repo's next weak-spur or sidelobe-falloff lesson much safer because the coefficient family is finally explicit.
+
 The overlap-add sidecar matters because it brings STFT framing into the same conversation. Flat overlap is not the same thing as low leakage, and flat-top turns out to be expensive on both fronts.
 
 The new synthesis-normalization sidecar matters because it closes the loophole inside the framing story: a raw overlap sum can look almost flat while the squared overlap still implies a real weighted overlap-add gain swing. That keeps the repo from quietly teaching that one overlap metric is enough.
@@ -159,6 +171,8 @@ The task-selection sidecar matters for a different reason: it forces the repo to
 
 - [Flat-top is the amplitude specialist, not the default](notes/flattop-amplitude-specialist.md)
 - [Blackman-Harris and Nuttall are deep-sidelobe specialists, not amplitude specialists](notes/blackman-harris-and-nuttall-are-deep-sidelobe-specialists.md)
+- [Nuttall is not one window](notes/nuttall-is-not-one-window.md)
+- [Nuttall variants split one low-sidelobe story into two different jobs](notes/nuttall-variant-split.md)
 - [Overlap-add flatness is a second window bill](notes/overlap-add-and-stft-framing.md)
 - [Raw overlap flatness is not the synthesis rule](notes/raw-overlap-is-not-the-synthesis-rule.md)
 - [Exact overlap-add reconstruction is not the conditioning story](notes/exact-overlap-add-is-not-the-conditioning-story.md)
@@ -172,6 +186,7 @@ The task-selection sidecar matters for a different reason: it forces the repo to
 
 ## Next directions
 
+- turn the new Nuttall variant split into one bounded weak-spur-at-distance task card only if it changes the existing recommendation map instead of just rewording it
 - test one genuinely different desired-dual family only if it bends the new path instead of just landing somewhere between the same two endpoints
 - test one amplitude-specialist FFT-density family only if it changes the now sharper family-specific read instead of replaying Kaiser or Nuttall
 - port the metrics core to Julia and Fortran for cross-language comparison once those toolchains are live

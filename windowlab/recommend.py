@@ -13,6 +13,18 @@ from windowlab.overlap import squared_overlap_add_summary
 from windowlab.windows import WINDOW_BUILDERS
 
 
+DEFAULT_TASK_WINDOWS = (
+    'rectangular',
+    'hann',
+    'hamming',
+    'blackman',
+    'kaiser-8.6',
+    'blackman-harris',
+    'nuttall',
+    'flattop',
+)
+
+
 @dataclass(frozen=True)
 class WindowTaskMetrics:
     name: str
@@ -116,7 +128,7 @@ def build_task_metrics(
     synthesis_hop: int = 32,
     names: Iterable[str] | None = None,
 ) -> list[WindowTaskMetrics]:
-    selected_names = list(names) if names is not None else list(WINDOW_BUILDERS)
+    selected_names = list(names) if names is not None else list(DEFAULT_TASK_WINDOWS)
     rows: list[WindowTaskMetrics] = []
     for name in selected_names:
         builder = WINDOW_BUILDERS[name]
