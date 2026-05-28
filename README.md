@@ -122,7 +122,7 @@ This follow-up is the sharper dual-window question. The old sidecar only compare
 
 ![Task-based window selection map](art/window-selection-map.png)
 
-This sidecar is the repo's explicit decision card. Instead of pretending one window is "best," it uses guardrails plus the existing metrics to say different things for different jobs: rectangular for very tight equal-strength tone separation, Kaiser `β=8.6` for a compact low-sidelobe compromise, Nuttall for weak-spur hunting, flat-top for isolated-tone amplitude honesty, and Hamming for the repo's bounded quarter-hop STFT lane.
+This sidecar is the repo's explicit decision card. Instead of pretending one window is "best," it uses guardrails plus the existing metrics to say different things for different jobs: rectangular for very tight equal-strength tone separation, Kaiser `β=8.6` for a compact low-sidelobe compromise, Nuttall min-4-term BH for weak spurs close to a strong line, Nuttall continuous for weaker farther-out spurs, flat-top for isolated-tone amplitude honesty, and Hamming for the repo's bounded quarter-hop STFT lane.
 
 The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, `art/window-kaiser-fft-density-audit.csv`, `art/window-specialist-fft-density-audit.csv`, `art/window-nuttall-variant-split.csv`, `art/window-overlap-add-metrics.csv`, `art/window-synthesis-normalization-metrics.csv`, `art/window-reconstruction-conditioning.csv`, `art/window-dual-window-comparison.csv`, `art/window-dual-tradeoff-paths.csv`, and `art/window-selection-map.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, the two FFT-density audits, the new Nuttall-variant split, the raw overlap-add pass, the synthesis-normalization pass, the reconstruction-conditioning pass, the endpoint dual-window comparison, the new exact-dual path follow-up, and the task map.
 
@@ -165,7 +165,7 @@ The new dual-window sidecar matters because it closes the next loophole honestly
 
 The new dual-path follow-up matters because it turns that binary comparison into a real design question. Once both endpoints are exact, the honest question is whether there is a usable middle lane between them. For Hann and especially Blackman-Harris at quarter-hop, there is. For flat-top at half-overlap, there really is not.
 
-The task-selection sidecar matters for a different reason: it forces the repo to stop hiding behind generic advice like "Hann is a good default." The winners are different because the tasks are different, and now the repo has one compact artifact that makes that visible.
+The task-selection sidecar matters for a different reason: it forces the repo to stop hiding behind generic advice like "Hann is a good default." The winners are different because the tasks are different, and now the repo has one compact artifact that makes that visible. The new far-spur follow-up makes one sharper point inside the old deep-sidelobe lane too: the first-sidelobe winner and the far-tail winner are not always the same window.
 
 ## Notes
 
@@ -186,7 +186,6 @@ The task-selection sidecar matters for a different reason: it forces the repo to
 
 ## Next directions
 
-- turn the new Nuttall variant split into one bounded weak-spur-at-distance task card only if it changes the existing recommendation map instead of just rewording it
 - test one genuinely different desired-dual family only if it bends the new path instead of just landing somewhere between the same two endpoints
 - test one amplitude-specialist FFT-density family only if it changes the now sharper family-specific read instead of replaying Kaiser or Nuttall
 - port the metrics core to Julia and Fortran for cross-language comparison once those toolchains are live

@@ -93,7 +93,7 @@ SYNTHESIS_FIGURE_WINDOWS = (
     ("blackman-harris", "Blackman-Harris"),
     ("flattop", "Flat-top"),
 )
-TASK_WINDOW_ORDER = ("rectangular", "hann", "hamming", "blackman", "kaiser-8.6", "blackman-harris", "nuttall", "flattop")
+TASK_WINDOW_ORDER = ("rectangular", "hann", "hamming", "blackman", "kaiser-8.6", "blackman-harris", "nuttall-min4-bh", "nuttall-continuous", "flattop")
 RECONSTRUCTION_ORDER = (
     "hann",
     "hamming",
@@ -595,6 +595,8 @@ def build_window_selection_rows() -> list[dict[str, float | int | str | bool]]:
                     "main_lobe_width_bins": ranking.main_lobe_width_bins,
                     "scalloping_loss_db": ranking.scalloping_loss_db,
                     "synthesis_gain_span_db": ranking.synthesis_gain_span_db,
+                    "far_tail_max_db": ranking.far_tail_max_db,
+                    "far_tail_suppression_db": ranking.far_tail_suppression_db,
                 }
             )
     return rows
@@ -620,8 +622,8 @@ def build_window_selection_svg(rows: list[dict[str, float | int | str | bool]]) 
         list(TASK_WINDOW_ORDER),
         tasks,
         rankings_by_task,
-        width=1600,
-        height=1600,
+        width=1820,
+        height=1720,
     )
 
 
@@ -1114,6 +1116,8 @@ def main() -> int:
                 "main_lobe_width_bins",
                 "scalloping_loss_db",
                 "synthesis_gain_span_db",
+                "far_tail_max_db",
+                "far_tail_suppression_db",
             ],
         )
         writer.writeheader()

@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import Iterable
 
 from windowlab.metrics import (
+    coherent_gain_normalized_response,
     equivalent_noise_bandwidth_bins,
     null_to_null_main_lobe_width,
     peak_sidelobe_level_db,
@@ -20,7 +21,8 @@ DEFAULT_TASK_WINDOWS = (
     'blackman',
     'kaiser-8.6',
     'blackman-harris',
-    'nuttall',
+    'nuttall-min4-bh',
+    'nuttall-continuous',
     'flattop',
 )
 
@@ -34,6 +36,8 @@ class WindowTaskMetrics:
     main_lobe_width_bins: float
     scalloping_loss_db: float
     synthesis_gain_span_db: float
+    far_tail_max_db: float
+    far_tail_suppression_db: float
 
 
 @dataclass(frozen=True)
@@ -61,6 +65,8 @@ class TaskRanking:
     main_lobe_width_bins: float
     scalloping_loss_db: float
     synthesis_gain_span_db: float
+    far_tail_max_db: float
+    far_tail_suppression_db: float
 
 
 LOWER_IS_BETTER = {
@@ -69,7 +75,7 @@ LOWER_IS_BETTER = {
     'scalloping_loss_db',
     'synthesis_gain_span_db',
 }
-HIGHER_IS_BETTER = {'sidelobe_suppression_db'}
+HIGHER_IS_BETTER = {'sidelobe_suppression_db', 'far_tail_suppression_db'}
 
 TASK_PROFILES: tuple[TaskProfile, ...] = (
     TaskProfile(
@@ -94,10 +100,19 @@ TASK_PROFILES: tuple[TaskProfile, ...] = (
         key='weak_near_strong',
         title='Hunt a weak spur beside a strong line',
         short_label='weak beside strong',
-        summary='This lane mostly pays for sidelobe suppression, but still caps width so the answer does not become absurdly wide.',
+        summary='This lane pays for first-sidelobe suppression, but still caps width so the answer does not become absurdly wide.',
         weights={'sidelobe_suppression_db': 0.65, 'main_lobe_width_bins': 0.20, 'enbw_bins': 0.15},
         max_values={'main_lobe_width_bins': 8.5, 'enbw_bins': 2.2},
         min_values={},
+    ),
+    TaskProfile(
+        key='weak_far_strong',
+        title='Hunt a weak farther-out spur under a strong line',
+        short_label='farther-out spur',
+        summary='This follow-up lane shifts the scoring focus from the first sidelobe to the 24–48 bin tail, so the continuous Nuttall variant finally gets its own honest job.',
+        weights={'far_tail_suppression_db': 0.72, 'sidelobe_suppression_db': 0.10, 'main_lobe_width_bins': 0.10, 'enbw_bins': 0.08},
+        max_values={'main_lobe_width_bins': 8.5, 'enbw_bins': 2.2},
+        min_values={'far_tail_suppression_db': 95.0},
     ),
     TaskProfile(
         key='amplitude',
@@ -118,6 +133,17 @@ TASK_PROFILES: tuple[TaskProfile, ...] = (
         min_values={'sidelobe_suppression_db': 30.0},
     ),
 )
+
+
+def _max_band_response_db(window: list[float], start: float, stop: float, *, steps: int = 880) -> float:
+    import math
+
+    values = []
+    for idx in range(steps + 1):
+        offset = start + (stop - start) * idx / steps
+        response = coherent_gain_normalized_response(window, offset)
+        values.append(20.0 * math.log10(max(response, 1e-12)))
+    return max(values)
 
 
 def build_task_metrics(
@@ -144,6 +170,8 @@ def build_task_metrics(
                 main_lobe_width_bins=length * null_to_null_main_lobe_width(frequency_window, fft_size=fft_size),
                 scalloping_loss_db=abs(scalloping_loss_db(frequency_window)),
                 synthesis_gain_span_db=squared_overlap_add_summary(overlap_window, synthesis_hop).ripple_db,
+                far_tail_max_db=_max_band_response_db(frequency_window, 24.0, 48.0),
+                far_tail_suppression_db=abs(_max_band_response_db(frequency_window, 24.0, 48.0)),
             )
         )
     return rows
@@ -205,6 +233,8 @@ def rank_windows_for_task(rows: Iterable[WindowTaskMetrics], task: TaskProfile) 
                 main_lobe_width_bins=row.main_lobe_width_bins,
                 scalloping_loss_db=row.scalloping_loss_db,
                 synthesis_gain_span_db=row.synthesis_gain_span_db,
+                far_tail_max_db=row.far_tail_max_db,
+                far_tail_suppression_db=row.far_tail_suppression_db,
             )
         )
     return rankings

@@ -284,12 +284,19 @@ class WindowTests(unittest.TestCase):
         best = next(ranking for ranking in rankings if ranking.eligible)
         self.assertEqual(best.window, "kaiser-8.6")
 
-    def test_task_map_picks_nuttall_for_weak_spur_next_to_strong_line(self) -> None:
+    def test_task_map_picks_explicit_min4_nuttall_for_weak_spur_next_to_strong_line(self) -> None:
         rows = build_task_metrics()
         task = next(task for task in TASK_PROFILES if task.key == "weak_near_strong")
         rankings = rank_windows_for_task(rows, task)
         best = next(ranking for ranking in rankings if ranking.eligible)
-        self.assertEqual(best.window, "nuttall")
+        self.assertEqual(best.window, "nuttall-min4-bh")
+
+    def test_task_map_picks_continuous_nuttall_for_farther_out_weak_spur(self) -> None:
+        rows = build_task_metrics()
+        task = next(task for task in TASK_PROFILES if task.key == "weak_far_strong")
+        rankings = rank_windows_for_task(rows, task)
+        best = next(ranking for ranking in rankings if ranking.eligible)
+        self.assertEqual(best.window, "nuttall-continuous")
 
     def test_task_map_picks_flattop_for_isolated_tone_amplitude(self) -> None:
         rows = build_task_metrics()

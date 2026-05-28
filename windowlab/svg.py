@@ -11,7 +11,22 @@ PALETTE = {
     "kaiser-8.6": "#9467bd",
     "blackman-harris": "#0f766e",
     "nuttall": "#b45309",
+    "nuttall-min4-bh": "#b45309",
+    "nuttall-continuous": "#7c3aed",
     "flattop": "#8b5cf6",
+}
+
+WINDOW_LABELS = {
+    "rectangular": "Rectangular",
+    "hann": "Hann",
+    "hamming": "Hamming",
+    "blackman": "Blackman",
+    "kaiser-8.6": "Kaiser β=8.6",
+    "blackman-harris": "Blackman-Harris",
+    "nuttall": "Nuttall",
+    "nuttall-min4-bh": "Nuttall min-4-term BH",
+    "nuttall-continuous": "Nuttall continuous",
+    "flattop": "Flat-top",
 }
 
 
@@ -31,6 +46,10 @@ def _circle(x: float, y: float, radius: float, *, fill: str, stroke: str = "none
 
 def _text(x: float, y: float, text: str, *, size: int = 16, anchor: str = "start", fill: str = "#222", weight: str = "normal") -> str:
     return f'<text x="{x:.1f}" y="{y:.1f}" fill="{fill}" font-size="{size}" font-family="Inter, Arial, sans-serif" text-anchor="{anchor}" font-weight="{weight}">{escape(text)}</text>'
+
+
+def _window_label(name: str) -> str:
+    return WINDOW_LABELS.get(name, name)
 
 
 def _estimate_text_width(text: str, size: int) -> float:
@@ -518,7 +537,7 @@ def task_heatmap_svg(
         y = top + row_idx * cell_height
         if row_idx:
             parts.append(_line(left, y, left + grid_width, y, stroke="#e5e7eb", width=1))
-        parts.append(_text(left - 16, y + cell_height / 2 + 6, window, size=16, anchor="end", fill="#111827", weight="700" if window in {"rectangular", "kaiser-8.6", "nuttall", "flattop", "hamming"} else "normal"))
+        parts.append(_text(left - 16, y + cell_height / 2 + 6, _window_label(window), size=16, anchor="end", fill="#111827", weight="700" if window in {"rectangular", "kaiser-8.6", "nuttall", "nuttall-min4-bh", "nuttall-continuous", "flattop", "hamming"} else "normal"))
 
     for column_idx, task in enumerate(tasks):
         x = left + column_idx * cell_width
@@ -572,7 +591,7 @@ def task_heatmap_svg(
         )
         parts.append(f'<rect x="{x:.1f}" y="{winners_top:.1f}" width="{card_width:.1f}" height="148" fill="#ffffff" stroke="#dbe2ea" rx="14"/>')
         parts.append(_text(x + 16, winners_top + 24, task["short_label"], size=12, fill="#6b7280", weight="700"))
-        parts.append(_text(x + 16, winners_top + 48, str(winner["window"]), size=18, fill="#111827", weight="700"))
+        parts.append(_text(x + 16, winners_top + 48, _window_label(str(winner["window"])), size=18, fill="#111827", weight="700"))
         parts.append(summary_block)
 
     footer_block, _ = _text_block(

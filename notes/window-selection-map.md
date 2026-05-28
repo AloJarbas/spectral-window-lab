@@ -38,7 +38,7 @@ So each task column does two things in order:
 
 That is the whole trick that keeps the map from collapsing back into a vague window zoo.
 
-## 3. The five task lanes
+## 3. The six task lanes
 
 ### A. Separate very close equal-strength tones
 
@@ -66,14 +66,23 @@ Why it wins here:
 
 ### C. Hunt a weak spur beside a strong line
 
-Winner: **Nuttall**
+Winner: **Nuttall min-4-term BH**
 
-This is the deep-sidelobe lane.
-Once the task really is "show me the small thing next to the loud thing," the window that pushes far-out leakage lower deserves to surface.
+This is the deep-sidelobe lane, but specifically the **first-sidelobe** lane.
+Once the task really is "show me the small thing next to the loud thing," the variant that crushes the first sidelobe hardest deserves to surface.
 
-Nuttall edges out Blackman-Harris here because the sidelobe win is slightly stronger while the width and ENBW cost stay in the same rough class.
+That is the quieter benefit of the earlier Nuttall split. The old map said "Nuttall" and stopped there. The sharper map can now say which one: the repo's existing minimum-4-term-BH implementation still edges out Blackman-Harris and the continuous variant when the weak spur sits close enough that the first sidelobe still dominates the bill.
 
-### D. Measure isolated-tone amplitude honestly
+### D. Hunt a weak farther-out spur under a strong line
+
+Winner: **Nuttall continuous**
+
+This is the new column, and it earns its place because it changes the answer.
+The first-sidelobe winner is not the far-tail winner.
+
+Once the weak spur moves farther out, the scoring focus should move with it. In the repo's bounded `24–48` bin tail band, the continuous variant finally gets the job its coefficients deserve: it gives back a little first-sidelobe depth, then pulls away lower in the deeper tail than the minimum-4-term-BH branch.
+
+### E. Measure isolated-tone amplitude honestly
 
 Winner: **flat-top**
 
@@ -83,7 +92,7 @@ This is the one task where the repo should say the quiet part out loud:
 
 If between-bin amplitude honesty dominates the task, flat-top should stop apologizing for its ENBW and main-lobe width and just win the column.
 
-### E. Quarter-hop STFT with calmer reconstruction
+### F. Quarter-hop STFT with calmer reconstruction
 
 Winner: **Hamming**
 
@@ -99,6 +108,7 @@ The strongest lesson is not which window won which column.
 It is that the winners are different **for good reasons**:
 
 - resolution-first picks do not look like amplitude-first picks,
+- near-spur picks do not look like farther-out weak-spur picks,
 - deep-sidelobe picks are not compact defaults,
 - STFT framing calm is not the same thing as spectrum-reading honesty,
 - flat-top should only win when you explicitly mean amplitude honesty.
@@ -128,9 +138,9 @@ This sidecar adds:
 
 ## Best next move
 
-If this repo gets one more pass, the strongest continuation is probably **one bounded reconstruction note**:
+If this repo gets one more pass, the strongest continuation is probably **one bounded amplitude-specialist FFT-density check**:
 
-- not just which windows keep the overlap bill calm,
-- but when an analysis/synthesis pair with the same window stays numerically well-behaved after actual overlap-add normalization.
+- not a replay of the Kaiser or Nuttall audits,
+- but one honest look at whether the flat-top amplitude lane hides its own coarse-grid reading trap.
 
-That would keep the new task map tied to one more concrete downstream use instead of letting it drift back into an abstract ranking card.
+That would keep the task map honest on the amplitude side instead of only deepening the weak-spur branch.
