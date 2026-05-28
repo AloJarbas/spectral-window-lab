@@ -10,6 +10,7 @@ from windowlab.metrics import (
     peak_sidelobe_level_db,
     scalloping_loss_db,
 )
+from windowlab.amplitude_density import study_amplitude_fft_density
 from windowlab.dual_path import interpolate_dual_windows, study_dual_window_paths
 from windowlab.kaiser_density import study_kaiser_fft_density
 from windowlab.nuttall_variants import study_nuttall_variant_split
@@ -215,6 +216,26 @@ class WindowTests(unittest.TestCase):
             abs(scalloping_loss_db(build_window("nuttall", 129))),
             places=12,
         )
+
+    def test_amplitude_fft_density_audit_shows_flat_top_peak_read_is_already_honest(self) -> None:
+        study = study_amplitude_fft_density(length=129, probe_ffts=(256, 512), highlight_fft=256)
+        by_key = {(row.window, row.fft_size): row for row in study.rows}
+        blackman_256 = by_key[("blackman", 256)]
+        blackman_harris_256 = by_key[("blackman-harris", 256)]
+        flattop_256 = by_key[("flattop", 256)]
+        flattop_512 = by_key[("flattop", 512)]
+
+        self.assertGreater(blackman_256.worst_underread_db, 0.25)
+        self.assertGreater(blackman_harris_256.worst_underread_db, 0.20)
+        self.assertLess(flattop_256.worst_underread_db, 1e-9)
+        self.assertLess(flattop_256.worst_overread_db, 0.003)
+        self.assertLess(flattop_512.worst_overread_db, flattop_256.worst_overread_db)
+
+    def test_amplitude_fft_density_audit_keeps_window_metrics_fixed(self) -> None:
+        study = study_amplitude_fft_density(length=129, probe_ffts=(256,), windows=("flattop",), highlight_fft=256)
+        row = study.rows[0]
+        self.assertAlmostEqual(row.enbw_bins, equivalent_noise_bandwidth_bins(build_window("flattop", 129)), places=12)
+        self.assertAlmostEqual(row.scalloping_loss_db, abs(scalloping_loss_db(build_window("flattop", 129))), places=12)
 
     def test_nuttall_alias_matches_min4_bh_variant(self) -> None:
         alias = build_window("nuttall", 129)

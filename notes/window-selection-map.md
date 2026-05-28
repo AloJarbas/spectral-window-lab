@@ -138,9 +138,12 @@ This sidecar adds:
 
 ## Best next move
 
-If this repo gets one more pass, the strongest continuation is probably **one bounded amplitude-specialist FFT-density check**:
+That amplitude-specialist FFT-density check is now done, and the bounded result is cleaner than the suspicion:
 
-- not a replay of the Kaiser or Nuttall audits,
-- but one honest look at whether the flat-top amplitude lane hides its own coarse-grid reading trap.
+- flat-top is already very hard to fool on the sampled-peak read,
+- Blackman and Blackman-Harris are not,
+- so the real flat-top warning stays width and ENBW, not a hidden coarse-grid amplitude penalty.
+
+If this repo gets one more pass, the strongest continuation is now probably **one peak-interpolation follow-up only if it changes the practical amplitude story**.
 
 That would keep the task map honest on the amplitude side instead of only deepening the weak-spur branch.

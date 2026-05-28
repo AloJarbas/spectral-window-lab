@@ -24,6 +24,7 @@ from windowlab.metrics import (
     positive_frequency_spectrum,
     scalloping_loss_db,
 )
+from windowlab.amplitude_density import render_amplitude_fft_density_report, render_amplitude_fft_density_svg, study_amplitude_fft_density, write_amplitude_fft_density_csv, write_amplitude_fft_density_notebook
 from windowlab.dual_path import (
     render_dual_window_path_report,
     render_dual_window_path_svg,
@@ -1039,6 +1040,12 @@ def main() -> int:
     (ROOT / "notes" / "deep-sidelobe-fft-density-family-audit.md").write_text(render_specialist_fft_density_report(specialist_density_study))
     write_specialist_fft_density_notebook(specialist_density_study, ROOT / "notebooks" / "specialist_fft_density_audit.ipynb")
     write_specialist_fft_density_csv(specialist_density_study, ART / "window-specialist-fft-density-audit.csv")
+
+    amplitude_density_study = study_amplitude_fft_density()
+    write_svg_asset("window-amplitude-fft-density-audit.svg", render_amplitude_fft_density_svg(amplitude_density_study))
+    (ROOT / "notes" / "flat-top-does-not-hide-a-coarse-peak-read-trap.md").write_text(render_amplitude_fft_density_report(amplitude_density_study))
+    write_amplitude_fft_density_notebook(amplitude_density_study, ROOT / "notebooks" / "amplitude_fft_density_audit.ipynb")
+    write_amplitude_fft_density_csv(amplitude_density_study, ART / "window-amplitude-fft-density-audit.csv")
 
     nuttall_variant_study = study_nuttall_variant_split()
     write_svg_asset("window-nuttall-variant-split.svg", render_nuttall_variant_svg(nuttall_variant_study))
