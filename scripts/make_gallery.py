@@ -35,6 +35,7 @@ from windowlab.dual_path import (
 from windowlab.kaiser_density import render_kaiser_fft_density_report, render_kaiser_fft_density_svg, study_kaiser_fft_density, write_kaiser_fft_density_csv, write_kaiser_fft_density_notebook
 from windowlab.nuttall_variants import render_nuttall_variant_report, render_nuttall_variant_svg, study_nuttall_variant_split, write_nuttall_variant_csv, write_nuttall_variant_notebook
 from windowlab.peak_interpolation import render_peak_interpolation_report, render_peak_interpolation_svg, study_peak_interpolation, write_peak_interpolation_csv, write_peak_interpolation_notebook
+from windowlab.power_peak_interpolation import render_power_peak_interpolation_report, render_power_peak_interpolation_svg, reproduce_reference_power_scales, study_power_peak_interpolation, write_power_peak_interpolation_csv, write_power_peak_interpolation_notebook
 from windowlab.overlap import (
     normalized_overlap_add_profile,
     normalized_squared_overlap_add_profile,
@@ -1053,6 +1054,13 @@ def main() -> int:
     (ROOT / "notes" / "three-point-log-peak-interpolation-opens-a-compact-amplitude-lane.md").write_text(render_peak_interpolation_report(peak_interpolation_study))
     write_peak_interpolation_notebook(peak_interpolation_study, ROOT / "notebooks" / "peak_interpolation_amplitude_audit.ipynb")
     write_peak_interpolation_csv(peak_interpolation_study, ART / "window-peak-interpolation-audit.csv")
+
+    power_peak_interpolation_study = study_power_peak_interpolation()
+    power_scale_reproduction = reproduce_reference_power_scales()
+    write_svg_asset("window-power-peak-interpolation-audit.svg", render_power_peak_interpolation_svg(power_peak_interpolation_study, power_scale_reproduction))
+    (ROOT / "notes" / "power-scaled-peak-interpolation-tightens-the-compact-amplitude-lane.md").write_text(render_power_peak_interpolation_report(power_peak_interpolation_study, power_scale_reproduction))
+    write_power_peak_interpolation_notebook(power_peak_interpolation_study, ROOT / "notebooks" / "power_peak_interpolation_audit.ipynb")
+    write_power_peak_interpolation_csv(power_peak_interpolation_study, ART / "window-power-peak-interpolation-audit.csv")
 
     nuttall_variant_study = study_nuttall_variant_split()
     write_svg_asset("window-nuttall-variant-split.svg", render_nuttall_variant_svg(nuttall_variant_study))

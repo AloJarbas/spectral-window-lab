@@ -15,6 +15,7 @@ from windowlab.dual_path import interpolate_dual_windows, study_dual_window_path
 from windowlab.kaiser_density import study_kaiser_fft_density
 from windowlab.nuttall_variants import study_nuttall_variant_split
 from windowlab.peak_interpolation import study_peak_interpolation
+from windowlab.power_peak_interpolation import reproduce_reference_power_scales, study_power_peak_interpolation
 from windowlab.overlap import (
     normalized_synthesis_gain_profile,
     overlap_add_summary,
@@ -257,6 +258,32 @@ class WindowTests(unittest.TestCase):
         self.assertLess(flattop_sampled.worst_abs_bias_db, 0.003)
         self.assertGreater(flattop_log.worst_abs_bias_db, flattop_sampled.worst_abs_bias_db)
         self.assertLess(blackman_harris_log.enbw_bins, flattop_sampled.enbw_bins)
+
+    def test_power_scaled_interpolation_tightens_compact_windows_without_helping_flattop(self) -> None:
+        study = study_power_peak_interpolation(length=129, probe_ffts=(256,), highlight_fft=256)
+        by_window = {row.window: row for row in study.rows}
+        blackman = by_window["blackman"]
+        blackman_harris = by_window["blackman-harris"]
+        flattop = by_window["flattop"]
+
+        self.assertLess(blackman.power_worst_abs_bias_db, blackman.log_worst_abs_bias_db)
+        self.assertLess(blackman_harris.power_worst_abs_bias_db, blackman_harris.log_worst_abs_bias_db)
+        self.assertLess(blackman.power_worst_abs_bias_db, 1e-4)
+        self.assertLess(blackman_harris.power_worst_abs_bias_db, 5e-5)
+        self.assertGreater(blackman.power_opt_p, 0.12)
+        self.assertLess(blackman.power_opt_p, 0.13)
+        self.assertGreater(blackman_harris.power_opt_p, 0.08)
+        self.assertLess(blackman_harris.power_opt_p, 0.09)
+        self.assertGreater(flattop.power_opt_p, 0.99)
+        self.assertGreater(flattop.power_worst_abs_bias_db, flattop.sampled_worst_abs_bias_db)
+
+    def test_power_scaled_interpolation_reproduces_reference_window_scales(self) -> None:
+        reproduction = reproduce_reference_power_scales()
+        by_window = {row.window: row for row in reproduction.rows}
+        self.assertAlmostEqual(by_window["blackman"].fitted_p, 0.131, places=3)
+        self.assertAlmostEqual(by_window["blackman-harris"].fitted_p, 0.0855, places=4)
+        self.assertLess(by_window["blackman"].fitted_worst_abs_bias_db, 0.001)
+        self.assertLess(by_window["blackman-harris"].fitted_worst_abs_bias_db, 0.001)
 
     def test_peak_interpolation_keeps_window_metrics_fixed(self) -> None:
         study = study_peak_interpolation(length=129, probe_ffts=(256,), windows=("blackman-harris",), estimators=("parabolic-log",), highlight_fft=256)
