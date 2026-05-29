@@ -34,6 +34,7 @@ from windowlab.dual_path import (
 )
 from windowlab.kaiser_density import render_kaiser_fft_density_report, render_kaiser_fft_density_svg, study_kaiser_fft_density, write_kaiser_fft_density_csv, write_kaiser_fft_density_notebook
 from windowlab.nuttall_variants import render_nuttall_variant_report, render_nuttall_variant_svg, study_nuttall_variant_split, write_nuttall_variant_csv, write_nuttall_variant_notebook
+from windowlab.peak_interpolation import render_peak_interpolation_report, render_peak_interpolation_svg, study_peak_interpolation, write_peak_interpolation_csv, write_peak_interpolation_notebook
 from windowlab.overlap import (
     normalized_overlap_add_profile,
     normalized_squared_overlap_add_profile,
@@ -1046,6 +1047,12 @@ def main() -> int:
     (ROOT / "notes" / "flat-top-does-not-hide-a-coarse-peak-read-trap.md").write_text(render_amplitude_fft_density_report(amplitude_density_study))
     write_amplitude_fft_density_notebook(amplitude_density_study, ROOT / "notebooks" / "amplitude_fft_density_audit.ipynb")
     write_amplitude_fft_density_csv(amplitude_density_study, ART / "window-amplitude-fft-density-audit.csv")
+
+    peak_interpolation_study = study_peak_interpolation()
+    write_svg_asset("window-peak-interpolation-audit.svg", render_peak_interpolation_svg(peak_interpolation_study))
+    (ROOT / "notes" / "three-point-log-peak-interpolation-opens-a-compact-amplitude-lane.md").write_text(render_peak_interpolation_report(peak_interpolation_study))
+    write_peak_interpolation_notebook(peak_interpolation_study, ROOT / "notebooks" / "peak_interpolation_amplitude_audit.ipynb")
+    write_peak_interpolation_csv(peak_interpolation_study, ART / "window-peak-interpolation-audit.csv")
 
     nuttall_variant_study = study_nuttall_variant_split()
     write_svg_asset("window-nuttall-variant-split.svg", render_nuttall_variant_svg(nuttall_variant_study))

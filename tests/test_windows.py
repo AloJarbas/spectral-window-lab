@@ -14,6 +14,7 @@ from windowlab.amplitude_density import study_amplitude_fft_density
 from windowlab.dual_path import interpolate_dual_windows, study_dual_window_paths
 from windowlab.kaiser_density import study_kaiser_fft_density
 from windowlab.nuttall_variants import study_nuttall_variant_split
+from windowlab.peak_interpolation import study_peak_interpolation
 from windowlab.overlap import (
     normalized_synthesis_gain_profile,
     overlap_add_summary,
@@ -236,6 +237,32 @@ class WindowTests(unittest.TestCase):
         row = study.rows[0]
         self.assertAlmostEqual(row.enbw_bins, equivalent_noise_bandwidth_bins(build_window("flattop", 129)), places=12)
         self.assertAlmostEqual(row.scalloping_loss_db, abs(scalloping_loss_db(build_window("flattop", 129))), places=12)
+
+    def test_peak_interpolation_opens_compact_amplitude_lane(self) -> None:
+        study = study_peak_interpolation(length=129, probe_ffts=(256, 512), highlight_fft=256)
+        by_key = {(row.window, row.estimator, row.fft_size): row for row in study.rows}
+        blackman_sampled = by_key[("blackman", "sampled", 256)]
+        blackman_linear = by_key[("blackman", "parabolic-linear", 256)]
+        blackman_log = by_key[("blackman", "parabolic-log", 256)]
+        blackman_harris_sampled = by_key[("blackman-harris", "sampled", 256)]
+        blackman_harris_log = by_key[("blackman-harris", "parabolic-log", 256)]
+        flattop_sampled = by_key[("flattop", "sampled", 256)]
+        flattop_log = by_key[("flattop", "parabolic-log", 256)]
+
+        self.assertGreater(blackman_sampled.worst_abs_bias_db, 0.25)
+        self.assertLess(blackman_linear.worst_abs_bias_db, 0.04)
+        self.assertLess(blackman_log.worst_abs_bias_db, 0.006)
+        self.assertGreater(blackman_harris_sampled.worst_abs_bias_db, 0.20)
+        self.assertLess(blackman_harris_log.worst_abs_bias_db, 0.0025)
+        self.assertLess(flattop_sampled.worst_abs_bias_db, 0.003)
+        self.assertGreater(flattop_log.worst_abs_bias_db, flattop_sampled.worst_abs_bias_db)
+        self.assertLess(blackman_harris_log.enbw_bins, flattop_sampled.enbw_bins)
+
+    def test_peak_interpolation_keeps_window_metrics_fixed(self) -> None:
+        study = study_peak_interpolation(length=129, probe_ffts=(256,), windows=("blackman-harris",), estimators=("parabolic-log",), highlight_fft=256)
+        row = study.rows[0]
+        self.assertAlmostEqual(row.enbw_bins, equivalent_noise_bandwidth_bins(build_window("blackman-harris", 129)), places=12)
+        self.assertAlmostEqual(row.scalloping_loss_db, abs(scalloping_loss_db(build_window("blackman-harris", 129))), places=12)
 
     def test_nuttall_alias_matches_min4_bh_variant(self) -> None:
         alias = build_window("nuttall", 129)

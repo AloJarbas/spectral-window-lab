@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1620" height="1340" viewBox="0 0 1620 1340">
+<rect width="100%" height="100%" fill="#fcfcfd"/>
+<text x="810.0" y="42.0" fill="#111827" font-size="30" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">Three-point log interpolation opens a compact amplitude lane</text>
+<text x="810.0" y="78.0" fill="#4b5563" font-size="15" font-family="Inter, Arial, sans-serif"><tspan x="810.0" dy="0" text-anchor="middle">The earlier audit asked whether flat-top hides a coarse sampled-peak trap. This follow-up asks the next practical</tspan><tspan x="810.0" dy="19.0" text-anchor="middle">question: if you allow one tiny local estimator around the peak, does the amplitude story change? For length 129, the</tspan><tspan x="810.0" dy="19.0" text-anchor="middle">answer is yes.</tspan></text>
+<line x1="284.0" y1="154.0" x2="312.0" y2="154.0" stroke="#dc2626" stroke-width="3.2"/>
+<text x="324.0" y="159.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">sampled peak</text>
+<line x1="634.0" y1="154.0" x2="662.0" y2="154.0" stroke="#2563eb" stroke-width="3.2"/>
+<text x="674.0" y="159.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">3-point parabola on magnitude</text>
+<line x1="984.0" y1="154.0" x2="1012.0" y2="154.0" stroke="#059669" stroke-width="3.2"/>
+<text x="1024.0" y="159.0" fill="#111827" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">3-point parabola on log magnitude</text>
+<rect x="76.0" y="194.0" width="717.0" height="456.0" rx="18.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.0"/>
+<text x="98.0" y="226.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Blackman</text>
+<text x="98.0" y="252.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="98.0" dy="0" text-anchor="start">Raw sampled peaks leave a real quarter-dB hole here. A log</tspan><tspan x="98.0" dy="19.0" text-anchor="start">parabola collapses it into a few thousandths of a dB.</tspan></text>
+<text x="140.0" y="318.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">worst absolute amplitude bias (dB)</text>
+<line x1="140.0" y1="592.0" x2="741.0" y2="592.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="130.0" y="597.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.000</text>
+<line x1="140.0" y1="528.0" x2="741.0" y2="528.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="130.0" y="533.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.078</text>
+<line x1="140.0" y1="464.0" x2="741.0" y2="464.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="130.0" y="469.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.156</text>
+<line x1="140.0" y1="400.0" x2="741.0" y2="400.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="130.0" y="405.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.233</text>
+<line x1="140.0" y1="336.0" x2="741.0" y2="336.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="130.0" y="341.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.311</text>
+<line x1="140.0" y1="336.0" x2="140.0" y2="592.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="140.0" y="616.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">256</text>
+<line x1="290.2" y1="336.0" x2="290.2" y2="592.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="290.2" y="616.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">512</text>
+<line x1="440.5" y1="336.0" x2="440.5" y2="592.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="440.5" y="616.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">1024</text>
+<line x1="590.8" y1="336.0" x2="590.8" y2="592.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="590.8" y="616.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2048</text>
+<line x1="741.0" y1="336.0" x2="741.0" y2="592.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="741.0" y="616.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">4096</text>
+<line x1="140.0" y1="336.0" x2="140.0" y2="592.0" stroke="#334155" stroke-width="2.0"/>
+<line x1="140.0" y1="592.0" x2="741.0" y2="592.0" stroke="#334155" stroke-width="2.0"/>
+<polyline fill="none" stroke="#dc2626" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" points="140.0,367.4 290.2,535.9 440.5,578.0 590.8,588.5 741.0,591.1"/>
+<circle cx="140.0" cy="367.4" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#2563eb" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" points="140.0,566.4 290.2,590.3 440.5,591.9 590.8,592.0 741.0,592.0"/>
+<circle cx="140.0" cy="566.4" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#059669" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" points="140.0,587.9 290.2,591.8 440.5,592.0 590.8,592.0 741.0,592.0"/>
+<circle cx="140.0" cy="587.9" r="5.0" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="440.5" y="638.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">probe FFT size</text>
+<rect x="827.0" y="194.0" width="717.0" height="456.0" rx="18.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.0"/>
+<text x="849.0" y="226.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Blackman-Harris</text>
+<text x="849.0" y="252.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="849.0" dy="0" text-anchor="start">This is the sharper compact option. The log fit nearly erases</tspan><tspan x="849.0" dy="19.0" text-anchor="start">the old amplitude gap while ENBW stays far below flat-top.</tspan></text>
+<text x="891.0" y="318.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">worst absolute amplitude bias (dB)</text>
+<line x1="891.0" y1="592.0" x2="1492.0" y2="592.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="881.0" y="597.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.000</text>
+<line x1="891.0" y1="528.0" x2="1492.0" y2="528.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="881.0" y="533.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.059</text>
+<line x1="891.0" y1="464.0" x2="1492.0" y2="464.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="881.0" y="469.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.117</text>
+<line x1="891.0" y1="400.0" x2="1492.0" y2="400.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="881.0" y="405.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.176</text>
+<line x1="891.0" y1="336.0" x2="1492.0" y2="336.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="881.0" y="341.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.235</text>
+<line x1="891.0" y1="336.0" x2="891.0" y2="592.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="891.0" y="616.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">256</text>
+<line x1="1041.2" y1="336.0" x2="1041.2" y2="592.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="1041.2" y="616.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">512</text>
+<line x1="1191.5" y1="336.0" x2="1191.5" y2="592.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="1191.5" y="616.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">1024</text>
+<line x1="1341.8" y1="336.0" x2="1341.8" y2="592.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="1341.8" y="616.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2048</text>
+<line x1="1492.0" y1="336.0" x2="1492.0" y2="592.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="1492.0" y="616.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">4096</text>
+<line x1="891.0" y1="336.0" x2="891.0" y2="592.0" stroke="#334155" stroke-width="2.0"/>
+<line x1="891.0" y1="592.0" x2="1492.0" y2="592.0" stroke="#334155" stroke-width="2.0"/>
+<polyline fill="none" stroke="#dc2626" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" points="891.0,367.4 1041.2,535.9 1191.5,578.0 1341.8,588.5 1492.0,591.1"/>
+<circle cx="891.0" cy="367.4" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#2563eb" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" points="891.0,571.5 1041.2,590.7 1191.5,591.9 1341.8,592.0 1492.0,592.0"/>
+<circle cx="891.0" cy="571.5" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#059669" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" points="891.0,590.0 1041.2,591.9 1191.5,592.0 1341.8,592.0 1492.0,592.0"/>
+<circle cx="891.0" cy="590.0" r="5.0" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="1191.5" y="638.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">probe FFT size</text>
+<rect x="76.0" y="684.0" width="717.0" height="456.0" rx="18.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.0"/>
+<text x="98.0" y="716.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">Flat-top</text>
+<text x="98.0" y="742.0" fill="#4b5563" font-size="14" font-family="Inter, Arial, sans-serif"><tspan x="98.0" dy="0" text-anchor="start">Flat-top already wins with no extra work. Interpolation is not</tspan><tspan x="98.0" dy="19.0" text-anchor="start">its advantage; the raw sampled peak was honest from the start.</tspan></text>
+<text x="140.0" y="808.0" fill="#6b7280" font-size="13" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="600">worst absolute amplitude bias (dB)</text>
+<line x1="140.0" y1="1082.0" x2="741.0" y2="1082.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="130.0" y="1087.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.000</text>
+<line x1="140.0" y1="1018.0" x2="741.0" y2="1018.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="130.0" y="1023.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.004</text>
+<line x1="140.0" y1="954.0" x2="741.0" y2="954.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="130.0" y="959.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.008</text>
+<line x1="140.0" y1="890.0" x2="741.0" y2="890.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="130.0" y="895.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.011</text>
+<line x1="140.0" y1="826.0" x2="741.0" y2="826.0" stroke="#e5e7eb" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="130.0" y="831.0" fill="#6b7280" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">0.015</text>
+<line x1="140.0" y1="826.0" x2="140.0" y2="1082.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="140.0" y="1106.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="400">256</text>
+<line x1="290.2" y1="826.0" x2="290.2" y2="1082.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="290.2" y="1106.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">512</text>
+<line x1="440.5" y1="826.0" x2="440.5" y2="1082.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="440.5" y="1106.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">1024</text>
+<line x1="590.8" y1="826.0" x2="590.8" y2="1082.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="590.8" y="1106.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">2048</text>
+<line x1="741.0" y1="826.0" x2="741.0" y2="1082.0" stroke="#eef1f5" stroke-width="1.0" stroke-dasharray="4 6"/>
+<text x="741.0" y="1106.0" fill="#6b7280" font-size="11" font-family="Inter, Arial, sans-serif" text-anchor="end" font-weight="400">4096</text>
+<line x1="140.0" y1="826.0" x2="140.0" y2="1082.0" stroke="#334155" stroke-width="2.0"/>
+<line x1="140.0" y1="1082.0" x2="741.0" y2="1082.0" stroke="#334155" stroke-width="2.0"/>
+<polyline fill="none" stroke="#dc2626" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" points="140.0,1043.4 290.2,1067.2 440.5,1078.0 590.8,1081.0 741.0,1081.7"/>
+<circle cx="140.0" cy="1043.4" r="5.0" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#2563eb" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" points="140.0,858.5 290.2,1066.8 440.5,1081.0 590.8,1081.9 741.0,1082.0"/>
+<circle cx="140.0" cy="858.5" r="5.0" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+<polyline fill="none" stroke="#059669" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" points="140.0,857.4 290.2,1066.8 440.5,1081.0 590.8,1081.9 741.0,1082.0"/>
+<circle cx="140.0" cy="857.4" r="5.0" fill="#059669" stroke="#ffffff" stroke-width="2"/>
+<text x="440.5" y="1128.0" fill="#374151" font-size="14" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="400">probe FFT size</text>
+<rect x="827.0" y="684.0" width="717.0" height="456.0" rx="18.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.0"/>
+<text x="849.0" y="716.0" fill="#111827" font-size="20" font-family="Inter, Arial, sans-serif" text-anchor="start" font-weight="700">256-point snapshot</text>
+<text x="849.0" y="742.0" fill="#4b5563" font-size="13" font-family="Inter, Arial, sans-serif"><tspan x="849.0" dy="0" text-anchor="start">At the coarsest probe in this audit, the amplitude lane splits</tspan><tspan x="849.0" dy="19.0" text-anchor="start">in two. Flat-top still wins the no-extra-processing read. But a</tspan><tspan x="849.0" dy="19.0" text-anchor="start">three-point log parabola gives Blackman and especially Blackman-</tspan><tspan x="849.0" dy="19.0" text-anchor="start">Harris a compact alternative.</tspan></text>
+<rect x="847.0" y="816.0" width="146.0" height="58.0" rx="10.0" fill="#13223a" stroke="#cbd5e1" stroke-width="0.8"/>
+<text x="920.0" y="851.0" fill="#f8fafc" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">window</text>
+<rect x="993.0" y="816.0" width="78.0" height="58.0" rx="10.0" fill="#13223a" stroke="#cbd5e1" stroke-width="0.8"/>
+<text x="1032.0" y="851.0" fill="#f8fafc" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">ENBW</text>
+<rect x="1071.0" y="816.0" width="106.0" height="58.0" rx="10.0" fill="#13223a" stroke="#cbd5e1" stroke-width="0.8"/>
+<text x="1124.0" y="851.0" fill="#f8fafc" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">sampled</text>
+<rect x="1177.0" y="816.0" width="106.0" height="58.0" rx="10.0" fill="#13223a" stroke="#cbd5e1" stroke-width="0.8"/>
+<text x="1230.0" y="851.0" fill="#f8fafc" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">linear</text>
+<rect x="1283.0" y="816.0" width="106.0" height="58.0" rx="10.0" fill="#13223a" stroke="#cbd5e1" stroke-width="0.8"/>
+<text x="1336.0" y="851.0" fill="#f8fafc" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">log</text>
+<rect x="847.0" y="874.0" width="146.0" height="58.0" rx="10.0" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="920.0" y="909.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="500">Blackman</text>
+<rect x="993.0" y="874.0" width="78.0" height="58.0" rx="10.0" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="1032.0" y="909.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="500">1.740</text>
+<rect x="1071.0" y="874.0" width="106.0" height="58.0" rx="10.0" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="1124.0" y="909.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="500">0.2731</text>
+<rect x="1177.0" y="874.0" width="106.0" height="58.0" rx="10.0" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="1230.0" y="909.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="500">0.0312</text>
+<rect x="1283.0" y="874.0" width="106.0" height="58.0" rx="10.0" fill="#dcfce7" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="1336.0" y="909.0" fill="#14532d" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">0.0050</text>
+<rect x="847.0" y="932.0" width="146.0" height="58.0" rx="10.0" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="920.0" y="967.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="500">Blackman-Harris</text>
+<rect x="993.0" y="932.0" width="78.0" height="58.0" rx="10.0" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="1032.0" y="967.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="500">2.020</text>
+<rect x="1071.0" y="932.0" width="106.0" height="58.0" rx="10.0" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="1124.0" y="967.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="500">0.2058</text>
+<rect x="1177.0" y="932.0" width="106.0" height="58.0" rx="10.0" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="1230.0" y="967.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="500">0.0188</text>
+<rect x="1283.0" y="932.0" width="106.0" height="58.0" rx="10.0" fill="#dcfce7" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="1336.0" y="967.0" fill="#14532d" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">0.0019</text>
+<rect x="847.0" y="990.0" width="146.0" height="58.0" rx="10.0" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="920.0" y="1025.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="500">Flat-top</text>
+<rect x="993.0" y="990.0" width="78.0" height="58.0" rx="10.0" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="1032.0" y="1025.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="500">3.800</text>
+<rect x="1071.0" y="990.0" width="106.0" height="58.0" rx="10.0" fill="#dcfce7" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="1124.0" y="1025.0" fill="#14532d" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="700">0.0023</text>
+<rect x="1177.0" y="990.0" width="106.0" height="58.0" rx="10.0" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="1230.0" y="1025.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="500">0.0134</text>
+<rect x="1283.0" y="990.0" width="106.0" height="58.0" rx="10.0" fill="#ffffff" stroke="#e2e8f0" stroke-width="0.8"/>
+<text x="1336.0" y="1025.0" fill="#111827" font-size="12" font-family="Inter, Arial, sans-serif" text-anchor="middle" font-weight="500">0.0134</text>
+<text x="849.0" y="1042.0" fill="#4b5563" font-size="13" font-family="Inter, Arial, sans-serif"><tspan x="849.0" dy="0" text-anchor="start">At 256 points, Blackman drops from 0.273 dB to 0.0050 dB and Blackman-</tspan><tspan x="849.0" dy="19.0" text-anchor="start">Harris drops from 0.206 dB to 0.0019 dB with a log parabola. Flat-top was</tspan><tspan x="849.0" dy="19.0" text-anchor="start">already inside 0.0023 dB raw, while its own log fit rises to 0.0134 dB. So</tspan><tspan x="849.0" dy="19.0" text-anchor="start">flat-top keeps the zero-extra-work lane, but it no longer owns amplitude</tspan><tspan x="849.0" dy="19.0" text-anchor="start">honesty outright once interpolation is allowed.</tspan></text>
+</svg>

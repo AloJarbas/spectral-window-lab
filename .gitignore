@@ -5,6 +5,7 @@ art/*.csv
 !art/kaiser-beta-sweep.csv
 !art/window-kaiser-fft-density-audit.csv
 !art/window-amplitude-fft-density-audit.csv
+!art/window-peak-interpolation-audit.csv
 !art/window-specialist-metrics.csv
 !art/window-overlap-add-metrics.csv
 !art/window-synthesis-normalization-metrics.csv

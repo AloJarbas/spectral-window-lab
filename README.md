@@ -20,6 +20,7 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 - `windowlab/kaiser_density.py` audits how much of the Kaiser family sweep is actually stable under coarse versus dense FFT sampling instead of pretending every plotted spectrum metric is equally settled
 - `windowlab/specialist_density.py` checks whether the same FFT-density warning survives contact with Blackman-Harris and Nuttall instead of assuming one deep-sidelobe family story
 - `windowlab/amplitude_density.py` checks the narrower amplitude-specialist question: whether a coarse sampled FFT peak quietly puts a real amplitude error back into the flat-top lane
+- `windowlab/peak_interpolation.py` follows that amplitude lane one step farther by asking whether a tiny 3-point peak interpolator changes the practical ranking between flat-top and more compact windows
 - `windowlab/nuttall_variants.py` splits the repo's old bare `nuttall` label into two explicit coefficient families so first-sidelobe depth and far-out decay stop getting flattened into one ranking
 - `windowlab/recommend.py` turns the repo's existing metrics into a bounded task-selection map instead of a fake one-size-fits-all ranking
 - `windowlab/svg.py` renders clean SVG comparison plots without external plotting libraries
@@ -32,6 +33,7 @@ Everything here is pure Python standard library. No NumPy, no plotting stack, no
 - `notebooks/kaiser_fft_density_audit.ipynb` slows down the new coarse-versus-dense FFT audit for the Kaiser family
 - `notebooks/specialist_fft_density_audit.ipynb` slows down the new family-specific FFT-density follow-up for Blackman-Harris and Nuttall
 - `notebooks/amplitude_fft_density_audit.ipynb` slows down the new sampled-peak amplitude-bias follow-up for Blackman, Blackman-Harris, and flat-top
+- `notebooks/peak_interpolation_amplitude_audit.ipynb` slows down the new 3-point interpolation follow-up and the split between sampled peaks, linear parabolas, and log parabolas
 - `notebooks/nuttall_variant_split.ipynb` slows down the new first-sidelobe-versus-far-tail split inside the Nuttall family
 - `notebooks/window_selection_map.ipynb` slows down the task-selection map and the guardrails behind it
 - `tests/test_windows.py` checks useful ordering facts about the windows, the overlap-add lane, the reconstruction-conditioning pass, the dual-window sidecars, and the task map
@@ -90,6 +92,12 @@ This next pass keeps the FFT-density warning from turning into a fake universal 
 
 This follow-up closes the amplitude-side loophole left open by the task map. A coarse sampled FFT peak still underreads Blackman and Blackman-Harris by visible tenths of a dB, but flat-top stays essentially level on the same grid. Its real bill is still width and ENBW, not a hidden coarse-grid amplitude trap.
 
+### Peak interpolation audit
+
+![Peak interpolation audit](art/window-peak-interpolation-audit.png)
+
+This follow-up asks the next amplitude question after the sampled-peak audit. Flat-top still wins when you want the sampled peak itself to be honest. But if you allow one tiny 3-point log-parabola around the peak, Blackman-Harris becomes a serious compact amplitude option instead of an automatic loser.
+
 ### Nuttall variant split
 
 ![Nuttall variant split](art/window-nuttall-variant-split.png)
@@ -132,7 +140,7 @@ This follow-up is the sharper dual-window question. The old sidecar only compare
 
 This sidecar is the repo's explicit decision card. Instead of pretending one window is "best," it uses guardrails plus the existing metrics to say different things for different jobs: rectangular for very tight equal-strength tone separation, Kaiser `β=8.6` for a compact low-sidelobe compromise, Nuttall min-4-term BH for weak spurs close to a strong line, Nuttall continuous for weaker farther-out spurs, flat-top for isolated-tone amplitude honesty, and Hamming for the repo's bounded quarter-hop STFT lane.
 
-The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, `art/window-kaiser-fft-density-audit.csv`, `art/window-specialist-fft-density-audit.csv`, `art/window-amplitude-fft-density-audit.csv`, `art/window-nuttall-variant-split.csv`, `art/window-overlap-add-metrics.csv`, `art/window-synthesis-normalization-metrics.csv`, `art/window-reconstruction-conditioning.csv`, `art/window-dual-window-comparison.csv`, `art/window-dual-tradeoff-paths.csv`, and `art/window-selection-map.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, the three FFT-density audits, the new Nuttall-variant split, the raw overlap-add pass, the synthesis-normalization pass, the reconstruction-conditioning pass, the endpoint dual-window comparison, the new exact-dual path follow-up, and the task map.
+The generated CSVs in `art/window-metrics.csv`, `art/window-specialist-metrics.csv`, `art/kaiser-beta-sweep.csv`, `art/window-kaiser-fft-density-audit.csv`, `art/window-specialist-fft-density-audit.csv`, `art/window-amplitude-fft-density-audit.csv`, `art/window-peak-interpolation-audit.csv`, `art/window-nuttall-variant-split.csv`, `art/window-overlap-add-metrics.csv`, `art/window-synthesis-normalization-metrics.csv`, `art/window-reconstruction-conditioning.csv`, `art/window-dual-window-comparison.csv`, `art/window-dual-tradeoff-paths.csv`, and `art/window-selection-map.csv` now give compact numeric summaries for the named windows, the specialist sidecar, the Kaiser family sweep, the three FFT-density audits, the new peak-interpolation amplitude split, the Nuttall-variant split, the raw overlap-add pass, the synthesis-normalization pass, the reconstruction-conditioning pass, the endpoint dual-window comparison, the new exact-dual path follow-up, and the task map.
 
 ## Quick run
 
@@ -177,6 +185,8 @@ The task-selection sidecar matters for a different reason: it forces the repo to
 
 The new amplitude-density sidecar matters because it closes the loophole on the other side of the map. It is easy to say flat-top is the amplitude specialist and still leave open the practical objection that a coarse sampled FFT peak might quietly put a real amplitude error back into the read. In this bounded audit, that objection does not survive. Flat-top stays almost perfectly level on the same sampled-peak ladder where Blackman and Blackman-Harris still visibly underread.
 
+The new peak-interpolation sidecar matters because it stops that result from hardening into the wrong next folklore. Flat-top still owns the no-extra-work lane. But once a 3-point log parabola is allowed, Blackman-Harris stops looking like an amplitude write-off and becomes a compact alternative with a much smaller ENBW bill. That is a real practical split, not just prettier arithmetic.
+
 ## Notes
 
 - [Flat-top is the amplitude specialist, not the default](notes/flattop-amplitude-specialist.md)
@@ -184,6 +194,7 @@ The new amplitude-density sidecar matters because it closes the loophole on the 
 - [Nuttall is not one window](notes/nuttall-is-not-one-window.md)
 - [Nuttall variants split one low-sidelobe story into two different jobs](notes/nuttall-variant-split.md)
 - [Flat-top does not hide a coarse peak-read trap](notes/flat-top-does-not-hide-a-coarse-peak-read-trap.md)
+- [Three-point log peak interpolation opens a compact amplitude lane](notes/three-point-log-peak-interpolation-opens-a-compact-amplitude-lane.md)
 - [Overlap-add flatness is a second window bill](notes/overlap-add-and-stft-framing.md)
 - [Raw overlap flatness is not the synthesis rule](notes/raw-overlap-is-not-the-synthesis-rule.md)
 - [Exact overlap-add reconstruction is not the conditioning story](notes/exact-overlap-add-is-not-the-conditioning-story.md)
@@ -197,8 +208,8 @@ The new amplitude-density sidecar matters because it closes the loophole on the 
 
 ## Next directions
 
+- compare one second local amplitude estimator only if it changes the new compact-versus-flat-top split instead of replaying the same log-parabola result
 - test one genuinely different desired-dual family only if it bends the new path instead of just landing somewhere between the same two endpoints
-- test one peak-interpolation follow-up only if it changes the practical amplitude story instead of just polishing flat-top's already-good result
 - port the metrics core to Julia and Fortran for cross-language comparison once those toolchains are live
 
 Jarbas
